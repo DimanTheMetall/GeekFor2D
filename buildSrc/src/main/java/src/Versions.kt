@@ -2,6 +2,7 @@ object Versions {
     //Plugins
     const val AGP = "8.8.0"
     const val KOTLIN = "2.0.20"
+    const val KSP = "2.0.21-1.0.27"
 
     //Dependency
     const val CORE_KTX = "1.15.0"

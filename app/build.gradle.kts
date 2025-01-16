@@ -5,6 +5,7 @@ plugins {
     id(Plugins.APP)
     id(Plugins.KOTLIN_ANDROID)
     id(Plugins.COMPOSE_COMPILER)
+    id(Plugins.KSP)
 }
 
 android {
