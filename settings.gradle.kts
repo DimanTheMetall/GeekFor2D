@@ -21,3 +21,5 @@ dependencyResolutionManagement {
 
 rootProject.name = "GeekFor2D"
 include(":app")
+include(":core")
+include(":ui")
