@@ -16,4 +16,8 @@ object Dependency {
     const val COMPOSE_MATERIAL_3_NAV_SUIT = "androidx.compose.material3:material3-adaptive-navigation-suite:${Versions.COMPOSE_MATERIAL_3}"
     const val COMPOSE_MATERIAL_3_WINDOW_SIZE = "androidx.compose.material3:material3-window-size-class:${Versions.COMPOSE_MATERIAL_3}"
 
+    //dagger
+    const val DAGGER_COMPILER = "com.google.dagger:dagger-compiler:${Versions.DAGGER}"
+    const val DAGGER = "com.google.dagger:dagger:${Versions.DAGGER}"
+
 }

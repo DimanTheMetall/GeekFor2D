@@ -56,6 +56,7 @@ android {
 
 dependencies {
     implementation(Dependency.CORE_KTX)
+
     implementation(Dependency.ACTIVITY_COMPOSE)
     implementation(Dependency.COMPOSE_UI)
     implementation(Dependency.COMPOSE_UI_UTILS)
@@ -65,4 +66,7 @@ dependencies {
     implementation(Dependency.COMPOSE_MATERIAL_3)
     implementation(Dependency.COMPOSE_MATERIAL_3_WINDOW_SIZE)
     implementation(Dependency.COMPOSE_MATERIAL_3_NAV_SUIT)
+
+    implementation(Dependency.DAGGER)
+    ksp(Dependency.DAGGER_COMPILER)
 }

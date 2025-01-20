@@ -10,4 +10,5 @@ object Versions {
     const val COMPOSE = "1.7.6"
     const val COMPOSE_MATERIAL_3 = "1.3.1"
     const val COMPOSE_COMPILE_EXTENSIONS = "1.5.15"
+    const val DAGGER = "2.48"
 }
