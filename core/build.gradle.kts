@@ -1,6 +1,3 @@
-import src.Dependency
-import src.MetaInfo
-
 plugins {
     id(Plugins.ANDROID_LIBRARY)
     id(Plugins.KOTLIN_ANDROID)
@@ -9,7 +6,7 @@ plugins {
 }
 
 android {
-    namespace = "${MetaInfo.APP_PACK}.core"
+    namespace = "${MetaInfo.APP_PACK}.${Modules.CORE}"
 }
 
 dependencies {

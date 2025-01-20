@@ -11,15 +11,7 @@ pluginManagement {
         gradlePluginPortal()
     }
 }
-dependencyResolutionManagement {
-    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
-    repositories {
-        google()
-        mavenCentral()
-    }
-}
 
-rootProject.name = "GeekFor2D"
 include(":app")
 include(":core")
 include(":ui")

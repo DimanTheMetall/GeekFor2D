@@ -1,7 +1,3 @@
-package src
-
-import Versions
-
 object Dependency {
     const val CORE_KTX = "androidx.core:core-ktx:${Versions.CORE_KTX}"
 

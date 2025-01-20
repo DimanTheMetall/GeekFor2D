@@ -1,6 +1,3 @@
-import src.Dependency
-import src.MetaInfo
-
 plugins {
     id(Plugins.APP)
     id(Plugins.KOTLIN_ANDROID)
@@ -55,6 +52,7 @@ android {
 }
 
 dependencies {
+    //Dependency region
     implementation(Dependency.CORE_KTX)
 
     implementation(Dependency.ACTIVITY_COMPOSE)
@@ -69,4 +67,8 @@ dependencies {
 
     implementation(Dependency.DAGGER)
     ksp(Dependency.DAGGER_COMPILER)
+
+    //Modules region
+    implementation(project(Modules.getModulesDependency(Modules.CORE)))
+    implementation(project(Modules.getModulesDependency(Modules.UI)))
 }

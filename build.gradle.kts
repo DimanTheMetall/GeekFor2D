@@ -1,5 +1,4 @@
 import com.android.build.gradle.internal.plugins.LibraryPlugin
-import src.MetaInfo
 
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 plugins {
@@ -15,5 +14,10 @@ allprojects {
         configure<com.android.build.gradle.LibraryExtension> {
             compileSdk = MetaInfo.COMPILE_SDK
         }
+    }
+
+    repositories {
+        google()
+        mavenCentral()
     }
 }
