@@ -1,7 +1,7 @@
-package ru.pet.geek.geekfor2d.ui.theme
+package ru.pet.geek.ui
 
 import androidx.compose.runtime.staticCompositionLocalOf
-import ru.pet.geek.core.utils.providedError
+import ru.pet.geek.utils.providedError
 
 fun ThemeHolder.geekPalette(): GeekColors {
     return GeekColorsImpl()

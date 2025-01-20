@@ -1,4 +1,4 @@
-package ru.pet.geek.geekfor2d.ui.theme
+package ru.pet.geek.ui
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle
