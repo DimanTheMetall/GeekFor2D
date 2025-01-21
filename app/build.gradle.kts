@@ -32,11 +32,11 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = MetaInfo.JAVA_VERSION
+        targetCompatibility = MetaInfo.JAVA_VERSION
     }
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = MetaInfo.JVM_TARGET_STR
     }
     buildFeatures {
         compose = true
@@ -54,6 +54,7 @@ android {
 dependencies {
     //Dependency region
     implementation(Dependency.CORE_KTX)
+    implementation(Dependency.APP_COMPAT)
 
     implementation(Dependency.ACTIVITY_COMPOSE)
     implementation(Dependency.COMPOSE_UI)
@@ -65,10 +66,18 @@ dependencies {
     implementation(Dependency.COMPOSE_MATERIAL_3_WINDOW_SIZE)
     implementation(Dependency.COMPOSE_MATERIAL_3_NAV_SUIT)
 
+    implementation(Dependency.COROUTINES)
+
+    implementation(Dependency.LIFECYCLE_VIEWMODEL)
+    implementation(Dependency.LIFECYCLE_RUNTIME_COMPOSE)
+    implementation(Dependency.LIFECYCLE_VIEW_MODEL_COMPOSE)
+
+
     implementation(Dependency.DAGGER)
     ksp(Dependency.DAGGER_COMPILER)
 
     //Modules region
     implementation(project(Modules.getModulesDependency(Modules.CORE)))
     implementation(project(Modules.getModulesDependency(Modules.UI)))
+    implementation(project(Modules.getModulesDependency(Modules.NAVIGATION_CONTROLLER)))
 }

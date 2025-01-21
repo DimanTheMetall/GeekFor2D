@@ -1,3 +1,10 @@
 package ru.pet.geek.geekfor2d.di.dependency
 
-interface AppDependency: FeatureDependency
+import ru.pet.geek.geekfor2d.container.MainViewModel
+
+interface AppDependency: FeatureDependency {
+
+    fun getMainViewModelFactory(): MainViewModel.Factory
+
+}
+

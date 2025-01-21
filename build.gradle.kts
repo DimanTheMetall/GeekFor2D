@@ -13,7 +13,18 @@ allprojects {
     plugins.matching { it is LibraryPlugin }.whenPluginAdded {
         configure<com.android.build.gradle.LibraryExtension> {
             compileSdk = MetaInfo.COMPILE_SDK
+
+            compileOptions {
+                sourceCompatibility = MetaInfo.JAVA_VERSION
+                targetCompatibility = MetaInfo.JAVA_VERSION
+                tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile>().configureEach {
+                    compilerOptions.jvmTarget.set(org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_18)
+                }
+            }
+
         }
+
+
     }
 
     repositories {

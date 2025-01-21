@@ -10,5 +10,10 @@ android {
 }
 
 dependencies {
+    implementation(Dependency.CORE_KTX)
     implementation(Dependency.COMPOSE_RUNTIME)
+    implementation(Dependency.COROUTINES)
+    implementation(Dependency.LIFECYCLE_VIEWMODEL)
+    implementation(Dependency.LIFECYCLE_RUNTIME_COMPOSE)
+    implementation(Dependency.LIFECYCLE_VIEW_MODEL_COMPOSE)
 }

@@ -15,3 +15,4 @@ pluginManagement {
 include(":app")
 include(":core")
 include(":ui")
+include(":navigationController")

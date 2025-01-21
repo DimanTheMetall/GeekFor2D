@@ -15,6 +15,8 @@ android {
 }
 
 dependencies {
+    implementation(Dependency.APP_COMPAT)
+
     implementation(Dependency.COMPOSE_UI)
     implementation(Dependency.COMPOSE_UI_UTILS)
     implementation(Dependency.COMPOSE_RUNTIME)

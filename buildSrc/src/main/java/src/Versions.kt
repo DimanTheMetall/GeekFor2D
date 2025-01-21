@@ -10,5 +10,9 @@ object Versions {
     const val COMPOSE = "1.7.6"
     const val COMPOSE_MATERIAL_3 = "1.3.1"
     const val COMPOSE_COMPILE_EXTENSIONS = "1.5.15"
+    const val COMPOSE_NAVIGATION = "2.8.5"
     const val DAGGER = "2.48"
+    const val APP_COMPAT = "1.7.0"
+    const val COROUTINES = "1.10.1"
+    const val LIFECYCLE = "2.8.7"
 }

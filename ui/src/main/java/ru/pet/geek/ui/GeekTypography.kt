@@ -1,7 +1,7 @@
 package ru.pet.geek.ui
 
 import androidx.compose.runtime.staticCompositionLocalOf
-import ru.pet.geek.utils.providedError
+import ru.pet.geek.utils.compositionProviderError
 
 
 interface GeekTypography
@@ -13,5 +13,5 @@ fun geekTypography(): GeekTypography {
 }
 
 val LocalGeekTypography = staticCompositionLocalOf<GeekTypography> {
-    providedError<GeekTypography>()
+    compositionProviderError<GeekTypography>()
 }
