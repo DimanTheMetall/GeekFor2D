@@ -31,4 +31,7 @@ object Dependency {
     const val COROUTINES =
         "org.jetbrains.kotlinx:kotlinx-coroutines-android:${Versions.COROUTINES}"
 
+    //serialisation
+    const val KOTLINX_SERIALIZATION = "org.jetbrains.kotlinx:kotlinx-serialization-json:${Versions.SERIALIZATION}"
+
 }

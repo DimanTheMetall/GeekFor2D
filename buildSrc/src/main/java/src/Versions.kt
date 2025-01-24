@@ -15,4 +15,5 @@ object Versions {
     const val APP_COMPAT = "1.7.0"
     const val COROUTINES = "1.10.1"
     const val LIFECYCLE = "2.8.7"
+    const val SERIALIZATION = "1.8.0"
 }

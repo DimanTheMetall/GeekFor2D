@@ -5,4 +5,5 @@ object Plugins {
     const val KSP = "com.google.devtools.ksp"
     const val ANDROID_LIBRARY = "com.android.library"
     const val JVM = "org.jetbrains.kotlin.jvm"
+    const val KOTLINX_SERIALIZATION = "plugin.serialization"
 }

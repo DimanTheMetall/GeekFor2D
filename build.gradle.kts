@@ -7,6 +7,7 @@ plugins {
     id(Plugins.COMPOSE_COMPILER) version Versions.KOTLIN apply false
     id(Plugins.KSP) version Versions.KSP apply false
     id(Plugins.JVM) version Versions.KOTLIN
+    kotlin(Plugins.KOTLINX_SERIALIZATION) version Versions.KOTLIN
 }
 
 allprojects {
@@ -21,10 +22,7 @@ allprojects {
                     compilerOptions.jvmTarget.set(org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_18)
                 }
             }
-
         }
-
-
     }
 
     repositories {

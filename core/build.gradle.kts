@@ -3,6 +3,7 @@ plugins {
     id(Plugins.KOTLIN_ANDROID)
     id(Plugins.KSP)
     id(Plugins.COMPOSE_COMPILER)
+    kotlin(Plugins.KOTLINX_SERIALIZATION)
 }
 
 android {
@@ -16,4 +17,5 @@ dependencies {
     implementation(Dependency.LIFECYCLE_VIEWMODEL)
     implementation(Dependency.LIFECYCLE_RUNTIME_COMPOSE)
     implementation(Dependency.LIFECYCLE_VIEW_MODEL_COMPOSE)
+    implementation(Dependency.KOTLINX_SERIALIZATION)
 }

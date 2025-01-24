@@ -5,6 +5,7 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.isSystemInDarkTheme
+import ru.pet.geek.geekfor2d.container.MainContainer
 import ru.pet.geek.ui.GeekTheme
 
 class MainActivity : AppCompatActivity() {
@@ -14,8 +15,9 @@ class MainActivity : AppCompatActivity() {
         setContent {
             //TODO add control from other place
             GeekTheme(isDarkTheme = isSystemInDarkTheme()) {
-
+                MainContainer().Content()
             }
+
         }
     }
 }

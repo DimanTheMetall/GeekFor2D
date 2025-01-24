@@ -3,6 +3,7 @@ plugins {
     id(Plugins.KOTLIN_ANDROID)
     id(Plugins.KSP)
     id(Plugins.COMPOSE_COMPILER)
+    kotlin(Plugins.KOTLINX_SERIALIZATION)
 }
 
 android {
@@ -14,6 +15,7 @@ dependencies {
     implementation(Dependency.COROUTINES)
     implementation(Dependency.COMPOSE_RUNTIME)
     implementation(Dependency.COMPOSE_NAVIGATION)
+    implementation(Dependency.KOTLINX_SERIALIZATION)
 
     implementation(project(Modules.getModulesDependency(Modules.CORE)))
 }

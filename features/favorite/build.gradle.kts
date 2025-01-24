@@ -3,10 +3,11 @@ plugins {
     id(Plugins.KOTLIN_ANDROID)
     id(Plugins.KSP)
     id(Plugins.COMPOSE_COMPILER)
+    kotlin(Plugins.KOTLINX_SERIALIZATION)
 }
 
 android {
-    namespace = "${MetaInfo.APP_PACK}.${Modules.UI}"
+    namespace = "${MetaInfo.APP_PACK}.${Modules.FAVORITE}"
 
     buildFeatures {
         compose = true
@@ -24,4 +25,9 @@ dependencies {
     implementation(Dependency.COMPOSE_ANIMATION)
     implementation(Dependency.COMPOSE_MATERIAL_3)
     implementation(Dependency.COMPOSE_MATERIAL_3_WINDOW_SIZE)
+
+    implementation(Dependency.KOTLINX_SERIALIZATION)
+
+    implementation(project(Modules.getModulesDependency(Modules.CORE)))
+    implementation(project(Modules.getModulesDependency(Modules.UI)))
 }

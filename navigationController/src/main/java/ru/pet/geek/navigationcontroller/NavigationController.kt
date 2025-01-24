@@ -29,7 +29,7 @@ class NavigationController : NavigationControllerApi {
 
     override fun openNext(screen: Screen) {
         require(screen !is RootScreen) {
-            "Use non ${RootScreen::name} to open next screen"
+            "Use non ${RootScreen::class} to open next screen"
         }
         scope.launch {
             mutableSharedFlow.emit(NavigationAction.OpenNext(screen = screen))

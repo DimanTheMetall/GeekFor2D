@@ -3,6 +3,7 @@ plugins {
     id(Plugins.KOTLIN_ANDROID)
     id(Plugins.COMPOSE_COMPILER)
     id(Plugins.KSP)
+    kotlin(Plugins.KOTLINX_SERIALIZATION)
 }
 
 android {
@@ -64,9 +65,10 @@ dependencies {
     implementation(Dependency.COMPOSE_ANIMATION)
     implementation(Dependency.COMPOSE_MATERIAL_3)
     implementation(Dependency.COMPOSE_MATERIAL_3_WINDOW_SIZE)
-    implementation(Dependency.COMPOSE_MATERIAL_3_NAV_SUIT)
+    implementation(Dependency.COMPOSE_NAVIGATION)
 
     implementation(Dependency.COROUTINES)
+    implementation(Dependency.KOTLINX_SERIALIZATION)
 
     implementation(Dependency.LIFECYCLE_VIEWMODEL)
     implementation(Dependency.LIFECYCLE_RUNTIME_COMPOSE)
@@ -80,4 +82,6 @@ dependencies {
     implementation(project(Modules.getModulesDependency(Modules.CORE)))
     implementation(project(Modules.getModulesDependency(Modules.UI)))
     implementation(project(Modules.getModulesDependency(Modules.NAVIGATION_CONTROLLER)))
+    implementation(project(Modules.getModulesDependency(Packages.FEATURES, Modules.FEED)))
+    implementation(project(Modules.getModulesDependency(Packages.FEATURES, Modules.FAVORITE)))
 }
