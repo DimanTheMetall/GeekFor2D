@@ -10,7 +10,8 @@ import androidx.compose.runtime.key
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.graphics.TileMode
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.NavHost
@@ -19,14 +20,22 @@ import androidx.navigation.compose.navigation
 import androidx.navigation.compose.rememberNavController
 import ru.pet.geek.core.dagger.DaggerViewModel
 import ru.pet.geek.core.navigation.RootScreen
-
 import ru.pet.geek.core.navigation.navKey
 import ru.pet.geek.core.screens.BaseScreen
 import ru.pet.geek.geekfor2d.MainActivity
 import ru.pet.geek.geekfor2d.bottomNav.BottomNavMenu
 import ru.pet.geek.geekfor2d.di.dependency.getAppDependency
 import ru.pet.geek.navigationcontroller.ComposeNavigationController
+import ru.pet.geek.ui.GeekTheme
 import ru.pet.geek.utils.context
+
+private val bottomMenuGradient
+    @Composable
+    get() =
+        Brush.horizontalGradient(
+            colors = listOf(GeekTheme.colors.orangeMedium, GeekTheme.colors.blueMedium),
+            tileMode = TileMode.Clamp
+        )
 
 class MainContainer : BaseScreen() {
 
@@ -62,8 +71,8 @@ class MainContainer : BaseScreen() {
             BottomNavMenu(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(30.dp)
-                    .background(Color.Yellow)
+                    .height(34.dp)
+                    .background(bottomMenuGradient)
                     .align(Alignment.BottomCenter),
                 roots = roots,
                 onClickRoot = viewModel::selectRoot
