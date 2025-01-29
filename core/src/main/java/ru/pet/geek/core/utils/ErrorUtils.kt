@@ -1,7 +1,7 @@
 package ru.pet.geek.core.utils
 
-fun dependencyProviderError(): Nothing {
-    error("The application context you have passed does not implement Dependency")
+fun dependencyProviderError(dependencyName: String = "Dependency"): Nothing {
+    error("The application context you have passed does not implement $dependencyName")
 }
 
 fun viewModelStoreProvidedError(): Nothing {

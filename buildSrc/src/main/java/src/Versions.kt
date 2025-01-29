@@ -16,4 +16,6 @@ object Versions {
     const val COROUTINES = "1.10.1"
     const val LIFECYCLE = "2.8.7"
     const val SERIALIZATION = "1.8.0"
+    const val RETROFIT = "2.11.0"
+    const val OKHTTP = "4.12.0"
 }

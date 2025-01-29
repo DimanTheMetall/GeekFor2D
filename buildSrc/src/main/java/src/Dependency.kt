@@ -34,4 +34,8 @@ object Dependency {
     //serialisation
     const val KOTLINX_SERIALIZATION = "org.jetbrains.kotlinx:kotlinx-serialization-json:${Versions.SERIALIZATION}"
 
+    //remote
+    const val RETROFIT = "com.squareup.retrofit2:retrofit:${Versions.RETROFIT}"
+    const val OKHTTP = "com.squareup.okhttp3:okhttp:${Versions.OKHTTP}"
+
 }

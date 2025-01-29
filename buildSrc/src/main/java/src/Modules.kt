@@ -4,6 +4,7 @@ object Modules {
     const val NAVIGATION_CONTROLLER = "navigationController"
     const val FEED = "feed"
     const val FAVORITE = "favorite"
+    const val DATA = "data"
 
     fun getModulesDependency(vararg strings: String) =
         strings.asList().joinToString(separator = "") { ":$it" }

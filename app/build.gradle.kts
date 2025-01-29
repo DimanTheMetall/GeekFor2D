@@ -75,6 +75,10 @@ dependencies {
     implementation(Dependency.LIFECYCLE_VIEW_MODEL_COMPOSE)
 
 
+    implementation(Dependency.RETROFIT)
+    implementation(Dependency.OKHTTP)
+
+
     implementation(Dependency.DAGGER)
     ksp(Dependency.DAGGER_COMPILER)
 
@@ -82,6 +86,7 @@ dependencies {
     implementation(project(Modules.getModulesDependency(Modules.CORE)))
     implementation(project(Modules.getModulesDependency(Modules.UI)))
     implementation(project(Modules.getModulesDependency(Modules.NAVIGATION_CONTROLLER)))
+    implementation(project(Modules.getModulesDependency(Modules.DATA)))
     implementation(project(Modules.getModulesDependency(Packages.FEATURES, Modules.FEED)))
     implementation(project(Modules.getModulesDependency(Packages.FEATURES, Modules.FAVORITE)))
 }

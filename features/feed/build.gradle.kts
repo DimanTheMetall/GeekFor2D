@@ -26,6 +26,14 @@ dependencies {
     implementation(Dependency.COMPOSE_MATERIAL_3)
     implementation(Dependency.COMPOSE_MATERIAL_3_WINDOW_SIZE)
     implementation(Dependency.KOTLINX_SERIALIZATION)
+    implementation(Dependency.ACTIVITY_COMPOSE)
+
+    implementation(Dependency.LIFECYCLE_VIEWMODEL)
+    implementation(Dependency.LIFECYCLE_RUNTIME_COMPOSE)
+    implementation(Dependency.LIFECYCLE_VIEW_MODEL_COMPOSE)
+
+    implementation(Dependency.DAGGER)
+    ksp(Dependency.DAGGER_COMPILER)
 
     implementation(project(Modules.getModulesDependency(Modules.CORE)))
     implementation(project(Modules.getModulesDependency(Modules.UI)))
