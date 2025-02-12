@@ -18,4 +18,7 @@ dependencies {
     implementation(Dependency.LIFECYCLE_RUNTIME_COMPOSE)
     implementation(Dependency.LIFECYCLE_VIEW_MODEL_COMPOSE)
     implementation(Dependency.KOTLINX_SERIALIZATION)
+
+    api(project(Modules.getModulesDependency(Packages.DOMAIN, Modules.ENTITIES)))
+
 }

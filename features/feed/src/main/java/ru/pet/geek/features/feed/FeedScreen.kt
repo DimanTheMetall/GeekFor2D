@@ -10,13 +10,9 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import kotlinx.serialization.Serializable
 import ru.pet.geek.core.screens.BaseRootScreen
 import ru.pet.geek.features.feed.di.FeedComponentViewModel
-import ru.pet.geek.feed.R
 
 @Serializable
 class FeedScreen : BaseRootScreen() {
-
-    override val iconRes: Int
-        get() = R.drawable.feed_root_ic
 
     @Composable
     override fun Content() {

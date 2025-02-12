@@ -14,8 +14,8 @@ import javax.inject.Scope
 @Component(
     modules = [
         AppModule::class,
-        RemoteSourceModule::class,
         RepositoryModule::class,
+        RemoteSourceModule::class,
         FeedModule::class,
     ]
 )

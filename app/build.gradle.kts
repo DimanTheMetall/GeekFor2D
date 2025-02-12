@@ -41,6 +41,7 @@ android {
     }
     buildFeatures {
         compose = true
+        buildConfig = true
     }
     composeOptions {
         kotlinCompilerExtensionVersion = Versions.COMPOSE_COMPILE_EXTENSIONS
@@ -69,6 +70,7 @@ dependencies {
 
     implementation(Dependency.COROUTINES)
     implementation(Dependency.KOTLINX_SERIALIZATION)
+    implementation(Dependency.KOTLINX_SERIALIZATION_CONVERTOR)
 
     implementation(Dependency.LIFECYCLE_VIEWMODEL)
     implementation(Dependency.LIFECYCLE_RUNTIME_COMPOSE)
@@ -77,6 +79,7 @@ dependencies {
 
     implementation(Dependency.RETROFIT)
     implementation(Dependency.OKHTTP)
+    implementation(Dependency.OKHTTP_LOGGER_INTERCEPTOR)
 
 
     implementation(Dependency.DAGGER)

@@ -1,7 +1,6 @@
-package ru.pet.geek.geekfor2d.bottomNav
+package ru.pet.geek.widgets
 
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.size
@@ -10,14 +9,19 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
-import ru.pet.geek.core.navigation.RootScreen
+import ru.pet.geek.api.Clickable
+import ru.pet.geek.api.IcResHolderUi
+import ru.pet.geek.modifierExt.noRippleClickable
 
+data class BottomNavItem(
+    override val icRes: Int,
+    override val onClick: () -> Unit
+): IcResHolderUi, Clickable
 
 @Composable
-internal fun BottomNavMenu(
+fun BottomNavMenu(
     modifier: Modifier = Modifier,
-    roots: Set<RootScreen>,
-    onClickRoot: (RootScreen) -> Unit = {}
+    roots: List<BottomNavItem>,
 ) {
     Row(
         modifier = modifier,
@@ -28,9 +32,9 @@ internal fun BottomNavMenu(
             Image(
                 modifier = Modifier
                     .size(24.dp)
-                    .clickable(onClick = { onClickRoot.invoke(root) }),
+                    .noRippleClickable(clickable = root),
                 contentDescription = null,
-                painter = painterResource(root.iconRes)
+                painter = painterResource(root.icRes)
             )
         }
     }

@@ -9,12 +9,11 @@ import ru.pet.geek.features.feed.api.FeedNavApi
 class FeedViewModel @AssistedInject constructor(
     private val dataApi: FeedDataApi,
     private val navApi: FeedNavApi
-): ViewModel() {
+) : ViewModel() {
+
 
     @AssistedFactory
     interface Factory {
         fun create(): FeedViewModel
     }
-
-    fun onBackPress() = navApi.back()
 }

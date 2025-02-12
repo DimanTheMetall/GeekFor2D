@@ -5,6 +5,7 @@ object Modules {
     const val FEED = "feed"
     const val FAVORITE = "favorite"
     const val DATA = "data"
+    const val ENTITIES = "entities"
 
     fun getModulesDependency(vararg strings: String) =
         strings.asList().joinToString(separator = "") { ":$it" }
@@ -12,4 +13,5 @@ object Modules {
 
 object Packages {
     const val FEATURES = "features"
+    const val DOMAIN = "domain"
 }

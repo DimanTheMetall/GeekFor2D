@@ -11,8 +11,6 @@ import ru.pet.geek.core.screens.BaseRootScreen
 
 @Serializable
 class FavoriteScreen : BaseRootScreen() {
-    override val iconRes: Int
-        get() = R.drawable.favorite_root_ic
 
     @Composable
     override fun Content() {

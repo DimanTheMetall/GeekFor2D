@@ -2,16 +2,25 @@ package ru.pet.geek.geekfor2d.di.modules
 
 import dagger.Module
 import dagger.Provides
+import ru.pet.geek.data.remote.CounterRequestController
 import ru.pet.geek.data.remote.MangaRemoteSource
+import ru.pet.geek.data.remote.RequestsController
 import ru.pet.geek.data.repository.MangaRepository
 import ru.pet.geek.geekfor2d.di.AppScope
 
 @Module
 class RepositoryModule {
 
-    @AppScope
-    @Provides
-    fun provideMangaRepository(mangaRemoteSource: MangaRemoteSource): MangaRepository {
-        return MangaRepository(mangaRemoteSource = mangaRemoteSource)
+    @[AppScope Provides]
+    fun provideLimitRequestController(): RequestsController {
+        return CounterRequestController()
+    }
+
+    @[AppScope Provides]
+    fun provideMangaRepository(
+        mangaRemoteSource: MangaRemoteSource,
+        requestsController: RequestsController
+    ): MangaRepository {
+        return MangaRepository(mangaRemoteSource = mangaRemoteSource, requestsController = requestsController)
     }
 }

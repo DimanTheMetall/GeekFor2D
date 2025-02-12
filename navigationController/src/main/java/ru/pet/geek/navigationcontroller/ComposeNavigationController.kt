@@ -7,7 +7,6 @@ import androidx.navigation.compose.rememberNavController
 import kotlinx.coroutines.flow.Flow
 import ru.pet.geek.core.navigation.RootScreen
 import ru.pet.geek.core.navigation.Screen
-import ru.pet.geek.core.navigation.navKey
 
 interface NavigationEvents {
     val actions: Flow<NavigationAction>
@@ -30,7 +29,7 @@ fun ComposeNavigationController(
 }
 
 internal fun NavHostController.openNext(screen: Screen) {
-    this.navigate(screen::class.navKey())
+    this.navigate(screen)
 }
 
 internal fun NavHostController.back() {
@@ -38,7 +37,7 @@ internal fun NavHostController.back() {
 }
 
 internal fun NavHostController.selectStack(screen: RootScreen) {
-    this.navigate(screen::class.navKey()) {
+    this.navigate(screen) {
         launchSingleTop = true
         restoreState = true
         popUpTo(route = graph.startDestinationRoute!!) {

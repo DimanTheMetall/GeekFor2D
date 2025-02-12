@@ -31,11 +31,13 @@ object Dependency {
     const val COROUTINES =
         "org.jetbrains.kotlinx:kotlinx-coroutines-android:${Versions.COROUTINES}"
 
-    //serialisation
+    //serialization
     const val KOTLINX_SERIALIZATION = "org.jetbrains.kotlinx:kotlinx-serialization-json:${Versions.SERIALIZATION}"
+    const val KOTLINX_SERIALIZATION_CONVERTOR = "com.squareup.retrofit2:converter-kotlinx-serialization:${Versions.SERIALIZATION_CONVERTOR}"
 
     //remote
     const val RETROFIT = "com.squareup.retrofit2:retrofit:${Versions.RETROFIT}"
     const val OKHTTP = "com.squareup.okhttp3:okhttp:${Versions.OKHTTP}"
+    const val OKHTTP_LOGGER_INTERCEPTOR = "com.squareup.okhttp3:logging-interceptor:${Versions.OKHTTP}"
 
 }
