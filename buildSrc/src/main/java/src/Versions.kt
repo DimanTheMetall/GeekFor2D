@@ -19,4 +19,5 @@ object Versions {
     const val SERIALIZATION_CONVERTOR = "2.11.0"
     const val RETROFIT = "2.11.0"
     const val OKHTTP = "4.12.0"
+    const val COIL = "3.1.0"
 }

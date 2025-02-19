@@ -81,6 +81,9 @@ dependencies {
     implementation(Dependency.OKHTTP)
     implementation(Dependency.OKHTTP_LOGGER_INTERCEPTOR)
 
+    implementation(Dependency.COIL_COMPOSE)
+    implementation(Dependency.COIL_OKHTTP)
+
 
     implementation(Dependency.DAGGER)
     ksp(Dependency.DAGGER_COMPILER)

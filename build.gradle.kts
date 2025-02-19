@@ -15,6 +15,10 @@ allprojects {
         configure<com.android.build.gradle.LibraryExtension> {
             compileSdk = MetaInfo.COMPILE_SDK
 
+            defaultConfig {
+                minSdk = MetaInfo.MIN_SDK
+            }
+
             compileOptions {
                 sourceCompatibility = MetaInfo.JAVA_VERSION
                 targetCompatibility = MetaInfo.JAVA_VERSION

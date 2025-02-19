@@ -24,4 +24,6 @@ dependencies {
     implementation(Dependency.COMPOSE_ANIMATION)
     implementation(Dependency.COMPOSE_MATERIAL_3)
     implementation(Dependency.COMPOSE_MATERIAL_3_WINDOW_SIZE)
+    implementation(Dependency.COIL_COMPOSE)
+    implementation(Dependency.OKHTTP)
 }

@@ -40,4 +40,8 @@ object Dependency {
     const val OKHTTP = "com.squareup.okhttp3:okhttp:${Versions.OKHTTP}"
     const val OKHTTP_LOGGER_INTERCEPTOR = "com.squareup.okhttp3:logging-interceptor:${Versions.OKHTTP}"
 
+    //Image
+    const val COIL_COMPOSE = "io.coil-kt.coil3:coil-compose:${Versions.COIL}"
+    const val COIL_OKHTTP = "io.coil-kt.coil3:coil-network-okhttp:${Versions.COIL}"
+
 }

@@ -11,6 +11,10 @@ fun ThemeHolder.geekPalette(): GeekColors {
         violetDark = Color(0xFF310A6B) darkVariant Color(0xFF310A6B),
         orangeMedium = Color(0xFFB93C14) darkVariant Color(0xFF832D0F),
         blueMedium = Color(0xFF2F5AAD) darkVariant Color(0xFF27498F),
+        textPrimary = Color(0xFF000000) darkVariant Color(0xFFFFFFFF),
+        backgroundPrimary = Color(0xFFFFFFFF) darkVariant Color(0xFF2C2C2C),
+        backgroundModal = Color(0xFFE7E7E7) darkVariant Color(0xFF383838),
+        isDark = isDark,
     )
 }
 
@@ -31,11 +35,21 @@ interface GeekColors {
     val violetMedium: Color
     val violetDark: Color
 
+    //background
+    val backgroundPrimary: Color
+    val backgroundModal: Color
+
+    //text
+    val textPrimary: Color
+
     //
     val orangeMedium: Color
 
     //
     val blueMedium: Color
+
+    //
+    val isDark: Boolean
 }
 
 
@@ -44,7 +58,11 @@ internal class GeekColorsImpl(
     override val violetMedium: Color,
     override val violetDark: Color,
     override val orangeMedium: Color,
-    override val blueMedium: Color
+    override val blueMedium: Color,
+    override val textPrimary: Color,
+    override val backgroundPrimary: Color,
+    override val backgroundModal: Color,
+    override val isDark: Boolean,
 ) : GeekColors {
     //No theme extends
     override val greyscale0: Color = Color(0xFFFFFFFF)

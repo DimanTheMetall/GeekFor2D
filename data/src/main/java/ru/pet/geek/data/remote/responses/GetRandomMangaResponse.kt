@@ -5,6 +5,7 @@ import kotlinx.serialization.Serializable
 import ru.pet.geek.data.remote.responses.inner.ContentTypeNet
 import ru.pet.geek.data.remote.responses.inner.InnerImagesResponse
 import ru.pet.geek.data.remote.responses.inner.InnerTitleModel
+import ru.pet.geek.data.remote.responses.inner.StatusNet
 
 @Serializable
 class GetRandomMangaResponse(
@@ -25,6 +26,22 @@ class GetRandomMangaResponse(
     @SerialName("title_japanese")
     val titleJapanese: String? = null,
     @SerialName("type")
-    val type: ContentTypeNet? = null
+    val type: ContentTypeNet? = null,
+    @SerialName("chapters")
+    val chapters: Int? = null,
+    @SerialName("volumes")
+    val volumes: Int? = null,
+    @SerialName("status")
+    val status: StatusNet? = null,
+    @SerialName("publishing")
+    val publishing: Boolean? = null,
+    @SerialName("score")
+    val score: Int? = null,
+    @SerialName("rank")
+    val rank: Int? = null,
+    @SerialName("popularity")
+    val popularity: Int? = null,
+    @SerialName("synopsis")
+    val synopsis: String? = null,
 )
 

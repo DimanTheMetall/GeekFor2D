@@ -10,7 +10,7 @@ import androidx.compose.runtime.remember
 
 @Composable
 fun GeekTheme(
-    isDarkTheme: Boolean,
+    isDarkTheme: Boolean = false,
     content: @Composable () -> Unit
 ) {
 
