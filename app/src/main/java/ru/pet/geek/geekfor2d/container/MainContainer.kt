@@ -55,12 +55,13 @@ class MainContainer : BaseScreen() {
         Box(
             modifier = Modifier
                 .fillMaxSize()
+                .background(GeekTheme.colors.backgroundPrimary)
         ) {
             NavHost(
                 navController = navController,
                 startDestination = FeedContainer::class
             ) {
-                addRootsScreen()
+                createGraph()
             }
 
             BottomNavMenu(

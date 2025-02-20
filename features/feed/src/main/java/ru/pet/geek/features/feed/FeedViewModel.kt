@@ -41,6 +41,8 @@ class FeedViewModel @AssistedInject constructor(
     private fun MutableList<FeedItemUi>.addRandomWidget() {
         val randomList = buildList<RandomItemUi> {
             add(RandomItemUi.Manga(onClick = navApi::goToRandomMangaCard))
+            add(RandomItemUi.Anime(onClick = navApi::goToRandomAnimeCard))
+            add(RandomItemUi.Characters(onClick = navApi::goToRandomCharactersCard))
         }
         add(
             FeedItemUi.RandomWidget(

@@ -8,7 +8,7 @@ import ru.pet.geek.favorite.FavoriteScreen
 import ru.pet.geek.features.feed.FeedScreen
 
 
-internal fun NavGraphBuilder.addRootsScreen() {
+internal fun NavGraphBuilder.createGraph() {
     navigation<FeedContainer>(startDestination = FeedScreen::class) {
         addSimplesScreens()
     }
@@ -18,7 +18,7 @@ internal fun NavGraphBuilder.addRootsScreen() {
     }
 }
 
-internal fun NavGraphBuilder.addSimplesScreens() {
+private fun NavGraphBuilder.addSimplesScreens() {
     composable<FeedScreen> {
         val screen = it.toRoute<FeedScreen>()
         screen.Content()

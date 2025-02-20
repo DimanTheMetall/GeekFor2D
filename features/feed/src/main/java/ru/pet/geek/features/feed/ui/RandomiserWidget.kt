@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -44,8 +45,21 @@ sealed interface RandomItemUi : Clickable {
         override val text: UiText = UiText.ResourcesText(ru.pet.geek.ui.R.string.ui_manga)
 
         override val backgroundColor: Color
-            @Composable
-            get() = GeekTheme.colors.violetLight
+            @Composable get() = GeekTheme.colors.violetLight
+    }
+
+    data class Anime(override val onClick: () -> Unit = {}) : RandomItemUi {
+        override val text: UiText = UiText.ResourcesText(ru.pet.geek.ui.R.string.ui_anime)
+
+        override val backgroundColor: Color
+            @Composable get() = GeekTheme.colors.pinkMedium
+    }
+
+    data class Characters(override val onClick: () -> Unit = {}) : RandomItemUi {
+        override val text: UiText = UiText.ResourcesText(ru.pet.geek.ui.R.string.ui_charachers)
+
+        override val backgroundColor: Color
+            @Composable get() = GeekTheme.colors.blueMedium
     }
 }
 
@@ -63,13 +77,14 @@ internal fun RandomsWidget(
     val shape = remember { RoundedCornerShape(topEnd = 26.dp, bottomStart = 26.dp) }
     Column(
         modifier = modifier
-            .background(shape = shape, color = GeekTheme.colors.backgroundModalSemiTransparent)
+            .background(
+                shape = shape, color = GeekTheme.colors.backgroundModalSemiTransparent
+            )
             .border(
                 border = BorderStroke(width = 2.dp, color = GeekTheme.colors.greyscale500),
                 shape = shape
             )
-            .padding(20.dp),
-        horizontalAlignment = Alignment.CenterHorizontally
+            .padding(20.dp), horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Text(
             text = stringResource(ru.pet.geek.ui.R.string.ui_random),
@@ -79,11 +94,12 @@ internal fun RandomsWidget(
         )
         SpacerHeight(10.dp)
         Row(
-            horizontalArrangement = Arrangement.spacedBy(10.dp),
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceEvenly,
         ) {
             uiInfo.listUi.forEach { item ->
                 RandomItem(
-                    uiInfo = item,
+                    uiInfo = item, width = 46.dp
                 )
             }
         }
@@ -91,10 +107,7 @@ internal fun RandomsWidget(
 
 }
 
-@[
-Composable
-Preview(uiMode = Configuration.UI_MODE_NIGHT_YES, name = "dark")
-Preview(
+@[Composable Preview(uiMode = Configuration.UI_MODE_NIGHT_YES, name = "dark") Preview(
     uiMode = Configuration.UI_MODE_NIGHT_NO, name = "light"
 )]
 private fun RandomsWidgetPreview() {
@@ -105,13 +118,11 @@ private fun RandomsWidgetPreview() {
                 .padding(20.dp)
         ) {
             RandomsWidget(
-                modifier = Modifier
-                    .padding(20.dp),
-                uiInfo = RandomWidgetUiImpl(
+                modifier = Modifier.padding(20.dp), uiInfo = RandomWidgetUiImpl(
                     listOf(
                         RandomItemUi.Manga(),
-                        RandomItemUi.Manga(),
-                        RandomItemUi.Manga(),
+                        RandomItemUi.Anime(),
+                        RandomItemUi.Characters(),
                     )
                 )
             )
@@ -162,8 +173,7 @@ private fun RandomItemPreview() {
         RandomItem(
             modifier = Modifier
                 .width(45.dp)
-                .background(Color.White),
-            uiInfo = RandomItemUi.Manga()
+                .background(Color.White), uiInfo = RandomItemUi.Manga()
         )
     }
 }
@@ -171,8 +181,7 @@ private fun RandomItemPreview() {
 
 @Composable
 private fun Flag(
-    modifier: Modifier = Modifier,
-    color: Color
+    modifier: Modifier = Modifier, color: Color
 ) {
     Canvas(modifier = modifier) {
         val path = Path().apply {
