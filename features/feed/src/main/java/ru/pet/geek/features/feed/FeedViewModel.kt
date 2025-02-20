@@ -38,20 +38,16 @@ class FeedViewModel @AssistedInject constructor(
         return FeedUiState.Success(list)
     }
 
-    private fun List<FeedItemUi>.addRandomWidget(): List<FeedItemUi> {
+    private fun MutableList<FeedItemUi>.addRandomWidget() {
         val randomList = buildList<RandomItemUi> {
             add(RandomItemUi.Manga(onClick = navApi::goToRandomMangaCard))
         }
-        return buildList {
-            addAll(this@addRandomWidget)
-            add(
-                FeedItemUi.RandomWidget(
-                    uiInfo = RandomWidgetUiImpl(
-                        listUi = randomList
-                    )
+        add(
+            FeedItemUi.RandomWidget(
+                uiInfo = RandomWidgetUiImpl(
+                    listUi = randomList
                 )
             )
-        }
-
+        )
     }
 }

@@ -14,6 +14,8 @@ fun ThemeHolder.geekPalette(): GeekColors {
         textPrimary = Color(0xFF000000) darkVariant Color(0xFFFFFFFF),
         backgroundPrimary = Color(0xFFFFFFFF) darkVariant Color(0xFF2C2C2C),
         backgroundModal = Color(0xFFE7E7E7) darkVariant Color(0xFF383838),
+        pinkLight = Color(0xFFFFBEEF) darkVariant Color(0xFFFF50E9),
+        blueLight = Color(0xFFAEE0F6) darkVariant Color(0xFF5CB3C4),
         isDark = isDark,
     )
 }
@@ -38,6 +40,7 @@ interface GeekColors {
     //background
     val backgroundPrimary: Color
     val backgroundModal: Color
+    val backgroundModalSemiTransparent: Color
 
     //text
     val textPrimary: Color
@@ -45,7 +48,11 @@ interface GeekColors {
     //
     val orangeMedium: Color
 
-    //
+    //pink
+    val pinkLight: Color
+
+    //blue
+    val blueLight: Color
     val blueMedium: Color
 
     //
@@ -53,7 +60,7 @@ interface GeekColors {
 }
 
 
-internal class GeekColorsImpl(
+internal data class GeekColorsImpl(
     override val violetLight: Color,
     override val violetMedium: Color,
     override val violetDark: Color,
@@ -62,6 +69,8 @@ internal class GeekColorsImpl(
     override val textPrimary: Color,
     override val backgroundPrimary: Color,
     override val backgroundModal: Color,
+    override val blueLight: Color,
+    override val pinkLight: Color,
     override val isDark: Boolean,
 ) : GeekColors {
     //No theme extends
@@ -75,6 +84,7 @@ internal class GeekColorsImpl(
     override val greyscale700: Color = Color(0xFF2C3135)
     override val greyscale800: Color = Color(0xFF1D2023)
     override val greyscale900: Color = Color(0xFF000000)
+    override val backgroundModalSemiTransparent: Color = backgroundModal.copy(alpha = 0.5f)
 }
 
 val LocalGeekColors = staticCompositionLocalOf<GeekColors> {

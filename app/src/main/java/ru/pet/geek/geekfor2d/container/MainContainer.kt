@@ -12,30 +12,27 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.TileMode
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.NavHost
-import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import androidx.navigation.toRoute
+import kotlinx.serialization.Serializable
 import ru.pet.geek.core.dagger.DaggerViewModel
 import ru.pet.geek.core.screens.BaseScreen
-import ru.pet.geek.favorite.FavoriteScreen
-import ru.pet.geek.features.feed.FeedScreen
 import ru.pet.geek.geekfor2d.MainActivity
-import ru.pet.geek.widgets.BottomNavMenu
 import ru.pet.geek.geekfor2d.di.dependency.getAppDependency
 import ru.pet.geek.navigationcontroller.ComposeNavigationController
 import ru.pet.geek.ui.GeekTheme
 import ru.pet.geek.utils.context
+import ru.pet.geek.widgets.BottomNavMenu
 
 private val bottomMenuGradient
     @Composable
     get() =
         Brush.horizontalGradient(
-            colors = listOf(GeekTheme.colors.orangeMedium, GeekTheme.colors.blueMedium),
+            colors = listOf(GeekTheme.colors.pinkLight, GeekTheme.colors.blueLight),
             tileMode = TileMode.Clamp
         )
 
+@Serializable
 class MainContainer : BaseScreen() {
 
     @Composable
@@ -55,10 +52,13 @@ class MainContainer : BaseScreen() {
 
         ComposeNavigationController(api = viewModel, navHostController = navController)
 
-        Box(modifier = Modifier.fillMaxSize()) {
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+        ) {
             NavHost(
                 navController = navController,
-                startDestination = FeedScreen::class
+                startDestination = FeedContainer::class
             ) {
                 addRootsScreen()
             }
@@ -74,18 +74,9 @@ class MainContainer : BaseScreen() {
         }
     }
 
+
 }
 
 
-private fun NavGraphBuilder.addRootsScreen() {
-    composable<FeedScreen> {
-        val screen = it.toRoute<FeedScreen>()
-        screen.Content()
-    }
 
-    composable<FavoriteScreen> {
-        val screen = it.toRoute<FavoriteScreen>()
-        screen.Content()
-    }
-}
 

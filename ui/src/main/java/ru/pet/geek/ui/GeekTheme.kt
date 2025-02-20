@@ -1,5 +1,6 @@
 package ru.pet.geek.ui
 
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.MaterialTheme.colorScheme
 import androidx.compose.runtime.Composable
@@ -10,7 +11,7 @@ import androidx.compose.runtime.remember
 
 @Composable
 fun GeekTheme(
-    isDarkTheme: Boolean = false,
+    isDarkTheme: Boolean = isSystemInDarkTheme(),
     content: @Composable () -> Unit
 ) {
 

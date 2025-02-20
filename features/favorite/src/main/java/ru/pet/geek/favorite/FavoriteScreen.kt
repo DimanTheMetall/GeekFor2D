@@ -7,10 +7,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import kotlinx.serialization.Serializable
-import ru.pet.geek.core.screens.BaseRootScreen
+import ru.pet.geek.core.screens.BaseScreen
 
 @Serializable
-class FavoriteScreen : BaseRootScreen() {
+class FavoriteScreen : BaseScreen() {
 
     @Composable
     override fun Content() {

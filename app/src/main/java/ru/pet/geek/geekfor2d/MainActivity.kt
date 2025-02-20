@@ -18,8 +18,6 @@ class MainActivity : AppCompatActivity() {
                 MainContainer().Content()
             }
 
-
-
         }
     }
 }

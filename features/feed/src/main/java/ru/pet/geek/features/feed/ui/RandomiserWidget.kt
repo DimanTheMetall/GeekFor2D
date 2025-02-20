@@ -1,5 +1,6 @@
 package ru.pet.geek.features.feed.ui
 
+import android.content.res.Configuration
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
@@ -59,10 +60,10 @@ internal fun RandomsWidget(
     modifier: Modifier = Modifier,
     uiInfo: RandomWidgetUi,
 ) {
-    val shape = remember { RoundedCornerShape(10.dp) }
+    val shape = remember { RoundedCornerShape(topEnd = 26.dp, bottomStart = 26.dp) }
     Column(
         modifier = modifier
-            .background(shape = shape, color = GeekTheme.colors.backgroundModal)
+            .background(shape = shape, color = GeekTheme.colors.backgroundModalSemiTransparent)
             .border(
                 border = BorderStroke(width = 2.dp, color = GeekTheme.colors.greyscale500),
                 shape = shape
@@ -90,9 +91,14 @@ internal fun RandomsWidget(
 
 }
 
-@[Composable Preview]
-private fun RandomsWidgetPreviewLight() {
-    GeekTheme(isDarkTheme = false) {
+@[
+Composable
+Preview(uiMode = Configuration.UI_MODE_NIGHT_YES, name = "dark")
+Preview(
+    uiMode = Configuration.UI_MODE_NIGHT_NO, name = "light"
+)]
+private fun RandomsWidgetPreview() {
+    GeekTheme {
         Box(
             modifier = Modifier
                 .background(GeekTheme.colors.backgroundPrimary)
@@ -111,29 +117,6 @@ private fun RandomsWidgetPreviewLight() {
             )
         }
 
-    }
-}
-
-@[Composable Preview]
-private fun RandomsWidgetPreviewDark() {
-    GeekTheme(isDarkTheme = true) {
-        Box(
-            modifier = Modifier
-                .background(GeekTheme.colors.backgroundPrimary)
-                .padding(20.dp)
-        ) {
-            RandomsWidget(
-                modifier = Modifier
-                    .padding(20.dp),
-                uiInfo = RandomWidgetUiImpl(
-                    listOf(
-                        RandomItemUi.Manga(),
-                        RandomItemUi.Manga(),
-                        RandomItemUi.Manga(),
-                    )
-                )
-            )
-        }
     }
 }
 
