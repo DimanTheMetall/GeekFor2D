@@ -36,6 +36,14 @@ class FeedModule {
             override fun goToRandomMangaCard() {
                 //TODO
             }
+
+            override fun goToRandomAnimeCard() {
+                TODO("Not yet implemented")
+            }
+
+            override fun goToRandomCharactersCard() {
+                TODO("Not yet implemented")
+            }
         }
     }
 

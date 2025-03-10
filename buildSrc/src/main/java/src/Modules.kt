@@ -6,6 +6,10 @@ object Modules {
     const val FAVORITE = "favorite"
     const val DATA = "data"
     const val ENTITIES = "entities"
+    const val BASE_CARDS = "basecards"
+    const val CARDS = "cards"
+    const val MANGA = "manga"
+    const val FEATURES = "features"
 
     fun getModulesDependency(vararg strings: String) =
         strings.asList().joinToString(separator = "") { ":$it" }
