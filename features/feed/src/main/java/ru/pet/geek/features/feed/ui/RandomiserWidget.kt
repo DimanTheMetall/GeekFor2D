@@ -41,21 +41,27 @@ sealed interface RandomItemUi : Clickable {
     @get:Composable
     val backgroundColor: Color
 
-    data class Manga(override val onClick: () -> Unit = {}) : RandomItemUi {
+    data class Manga(
+        override val onClick: () -> Unit = {},
+    ) : RandomItemUi {
         override val text: UiText = UiText.ResourcesText(ru.pet.geek.ui.R.string.ui_manga)
 
         override val backgroundColor: Color
             @Composable get() = GeekTheme.colors.violetLight
     }
 
-    data class Anime(override val onClick: () -> Unit = {}) : RandomItemUi {
+    data class Anime(
+        override val onClick: () -> Unit = {},
+    ) : RandomItemUi {
         override val text: UiText = UiText.ResourcesText(ru.pet.geek.ui.R.string.ui_anime)
 
         override val backgroundColor: Color
             @Composable get() = GeekTheme.colors.pinkMedium
     }
 
-    data class Characters(override val onClick: () -> Unit = {}) : RandomItemUi {
+    data class Characters(
+        override val onClick: () -> Unit = {},
+    ) : RandomItemUi {
         override val text: UiText = UiText.ResourcesText(ru.pet.geek.ui.R.string.ui_charachers)
 
         override val backgroundColor: Color
@@ -67,7 +73,9 @@ interface RandomWidgetUi : UiInterface {
     val listUi: List<RandomItemUi>
 }
 
-data class RandomWidgetUiImpl(override val listUi: List<RandomItemUi>) : RandomWidgetUi
+data class RandomWidgetUiImpl(
+    override val listUi: List<RandomItemUi>,
+) : RandomWidgetUi
 
 @Composable
 internal fun RandomsWidget(
@@ -76,21 +84,22 @@ internal fun RandomsWidget(
 ) {
     val shape = remember { RoundedCornerShape(topEnd = 26.dp, bottomStart = 26.dp) }
     Column(
-        modifier = modifier
-            .background(
-                shape = shape, color = GeekTheme.colors.backgroundModalSemiTransparent
-            )
-            .border(
-                border = BorderStroke(width = 2.dp, color = GeekTheme.colors.greyscale500),
-                shape = shape
-            )
-            .padding(20.dp), horizontalAlignment = Alignment.CenterHorizontally
+        modifier =
+            modifier
+                .background(
+                    shape = shape,
+                    color = GeekTheme.colors.backgroundModalSemiTransparent,
+                ).border(
+                    border = BorderStroke(width = 2.dp, color = GeekTheme.colors.greyscale500),
+                    shape = shape,
+                ).padding(20.dp),
+        horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         Text(
             text = stringResource(ru.pet.geek.ui.R.string.ui_random),
             color = GeekTheme.colors.textPrimary,
             style = GeekTheme.typography.tttSmallBold,
-            textAlign = TextAlign.Center
+            textAlign = TextAlign.Center,
         )
         SpacerHeight(10.dp)
         Row(
@@ -99,35 +108,40 @@ internal fun RandomsWidget(
         ) {
             uiInfo.listUi.forEach { item ->
                 RandomItem(
-                    uiInfo = item, width = 46.dp
+                    uiInfo = item,
+                    width = 46.dp,
                 )
             }
         }
     }
-
 }
 
-@[Composable Preview(uiMode = Configuration.UI_MODE_NIGHT_YES, name = "dark") Preview(
-    uiMode = Configuration.UI_MODE_NIGHT_NO, name = "light"
-)]
+@[
+Composable Preview(uiMode = Configuration.UI_MODE_NIGHT_YES, name = "dark") Preview(
+    uiMode = Configuration.UI_MODE_NIGHT_NO,
+    name = "light",
+)
+]
 private fun RandomsWidgetPreview() {
     GeekTheme {
         Box(
-            modifier = Modifier
-                .background(GeekTheme.colors.backgroundPrimary)
-                .padding(20.dp)
+            modifier =
+                Modifier
+                    .background(GeekTheme.colors.backgroundPrimary)
+                    .padding(20.dp),
         ) {
             RandomsWidget(
-                modifier = Modifier.padding(20.dp), uiInfo = RandomWidgetUiImpl(
-                    listOf(
-                        RandomItemUi.Manga(),
-                        RandomItemUi.Anime(),
-                        RandomItemUi.Characters(),
-                    )
-                )
+                modifier = Modifier.padding(20.dp),
+                uiInfo =
+                    RandomWidgetUiImpl(
+                        listOf(
+                            RandomItemUi.Manga(),
+                            RandomItemUi.Anime(),
+                            RandomItemUi.Characters(),
+                        ),
+                    ),
             )
         }
-
     }
 }
 
@@ -144,9 +158,10 @@ private fun RandomItem(
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         Column(
-            modifier = Modifier
-                .width(width)
-                .background(color = uiInfo.backgroundColor),
+            modifier =
+                Modifier
+                    .width(width)
+                    .background(color = uiInfo.backgroundColor),
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
             chatText.forEach { char ->
@@ -159,10 +174,11 @@ private fun RandomItem(
         }
 
         Flag(
-            modifier = Modifier
-                .size(width)
-                .offset(y = (-1).dp),
-            color = uiInfo.backgroundColor
+            modifier =
+                Modifier
+                    .size(width)
+                    .offset(y = (-1).dp),
+            color = uiInfo.backgroundColor,
         )
     }
 }
@@ -171,28 +187,30 @@ private fun RandomItem(
 private fun RandomItemPreview() {
     GeekTheme {
         RandomItem(
-            modifier = Modifier
-                .width(45.dp)
-                .background(Color.White), uiInfo = RandomItemUi.Manga()
+            modifier =
+                Modifier
+                    .width(45.dp)
+                    .background(Color.White),
+            uiInfo = RandomItemUi.Manga(),
         )
     }
 }
 
-
 @Composable
 private fun Flag(
-    modifier: Modifier = Modifier, color: Color
+    modifier: Modifier = Modifier,
+    color: Color,
 ) {
     Canvas(modifier = modifier) {
-        val path = Path().apply {
-            lineTo(x = size.width, y = 0f)
-            lineTo(x = size.width * 0.8f, y = size.height)
-            lineTo(x = size.width / 2, y = size.height / 2)
-            lineTo(x = size.width * 0.2f, y = size.height)
-            lineTo(x = 0f, 0f)
-            close()
-
-        }
+        val path =
+            Path().apply {
+                lineTo(x = size.width, y = 0f)
+                lineTo(x = size.width * 0.8f, y = size.height)
+                lineTo(x = size.width / 2, y = size.height / 2)
+                lineTo(x = size.width * 0.2f, y = size.height)
+                lineTo(x = 0f, 0f)
+                close()
+            }
 
         drawPath(path = path, color = color, style = Fill)
     }

@@ -4,8 +4,8 @@ import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.graphics.Color
 import ru.pet.geek.utils.compositionProviderError
 
-fun ThemeHolder.geekPalette(): GeekColors {
-    return GeekColorsImpl(
+fun ThemeHolder.geekPalette(): GeekColors =
+    GeekColorsImpl(
         violetLight = Color(0xFF8415FF) darkVariant Color(0xFF6D11D5),
         violetMedium = Color(0xFF5C11B0) darkVariant Color(0xFF4B0D91),
         violetDark = Color(0xFF310A6B) darkVariant Color(0xFF310A6B),
@@ -19,7 +19,6 @@ fun ThemeHolder.geekPalette(): GeekColors {
         blueLight = Color(0xFFAEE0F6) darkVariant Color(0xFF5CB3C4),
         isDark = isDark,
     )
-}
 
 interface GeekColors {
     val greyscale0: Color
@@ -33,34 +32,36 @@ interface GeekColors {
     val greyscale800: Color
     val greyscale900: Color
 
-    //violet
+    // violet
     val violetLight: Color
     val violetMedium: Color
     val violetDark: Color
 
-    //background
+    // background
     val backgroundPrimary: Color
     val backgroundModal: Color
     val backgroundModalSemiTransparent: Color
 
-    //text
+    // text
     val textPrimary: Color
 
     //
     val orangeMedium: Color
 
-    //pink
+    // pink
     val pinkLight: Color
     val pinkMedium: Color
 
-    //blue
+    // blue
     val blueLight: Color
     val blueMedium: Color
+
+    // transparent
+    val transparent: Color
 
     //
     val isDark: Boolean
 }
-
 
 internal data class GeekColorsImpl(
     override val violetLight: Color,
@@ -76,7 +77,7 @@ internal data class GeekColorsImpl(
     override val pinkMedium: Color,
     override val isDark: Boolean,
 ) : GeekColors {
-    //No theme extends
+    // No theme extends
     override val greyscale0: Color = Color(0xFFFFFFFF)
     override val greyscale100: Color = Color(0xFFF2F3F7)
     override val greyscale200: Color = Color(0xFFE2E5EB)
@@ -87,9 +88,11 @@ internal data class GeekColorsImpl(
     override val greyscale700: Color = Color(0xFF2C3135)
     override val greyscale800: Color = Color(0xFF1D2023)
     override val greyscale900: Color = Color(0xFF000000)
+    override val transparent: Color = Color.Transparent
     override val backgroundModalSemiTransparent: Color = backgroundModal.copy(alpha = 0.5f)
 }
 
-val LocalGeekColors = staticCompositionLocalOf<GeekColors> {
-    compositionProviderError<GeekColors>()
-}
+val LocalGeekColors =
+    staticCompositionLocalOf<GeekColors> {
+        compositionProviderError<GeekColors>()
+    }

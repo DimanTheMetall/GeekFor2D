@@ -15,7 +15,6 @@ android {
     }
 }
 
-
 dependencies {
     implementation(Dependency.APP_COMPAT)
 

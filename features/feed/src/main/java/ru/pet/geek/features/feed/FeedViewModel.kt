@@ -12,44 +12,48 @@ import ru.pet.geek.features.feed.api.FeedNavApi
 import ru.pet.geek.features.feed.ui.RandomItemUi
 import ru.pet.geek.features.feed.ui.RandomWidgetUiImpl
 
-class FeedViewModel @AssistedInject constructor(
-    private val dataApi: FeedDataApi,
-    private val navApi: FeedNavApi
-) : ViewModel() {
+class FeedViewModel
+    @AssistedInject
+    constructor(
+        private val dataApi: FeedDataApi,
+        private val navApi: FeedNavApi,
+    ) : ViewModel() {
+        private val mutableStateUi = MutableStateFlow<FeedUiState>(FeedUiState.Loading())
+        val uiState = mutableStateUi.asStateFlow()
 
-    private val mutableStateUi = MutableStateFlow<FeedUiState>(FeedUiState.Loading())
-    val uiState = mutableStateUi.asStateFlow()
-
-    init {
-        viewModelScope.launch {
-            mutableStateUi.emit(buildSuccessState())
+        init {
+            viewModelScope.launch {
+                mutableStateUi.emit(buildSuccessState())
+            }
         }
-    }
 
-    @AssistedFactory
-    interface Factory {
-        fun create(): FeedViewModel
-    }
-
-    private fun buildSuccessState(): FeedUiState.Success {
-        val list = buildList<FeedItemUi> {
-            addRandomWidget()
+        @AssistedFactory
+        interface Factory {
+            fun create(): FeedViewModel
         }
-        return FeedUiState.Success(list)
-    }
 
-    private fun MutableList<FeedItemUi>.addRandomWidget() {
-        val randomList = buildList<RandomItemUi> {
-            add(RandomItemUi.Manga(onClick = navApi::goToRandomMangaCard))
-            add(RandomItemUi.Anime(onClick = navApi::goToRandomAnimeCard))
-            add(RandomItemUi.Characters(onClick = navApi::goToRandomCharactersCard))
+        private fun buildSuccessState(): FeedUiState.Success {
+            val list =
+                buildList<FeedItemUi> {
+                    addRandomWidget()
+                }
+            return FeedUiState.Success(list)
         }
-        add(
-            FeedItemUi.RandomWidget(
-                uiInfo = RandomWidgetUiImpl(
-                    listUi = randomList
-                )
+
+        private fun MutableList<FeedItemUi>.addRandomWidget() {
+            val randomList =
+                buildList<RandomItemUi> {
+                    add(RandomItemUi.Manga(onClick = navApi::goToRandomMangaCard))
+                    add(RandomItemUi.Anime(onClick = navApi::goToRandomAnimeCard))
+                    add(RandomItemUi.Characters(onClick = navApi::goToRandomCharactersCard))
+                }
+            add(
+                FeedItemUi.RandomWidget(
+                    uiInfo =
+                        RandomWidgetUiImpl(
+                            listUi = randomList,
+                        ),
+                ),
             )
-        )
+        }
     }
-}

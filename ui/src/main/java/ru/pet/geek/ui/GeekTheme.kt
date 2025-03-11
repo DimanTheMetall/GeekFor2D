@@ -8,26 +8,27 @@ import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.ReadOnlyComposable
 import androidx.compose.runtime.remember
 
-
 @Composable
 fun GeekTheme(
     isDarkTheme: Boolean = isSystemInDarkTheme(),
-    content: @Composable () -> Unit
+    content: @Composable () -> Unit,
 ) {
-
     val themeHolder = remember(isDarkTheme) { ThemeHolderImpl(isDarkTheme) }
 
-    val colors = remember(isDarkTheme) {
-        themeHolder.geekPalette()
-    }
+    val colors =
+        remember(isDarkTheme) {
+            themeHolder.geekPalette()
+        }
 
-    val images = remember(isDarkTheme) {
-        themeHolder.geekImages()
-    }
+    val images =
+        remember(isDarkTheme) {
+            themeHolder.geekImages()
+        }
 
-    val typography = remember {
-        geekTypography()
-    }
+    val typography =
+        remember {
+            geekTypography()
+        }
 
     CompositionLocalProvider(
         LocalGeekColors provides colors,
@@ -39,9 +40,8 @@ fun GeekTheme(
                 typography = Typography,
                 content = content,
             )
-        }
+        },
     )
-
 }
 
 object GeekTheme {

@@ -29,55 +29,51 @@ private val bottomMenuGradient
     get() =
         Brush.horizontalGradient(
             colors = listOf(GeekTheme.colors.pinkLight, GeekTheme.colors.blueLight),
-            tileMode = TileMode.Clamp
+            tileMode = TileMode.Clamp,
         )
 
 @Serializable
 class MainContainer : BaseScreen() {
-
     @Composable
     override fun Content() {
         val context = context as MainActivity
 
-        val component = remember {
-            context.getAppDependency()
-        }
+        val component =
+            remember {
+                context.getAppDependency()
+            }
 
-        val viewModel = DaggerViewModel {
-            component.getMainViewModelFactory().create()
-        }
-
+        val viewModel =
+            DaggerViewModel {
+                component.getMainViewModelFactory().create()
+            }
 
         val navController = rememberNavController()
 
         ComposeNavigationController(api = viewModel, navHostController = navController)
 
         Box(
-            modifier = Modifier
-                .fillMaxSize()
-                .background(GeekTheme.colors.backgroundPrimary)
+            modifier =
+                Modifier
+                    .fillMaxSize()
+                    .background(GeekTheme.colors.backgroundPrimary),
         ) {
             NavHost(
                 navController = navController,
-                startDestination = FeedContainer::class
+                startDestination = FeedContainer::class,
             ) {
                 createGraph()
             }
 
             BottomNavMenu(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(34.dp)
-                    .background(bottomMenuGradient)
-                    .align(Alignment.BottomCenter),
+                modifier =
+                    Modifier
+                        .fillMaxWidth()
+                        .height(34.dp)
+                        .background(bottomMenuGradient)
+                        .align(Alignment.BottomCenter),
                 roots = viewModel.roots,
             )
         }
     }
-
-
 }
-
-
-
-

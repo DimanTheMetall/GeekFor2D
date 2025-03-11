@@ -12,29 +12,21 @@ import ru.pet.geek.navigationcontroller.NavigationControllerApi
 
 @Module
 class FeedModule {
-
     @Provides
     @AppScope
-    fun providerFeedDataApi(
-        mangaRepository: MangaRepository
-    ): FeedDataApi {
-        return object : FeedDataApi {
-            override suspend fun getRandomContent(): LocalResponse<MangaRandomCardModel> {
-                return mangaRepository.getRandomMangaContent()
-            }
+    fun providerFeedDataApi(mangaRepository: MangaRepository): FeedDataApi =
+        object : FeedDataApi {
+            override suspend fun getRandomContent(): LocalResponse<MangaRandomCardModel> = mangaRepository.getRandomMangaContent()
         }
-    }
 
     @Provides
     @AppScope
-    fun provideFeedNavApi(
-        navigationControllerApi: NavigationControllerApi
-    ): FeedNavApi {
-        return object : FeedNavApi {
+    fun provideFeedNavApi(navigationControllerApi: NavigationControllerApi): FeedNavApi =
+        object : FeedNavApi {
             override fun back() = navigationControllerApi.back()
 
             override fun goToRandomMangaCard() {
-                //TODO
+                // TODO
             }
 
             override fun goToRandomAnimeCard() {
@@ -45,6 +37,4 @@ class FeedModule {
                 TODO("Not yet implemented")
             }
         }
-    }
-
 }

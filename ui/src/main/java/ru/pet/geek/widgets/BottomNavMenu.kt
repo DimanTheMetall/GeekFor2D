@@ -15,8 +15,9 @@ import ru.pet.geek.modifierExt.noRippleClickable
 
 data class BottomNavItem(
     override val icRes: Int,
-    override val onClick: () -> Unit
-): IcResHolderUi, Clickable
+    override val onClick: () -> Unit,
+) : IcResHolderUi,
+    Clickable
 
 @Composable
 fun BottomNavMenu(
@@ -26,15 +27,16 @@ fun BottomNavMenu(
     Row(
         modifier = modifier,
         horizontalArrangement = Arrangement.Absolute.SpaceAround,
-        verticalAlignment = Alignment.CenterVertically
+        verticalAlignment = Alignment.CenterVertically,
     ) {
         roots.forEach { root ->
             Image(
-                modifier = Modifier
-                    .size(24.dp)
-                    .noRippleClickable(clickable = root),
+                modifier =
+                    Modifier
+                        .size(24.dp)
+                        .noRippleClickable(clickable = root),
                 contentDescription = null,
-                painter = painterResource(root.icRes)
+                painter = painterResource(root.icRes),
             )
         }
     }

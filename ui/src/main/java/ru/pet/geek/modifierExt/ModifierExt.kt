@@ -19,68 +19,80 @@ import androidx.compose.ui.unit.IntSize
 import ru.pet.geek.api.Clickable
 import ru.pet.geek.ui.GeekTheme
 
-fun Modifier.noRippleClickable(enable: Boolean = true, clickable: Clickable) = composed {
-    this.clickable(enabled = enable,
+fun Modifier.noRippleClickable(
+    enable: Boolean = true,
+    clickable: Clickable,
+) = composed {
+    this.clickable(
+        enabled = enable,
         onClick = clickable.onClick,
         indication = null,
-        interactionSource = remember { MutableInteractionSource() })
+        interactionSource = remember { MutableInteractionSource() },
+    )
 }
 
-fun Modifier.clickable(enable: Boolean = true, clickable: Clickable) = this.clickable(
+fun Modifier.clickable(
+    enable: Boolean = true,
+    clickable: Clickable,
+) = this.clickable(
     enabled = enable,
     onClick = clickable.onClick,
 )
 
-private val shimmerLight = listOf(
-    Color(0xD0B7B7B7),
-    Color(0xD0696969),
-    Color(0xD0B7B7B7),
-)
+private val shimmerLight =
+    listOf(
+        Color(0xD0B7B7B7),
+        Color(0xD0696969),
+        Color(0xD0B7B7B7),
+    )
 
-private val shimmerDark = listOf(
-    Color(0xD01A1A1A),
-    Color(0xD0CBCBCB),
-    Color(0xD02F2F2F),
-)
+private val shimmerDark =
+    listOf(
+        Color(0xD01A1A1A),
+        Color(0xD0CBCBCB),
+        Color(0xD02F2F2F),
+    )
 
-fun Modifier.shimmerEffect(
-    isEnabled: Boolean = true,
-) = composed {
-    if (isEnabled) {
-        val contentCoord = remember { mutableStateOf(IntSize.Zero) }
-        val infinity = rememberInfiniteTransition()
-        val isDark: Boolean = GeekTheme.colors.isDark
-        val startCoordX = infinity.animateFloat(
-            initialValue = contentCoord.value.width * -(1f),
-            targetValue = contentCoord.value.width * 2f,
-            animationSpec = infiniteRepeatable(
-                animation = tween(durationMillis = 700)
-            )
-        )
-
-        val brush = remember(isDark) {
-            if (isDark) {
-                shimmerDark
-            } else {
-                shimmerLight
-            }
-        }
-
-        background(
-            brush = Brush.linearGradient(
-                colors = brush,
-                start = Offset(x = startCoordX.value, y = 0f),
-                end = Offset(
-                    x = startCoordX.value + contentCoord.value.width.toFloat(),
-                    y = contentCoord.value.height.toFloat()
+fun Modifier.shimmerEffect(isEnabled: Boolean = true) =
+    composed {
+        if (isEnabled) {
+            val contentCoord = remember { mutableStateOf(IntSize.Zero) }
+            val infinity = rememberInfiniteTransition()
+            val isDark: Boolean = GeekTheme.colors.isDark
+            val startCoordX =
+                infinity.animateFloat(
+                    initialValue = contentCoord.value.width * -(1f),
+                    targetValue = contentCoord.value.width * 2f,
+                    animationSpec =
+                        infiniteRepeatable(
+                            animation = tween(durationMillis = 700),
+                        ),
                 )
-            ),
-        ).onGloballyPositioned { coord ->
-            contentCoord.value = coord.size
+
+            val brush =
+                remember(isDark) {
+                    if (isDark) {
+                        shimmerDark
+                    } else {
+                        shimmerLight
+                    }
+                }
+
+            background(
+                brush =
+                    Brush.linearGradient(
+                        colors = brush,
+                        start = Offset(x = startCoordX.value, y = 0f),
+                        end =
+                            Offset(
+                                x = startCoordX.value + contentCoord.value.width.toFloat(),
+                                y = contentCoord.value.height.toFloat(),
+                            ),
+                    ),
+            ).onGloballyPositioned { coord ->
+                contentCoord.value = coord.size
+            }
+        } else {
+            this
         }
-    } else {
-        this
     }
-}
-
-

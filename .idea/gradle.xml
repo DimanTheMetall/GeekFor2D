@@ -28,13 +28,15 @@
             <option value="$PROJECT_DIR$/domain" />
             <option value="$PROJECT_DIR$/domain/entities" />
             <option value="$PROJECT_DIR$/features" />
+            <option value="$PROJECT_DIR$/features/cards" />
+            <option value="$PROJECT_DIR$/features/cards/basecards" />
+            <option value="$PROJECT_DIR$/features/cards/manga" />
             <option value="$PROJECT_DIR$/features/favorite" />
             <option value="$PROJECT_DIR$/features/feed" />
             <option value="$PROJECT_DIR$/navigationController" />
             <option value="$PROJECT_DIR$/ui" />
           </set>
         </option>
-        <option name="resolveExternalAnnotations" value="false" />
       </GradleProjectSettings>
     </option>
   </component>

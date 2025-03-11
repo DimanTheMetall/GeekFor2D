@@ -11,8 +11,7 @@ object Modules {
     const val MANGA = "manga"
     const val FEATURES = "features"
 
-    fun getModulesDependency(vararg strings: String) =
-        strings.asList().joinToString(separator = "") { ":$it" }
+    fun getModulesDependency(vararg strings: String) = strings.asList().joinToString(separator = "") { ":$it" }
 }
 
 object Packages {

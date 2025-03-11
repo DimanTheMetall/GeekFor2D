@@ -4,6 +4,8 @@ interface FeedNavApi {
     fun back()
 
     fun goToRandomMangaCard()
+
     fun goToRandomAnimeCard()
+
     fun goToRandomCharactersCard()
 }

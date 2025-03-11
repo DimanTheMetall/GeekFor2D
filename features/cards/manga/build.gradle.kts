@@ -38,5 +38,4 @@ dependencies {
     implementation(project(Modules.getModulesDependency(Modules.CORE)))
     implementation(project(Modules.getModulesDependency(Modules.UI)))
     implementation(project(Modules.getModulesDependency(Modules.FEATURES, Modules.CARDS, Modules.MANGA)))
-
 }
