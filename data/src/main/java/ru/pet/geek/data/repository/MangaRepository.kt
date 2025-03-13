@@ -16,5 +16,4 @@ class MangaRepository(
             toAppModel()
         }
     }
-
 }

@@ -3,7 +3,14 @@
     <string name="ui_manga">манга</string>
     <string name="ui_anime">аниме</string>
     <string name="ui_charachers">герои</string>
+    <string name="ui_characher">герой</string>
     <string name="ui_people">люди</string>
     <string name="ui_users">пользователи</string>
     <string name="ui_random">Случайно</string>
+
+    <string name="ui_manga_chapters">Глав: %s</string>
+    <string name="ui_manga_volumes">Томов: %s</string>
+
+    <string name="ui_anime_chapters">Серий: %s</string>
+    <string name="ui_anime_volumes">Сезонов: %s</string>
 </resources>
