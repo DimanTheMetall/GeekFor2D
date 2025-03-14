@@ -95,4 +95,5 @@ dependencies {
     implementation(project(Modules.getModulesDependency(Modules.DATA)))
     implementation(project(Modules.getModulesDependency(Packages.FEATURES, Modules.FEED)))
     implementation(project(Modules.getModulesDependency(Packages.FEATURES, Modules.FAVORITE)))
+    implementation(project(Modules.getModulesDependency(Packages.FEATURES, Modules.CARDS, Modules.MANGA)))
 }

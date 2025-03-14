@@ -2,18 +2,7 @@ package ru.pet.geek.core
 
 sealed interface GeneralState<out T> {
 
-    class Loading : GeneralState<Nothing> {
-        override fun equals(other: Any?): Boolean {
-            return when {
-                other == null -> false
-                else -> javaClass == javaClass
-            }
-        }
-
-        override fun hashCode(): Int {
-            return javaClass.hashCode()
-        }
-    }
+    data object Loading : GeneralState<Nothing>
 
     data class Error(val e: Throwable) : GeneralState<Nothing>
 

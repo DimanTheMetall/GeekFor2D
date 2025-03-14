@@ -23,8 +23,50 @@ import ru.pet.geek.ui.GeekTheme
 import ru.pet.geek.ui.R
 import ru.pet.geek.utils.PreviewBox
 import ru.pet.geek.utils.SpacerHeight
+import ru.pet.geek.utils.UiInterface
+
+interface MainInfoWidgetDataUi : UiInterface {
+    val contentTypeUi: ContentTypeUi
+    val imageUrl: String
+    val volumes: String?
+    val chapters: String?
+    val rating: GradientRatingUi
+    val title: String
+}
+
+data class MainInfoWidgetDataUiImpl(
+    override val contentTypeUi: ContentTypeUi,
+    override val imageUrl: String,
+    override val volumes: String?,
+    override val chapters: String?,
+    override val rating: GradientRatingUi,
+    override val title: String,
+) : MainInfoWidgetDataUi
+
+class MainInfoWidgetDataPreview : MainInfoWidgetDataUi {
+    override val contentTypeUi: ContentTypeUi = ContentTypeUi.Manga
+    override val imageUrl: String = ""
+    override val volumes: String? = "1"
+    override val chapters: String? = "2"
+    override val rating: GradientRatingUi = GradientRatingUiImpl(rating = 2.4f, ratesClick = 1232)
+    override val title: String = "Some title name for some manga title for long long long text"
+}
 
 private val shape = RoundedCornerShape(10.dp)
+
+@Composable
+fun MainInfoWidget(
+    modifier: Modifier = Modifier,
+    uiInfo: MainInfoWidgetDataUi,
+) = MainInfoWidget(
+    modifier = modifier,
+    imageUrl = uiInfo.imageUrl,
+    contentTypeUi = uiInfo.contentTypeUi,
+    title = uiInfo.title,
+    volumes = uiInfo.volumes,
+    chapters = uiInfo.chapters,
+    ratingInfo = uiInfo.rating,
+)
 
 @Composable
 fun MainInfoWidget(
@@ -33,8 +75,8 @@ fun MainInfoWidget(
     contentTypeUi: ContentTypeUi,
     title: String,
     ratingInfo: GradientRatingUi,
-    volumes: String,
-    chapters: String,
+    volumes: String?,
+    chapters: String?,
 ) {
     val gradientBrush = Brush.horizontalGradient(listOf(GeekTheme.colors.transparent, GeekTheme.colors.blueLight))
 
@@ -96,18 +138,18 @@ fun MainInfoWidget(
 }
 
 @Composable
-private fun ContentTypeUi.toVolumesText(volumes: String): String? =
+private fun ContentTypeUi.toVolumesText(volumes: String?): String? =
     when (this) {
-        ContentTypeUi.Manga -> stringResource(R.string.ui_manga_volumes, volumes)
-        ContentTypeUi.Anime -> stringResource(R.string.ui_anime_volumes, volumes)
+        ContentTypeUi.Manga -> stringResource(R.string.ui_manga_volumes, volumes ?: "")
+        ContentTypeUi.Anime -> stringResource(R.string.ui_anime_volumes, volumes ?: "")
         ContentTypeUi.Characters -> null
     }
 
 @Composable
-private fun ContentTypeUi.toChaptersText(chapters: String): String? =
+private fun ContentTypeUi.toChaptersText(chapters: String?): String? =
     when (this) {
-        ContentTypeUi.Manga -> stringResource(R.string.ui_manga_chapters, chapters)
-        ContentTypeUi.Anime -> stringResource(R.string.ui_anime_chapters, chapters)
+        ContentTypeUi.Manga -> stringResource(R.string.ui_manga_chapters, chapters ?: "")
+        ContentTypeUi.Anime -> stringResource(R.string.ui_anime_chapters, chapters ?: "")
         ContentTypeUi.Characters -> null
     }
 
@@ -116,17 +158,7 @@ private fun MainInfoWidgetPreview() {
     GeekTheme {
         PreviewBox {
             MainInfoWidget(
-                modifier = Modifier.padding(10.dp),
-                contentTypeUi = ContentTypeUi.Manga,
-                imageUrl = "",
-                title = "Some manga title for long long long long long text",
-                ratingInfo =
-                    GradientRatingUiImpl(
-                        rating = 6.4f,
-                        ratesClick = 1224,
-                    ),
-                chapters = "8",
-                volumes = "2",
+                uiInfo = MainInfoWidgetDataPreview(),
             )
         }
     }

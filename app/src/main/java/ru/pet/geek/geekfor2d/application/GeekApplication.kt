@@ -5,8 +5,9 @@ import ru.pet.geek.geekfor2d.di.DaggerAppComponent
 import ru.pet.geek.geekfor2d.di.dependency.AppDependency
 import ru.pet.geek.geekfor2d.di.dependency.DependencyProvider
 
-class GeekApplication : Application(), DependencyProvider {
-
+class GeekApplication :
+    Application(),
+    DependencyProvider {
     private val appComponent by lazy {
         DaggerAppComponent.factory().create(this)
     }
@@ -17,6 +18,4 @@ class GeekApplication : Application(), DependencyProvider {
     override fun onCreate() {
         super.onCreate()
     }
-
-
 }
