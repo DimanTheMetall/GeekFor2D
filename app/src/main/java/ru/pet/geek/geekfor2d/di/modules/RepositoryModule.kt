@@ -10,17 +10,12 @@ import ru.pet.geek.geekfor2d.di.AppScope
 
 @Module
 class RepositoryModule {
-
     @[AppScope Provides]
-    fun provideLimitRequestController(): RequestsController {
-        return CounterRequestController()
-    }
+    fun provideLimitRequestController(): RequestsController = CounterRequestController()
 
     @[AppScope Provides]
     fun provideMangaRepository(
         mangaRemoteSource: MangaRemoteSource,
-        requestsController: RequestsController
-    ): MangaRepository {
-        return MangaRepository(mangaRemoteSource = mangaRemoteSource, requestsController = requestsController)
-    }
+        requestsController: RequestsController,
+    ): MangaRepository = MangaRepository(mangaRemoteSource = mangaRemoteSource, requestsController = requestsController)
 }

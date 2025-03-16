@@ -1,5 +1,6 @@
 package com.example.cards.basecards
 
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -13,6 +14,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import ru.pet.geek.VisibilityItem
+import ru.pet.geek.VisibilityItemImpl
 import ru.pet.geek.utils.PreviewBox
 import ru.pet.geek.utils.UiInterface
 import ru.pet.geek.widgets.CircleButtonInfo
@@ -24,20 +27,20 @@ import ru.pet.geek.widgets.MainInfoWidgetDataUi
 
 interface CardSuccessUiState : UiInterface {
     val mainInfo: MainInfoWidgetDataUi
-    val previousButton: CircleButtonInfo
-    val nextButton: CircleButtonInfo
+    val previousButton: VisibilityItem<CircleButtonInfo>
+    val nextButton: VisibilityItem<CircleButtonInfo>
 }
 
 data class SuccessUiState(
     override val mainInfo: MainInfoWidgetDataUi,
-    override val previousButton: CircleButtonInfo,
-    override val nextButton: CircleButtonInfo,
+    override val previousButton: VisibilityItem<CircleButtonInfo>,
+    override val nextButton: VisibilityItem<CircleButtonInfo>,
 ) : CardSuccessUiState
 
 class CardSuccessStatePreview : CardSuccessUiState {
     override val mainInfo: MainInfoWidgetDataUi = MainInfoWidgetDataPreview()
-    override val previousButton: CircleButtonInfo = LeftRightButton.LeftButton(onClick = {})
-    override val nextButton: CircleButtonInfo = LeftRightButton.RightButton(onClick = {})
+    override val previousButton: VisibilityItem<CircleButtonInfo> = VisibilityItemImpl(LeftRightButton.LeftButton(onClick = {}))
+    override val nextButton: VisibilityItem<CircleButtonInfo> = VisibilityItemImpl(LeftRightButton.RightButton(onClick = {}))
 }
 
 @Composable
@@ -68,14 +71,23 @@ fun SuccessCardState(
                     .align(Alignment.BottomCenter),
             horizontalArrangement = Arrangement.SpaceBetween,
         ) {
-            CircleIconButton(
-                modifier = Modifier.size(36.dp),
-                uiInfo = uiInfo.previousButton,
-            )
-            CircleIconButton(
-                modifier = Modifier.size(36.dp),
-                uiInfo = uiInfo.nextButton,
-            )
+            AnimatedVisibility(
+                uiInfo.previousButton.isVisible,
+            ) {
+                CircleIconButton(
+                    modifier = Modifier.size(36.dp),
+                    uiInfo = uiInfo.previousButton.item,
+                )
+            }
+
+            AnimatedVisibility(
+                uiInfo.nextButton.isVisible,
+            ) {
+                CircleIconButton(
+                    modifier = Modifier.size(36.dp),
+                    uiInfo = uiInfo.nextButton.item,
+                )
+            }
         }
     }
 }

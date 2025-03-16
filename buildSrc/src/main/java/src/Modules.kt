@@ -8,8 +8,9 @@ object Modules {
     const val ENTITIES = "entities"
     const val BASE_CARDS = "basecards"
     const val CARDS = "cards"
-    const val MANGA = "manga"
+    const val RANDOM_MANGA = "randommanga"
     const val FEATURES = "features"
+    const val UI_MAPPERS = "uimappers"
 
     fun getModulesDependency(vararg strings: String) = strings.asList().joinToString(separator = "") { ":$it" }
 }

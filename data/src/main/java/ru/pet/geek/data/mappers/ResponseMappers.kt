@@ -22,52 +22,54 @@ internal fun GetRandomMangaResponse.toAppModel(): MangaRandomCardModel? {
         images = images?.toAppModel() ?: ImagesModel(),
         approved = approved,
         titles = titles.mapNotNull { it.toAppModel() },
-        title = title?:return null,
+        title = title ?: return null,
         titleEnglish = titleEnglish,
         titleJapanese = titleJapanese,
-        type = type?.toApp()?:ContentType.Manga,
+        type = type?.toApp() ?: ContentType.Manga,
         chapters = chapters,
         volumes = volumes,
-        status = status?.toAppModel()?:Status.Unknown,
+        status = status?.toAppModel() ?: Status.Unknown,
+        score = score,
+        scoredBy = scoredBy,
     )
 }
 
-internal fun InnerImagesResponse.toAppModel(): ImagesModel {
-    return ImagesModel(
+internal fun InnerImagesResponse.toAppModel(): ImagesModel =
+    ImagesModel(
         jpg = jpg?.toAppModel() ?: ImageModel(),
         webp = webp?.toAppModel() ?: ImageModel(),
     )
-}
 
-internal fun InnerImageResponse.toAppModel(): ImageModel {
-    return ImageModel(
+internal fun InnerImageResponse.toAppModel(): ImageModel =
+    ImageModel(
         imageUrl = imageUrl ?: "",
         smallImageUrl = smallImageUrl ?: "",
-        largeImageUrl = largeImageUrl ?: ""
+        largeImageUrl = largeImageUrl ?: "",
     )
-}
 
 internal fun InnerTitleModel.toAppModel(): TitleModel? {
     return TitleModel(
         title = title ?: return null,
-        type = type?.toAppModel() ?: TitleType.Unknown
+        type = type?.toAppModel() ?: TitleType.Unknown,
     )
 }
 
-internal fun TitleTypeNet.toAppModel() = when (this) {
-    TitleTypeNet.Default -> TitleType.Default
-    TitleTypeNet.Synonym -> TitleType.Synonym
-    TitleTypeNet.Japanese -> TitleType.Japanese
-    TitleTypeNet.Unknown -> TitleType.Unknown
-}
+internal fun TitleTypeNet.toAppModel() =
+    when (this) {
+        TitleTypeNet.Default -> TitleType.Default
+        TitleTypeNet.Synonym -> TitleType.Synonym
+        TitleTypeNet.Japanese -> TitleType.Japanese
+        TitleTypeNet.Unknown -> TitleType.Unknown
+    }
 
-internal fun ContentTypeNet.toApp() = when(this) {
-    ContentTypeNet.Manga -> ContentType.Manga
-    ContentTypeNet.Unknown -> ContentType.Unknown
-}
+internal fun ContentTypeNet.toApp() =
+    when (this) {
+        ContentTypeNet.Manga -> ContentType.Manga
+        ContentTypeNet.Unknown -> ContentType.Unknown
+    }
 
-internal fun StatusNet.toAppModel() = when(this) {
-    StatusNet.Finished -> Status.Finished
-    StatusNet.Unknown -> Status.Unknown
-}
-
+internal fun StatusNet.toAppModel() =
+    when (this) {
+        StatusNet.Finished -> Status.Finished
+        StatusNet.Unknown -> Status.Unknown
+    }

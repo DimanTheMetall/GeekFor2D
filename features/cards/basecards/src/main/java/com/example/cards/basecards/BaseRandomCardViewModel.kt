@@ -14,8 +14,10 @@ import kotlinx.coroutines.sync.withLock
 import kotlinx.coroutines.withContext
 import ru.pet.geek.core.GeneralState
 import ru.pet.geek.core.LocalResponse
-import ru.pet.geek.core.mappers.map
 import ru.pet.geek.core.mappers.toGeneralState
+import ru.pet.geek.utils.UiInterface
+import ru.pet.geek.widgets.CircleButtonInfo
+import ru.pet.geek.widgets.CircleStaticLoadingButton
 
 abstract class BaseRandomCardViewModel<T> : ViewModel() {
     protected abstract suspend fun getRandomData(): LocalResponse<T>
@@ -27,11 +29,17 @@ abstract class BaseRandomCardViewModel<T> : ViewModel() {
 
     protected val currentDataState = MutableStateFlow<GeneralState<T>>(GeneralState.Loading)
 
-    protected val mutableUiState = MutableStateFlow<GeneralState<SuccessUiState>>(GeneralState.Loading)
+    protected val mutableUiState = MutableStateFlow<RandomCardUiState>(RandomCardUiState.Loading)
     val uiState = mutableUiState.asStateFlow()
     private val mutex = Mutex()
 
-    init {
+    protected val isHasNext: Boolean
+        get() = currentIndex.value < responseList.value.lastIndex
+
+    protected val isHasPrevious: Boolean
+        get() = currentIndex.value <= 1
+
+    protected fun onInit() {
         viewModelScope.launch {
             combine(
                 currentIndex,
@@ -47,20 +55,18 @@ abstract class BaseRandomCardViewModel<T> : ViewModel() {
 
         viewModelScope.launch {
             currentDataState
-                .map { dataState -> dataState.map { data -> data.toUi() } }
+                .map { dataState -> dataState.toUiState() }
                 .collect { uiState ->
                     mutableUiState.emit(uiState)
                 }
         }
-
-        viewModelScope.launch {
-        }
     }
 
     private fun refresh() {
-        currentDataState.value = GeneralState.Loading
         loadData()
     }
+
+    private fun onRefreshClick() = refresh()
 
     private fun replaceResponseOnIndex(
         response: LocalResponse<T>,
@@ -108,4 +114,29 @@ abstract class BaseRandomCardViewModel<T> : ViewModel() {
             currentIndex.value -= 1
         }
     }
+
+    private fun GeneralState<T>.toUiState(): RandomCardUiState =
+        when (this) {
+            is GeneralState.Error ->
+                RandomCardUiState.Error(
+                    e = e,
+                    uiInfo = CircleStaticLoadingButton(onClick = ::onRefreshClick),
+                )
+
+            is GeneralState.Loading -> RandomCardUiState.Loading
+            is GeneralState.Success<T> -> RandomCardUiState.Success(data = data.toUi())
+        }
+}
+
+sealed interface RandomCardUiState : UiInterface {
+    data class Success(
+        val data: SuccessUiState,
+    ) : RandomCardUiState
+
+    data class Error(
+        val e: Throwable,
+        val uiInfo: CircleButtonInfo,
+    ) : RandomCardUiState
+
+    data object Loading : RandomCardUiState
 }

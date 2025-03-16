@@ -13,4 +13,6 @@
 
     <string name="ui_anime_chapters">Серий: %s</string>
     <string name="ui_anime_volumes">Сезонов: %s</string>
+
+    <string name="ui_error_common_text">Упс...Что-то пошло не так, попробуйте еще раз.</string>
 </resources>

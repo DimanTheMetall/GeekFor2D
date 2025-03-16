@@ -12,7 +12,7 @@ internal class FeedContainer : SimpleContainer() {
     @Composable
     override fun Content() = Unit
 }
-//
+
 @Serializable
 internal class FavoriteContainer : SimpleContainer() {
     @Composable

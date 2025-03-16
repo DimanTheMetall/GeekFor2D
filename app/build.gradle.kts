@@ -28,7 +28,7 @@ android {
             isMinifyEnabled = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
+                "proguard-rules.pro",
             )
         }
     }
@@ -54,7 +54,7 @@ android {
 }
 
 dependencies {
-    //Dependency region
+    // Dependency region
     implementation(Dependency.CORE_KTX)
     implementation(Dependency.APP_COMPAT)
 
@@ -76,7 +76,6 @@ dependencies {
     implementation(Dependency.LIFECYCLE_RUNTIME_COMPOSE)
     implementation(Dependency.LIFECYCLE_VIEW_MODEL_COMPOSE)
 
-
     implementation(Dependency.RETROFIT)
     implementation(Dependency.OKHTTP)
     implementation(Dependency.OKHTTP_LOGGER_INTERCEPTOR)
@@ -84,16 +83,15 @@ dependencies {
     implementation(Dependency.COIL_COMPOSE)
     implementation(Dependency.COIL_OKHTTP)
 
-
     implementation(Dependency.DAGGER)
     ksp(Dependency.DAGGER_COMPILER)
 
-    //Modules region
+    // Modules region
     implementation(project(Modules.getModulesDependency(Modules.CORE)))
     implementation(project(Modules.getModulesDependency(Modules.UI)))
     implementation(project(Modules.getModulesDependency(Modules.NAVIGATION_CONTROLLER)))
     implementation(project(Modules.getModulesDependency(Modules.DATA)))
     implementation(project(Modules.getModulesDependency(Packages.FEATURES, Modules.FEED)))
     implementation(project(Modules.getModulesDependency(Packages.FEATURES, Modules.FAVORITE)))
-    implementation(project(Modules.getModulesDependency(Packages.FEATURES, Modules.CARDS, Modules.MANGA)))
+    implementation(project(Modules.getModulesDependency(Packages.FEATURES, Modules.CARDS, Modules.RANDOM_MANGA)))
 }

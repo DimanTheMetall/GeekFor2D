@@ -13,7 +13,7 @@ import ru.pet.geek.modifierExt.shimmerEffect
 import ru.pet.geek.ui.GeekTheme
 
 @Composable
-fun TestContent() {
+private fun TestContent() {
     Row(modifier = Modifier) {
         Box(Modifier.size(40.dp).shimmerEffect())
         Spacer(Modifier.width(10.dp))

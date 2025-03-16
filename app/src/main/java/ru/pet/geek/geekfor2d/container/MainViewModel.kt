@@ -23,7 +23,7 @@ class MainViewModel
         }
 
         val roots =
-            buildList<BottomNavItem> {
+            buildList {
                 add(
                     BottomNavItem(
                         icRes = R.drawable.app_ic_feed,

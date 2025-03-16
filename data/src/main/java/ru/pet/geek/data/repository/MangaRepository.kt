@@ -9,11 +9,12 @@ import ru.pet.geek.domain.entities.dto.MangaRandomCardModel
 
 class MangaRepository(
     private val mangaRemoteSource: MangaRemoteSource,
-    private val requestsController: RequestsController
+    private val requestsController: RequestsController,
 ) {
-    suspend fun getRandomMangaContent(): LocalResponse<MangaRandomCardModel> = requestsController.prepareRequest {
-        mangaRemoteSource.mangaApi.getRandomContent().toLocalResponse {
-            toAppModel()
+    suspend fun getRandomMangaContent(): LocalResponse<MangaRandomCardModel> =
+        requestsController.prepareRequest {
+            mangaRemoteSource.mangaApi.getRandomContent().toLocalResponse {
+                toAppModel()
+            }
         }
-    }
 }

@@ -7,7 +7,7 @@ plugins {
 }
 
 android {
-    namespace = "${MetaInfo.APP_PACK}.${Modules.BASE_CARDS}"
+    namespace = "${MetaInfo.APP_PACK}.${Modules.RANDOM_MANGA}"
 
     buildFeatures {
         compose = true
@@ -37,5 +37,6 @@ dependencies {
 
     implementation(project(Modules.getModulesDependency(Modules.CORE)))
     implementation(project(Modules.getModulesDependency(Modules.UI)))
+    implementation(project(Modules.getModulesDependency(Modules.UI_MAPPERS)))
     implementation(project(Modules.getModulesDependency(Modules.FEATURES, Modules.CARDS, Modules.BASE_CARDS)))
 }

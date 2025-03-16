@@ -36,7 +36,9 @@ class GetRandomMangaResponse(
     @SerialName("publishing")
     val publishing: Boolean? = null,
     @SerialName("score")
-    val score: Int? = null,
+    val score: Float? = null,
+    @SerialName("score_by")
+    val scoredBy: Int? = null,
     @SerialName("rank")
     val rank: Int? = null,
     @SerialName("popularity")

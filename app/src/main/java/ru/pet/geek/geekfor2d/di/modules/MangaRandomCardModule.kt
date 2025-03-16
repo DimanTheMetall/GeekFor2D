@@ -12,13 +12,15 @@ import ru.pet.geek.navigationcontroller.NavigationControllerApi
 
 @Module
 class MangaRandomCardModule {
-    @[Provides AppScope]
+    @AppScope
+    @Provides
     fun provideMangaRandomCardDataApi(mangaRepository: MangaRepository): RandomCardMangaDataApi =
         object : RandomCardMangaDataApi {
             override suspend fun getRandomCard(): LocalResponse<MangaRandomCardModel> = mangaRepository.getRandomMangaContent()
         }
 
-    @[Provides AppScope]
+    @AppScope
+    @Provides
     fun providerMangaRandomCardNavApi(navController: NavigationControllerApi): RandomCardMangaNavApi =
         object : RandomCardMangaNavApi {
             override fun goBack() = navController.back()

@@ -19,6 +19,9 @@
       <SelectionState runConfigName="MainInfoWidgetPreview">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
+      <SelectionState runConfigName="BaseErrorScreenWidgetPreview">
+        <option name="selectionMode" value="DROPDOWN" />
+      </SelectionState>
     </selectionStates>
   </component>
 </project>

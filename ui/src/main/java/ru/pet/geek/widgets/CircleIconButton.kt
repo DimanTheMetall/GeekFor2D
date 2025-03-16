@@ -35,6 +35,19 @@ interface CircleButtonInfo : Clickable {
     val angle: Float
 }
 
+data class CircleStaticLoadingButton(
+    override val onClick: () -> Unit,
+) : CircleButtonInfo {
+    override val background: Color
+        @Composable
+        get() = GeekTheme.colors.blueMedium
+    override val iconRes: Int
+        @DrawableRes
+        get() = R.drawable.ui_ic_rotate_right
+    override val angle: Float
+        get() = 0f
+}
+
 sealed interface LeftRightButton : CircleButtonInfo {
     data class LeftButton(
         override val onClick: () -> Unit,
@@ -103,6 +116,10 @@ private fun CircleIconButtonPreview() {
             CircleIconButton(
                 modifier = Modifier.size(26.dp),
                 uiInfo = LeftRightButton.RightButton(onClick = {}),
+            )
+            CircleIconButton(
+                modifier = Modifier.size(26.dp),
+                uiInfo = CircleStaticLoadingButton(onClick = {}),
             )
         }
     }

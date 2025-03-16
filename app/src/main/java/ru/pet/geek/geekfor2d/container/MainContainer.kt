@@ -34,6 +34,7 @@ private val bottomMenuGradient
 
 @Serializable
 class MainContainer : BaseScreen() {
+
     @Composable
     override fun Content() {
         val context = context as MainActivity
