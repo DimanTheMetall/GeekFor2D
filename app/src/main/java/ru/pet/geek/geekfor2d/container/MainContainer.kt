@@ -11,7 +11,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.TileMode
-import androidx.compose.ui.unit.dp
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
 import kotlinx.serialization.Serializable
@@ -22,6 +21,7 @@ import ru.pet.geek.geekfor2d.di.dependency.getAppDependency
 import ru.pet.geek.navigationcontroller.ComposeNavigationController
 import ru.pet.geek.ui.GeekTheme
 import ru.pet.geek.utils.context
+import ru.pet.geek.widgets.BOTTOM_NAV_MENU_HEIGHT
 import ru.pet.geek.widgets.BottomNavMenu
 
 private val bottomMenuGradient
@@ -34,7 +34,6 @@ private val bottomMenuGradient
 
 @Serializable
 class MainContainer : BaseScreen() {
-
     @Composable
     override fun Content() {
         val context = context as MainActivity
@@ -70,7 +69,7 @@ class MainContainer : BaseScreen() {
                 modifier =
                     Modifier
                         .fillMaxWidth()
-                        .height(34.dp)
+                        .height(BOTTOM_NAV_MENU_HEIGHT)
                         .background(bottomMenuGradient)
                         .align(Alignment.BottomCenter),
                 roots = viewModel.roots,

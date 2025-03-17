@@ -2,6 +2,7 @@ package ru.pet.geek.data.remote
 
 import retrofit2.Response
 import retrofit2.http.GET
+import ru.pet.geek.data.remote.responses.BaseDataResponse
 import ru.pet.geek.data.remote.responses.GetRandomMangaResponse
 
 class MangaRemoteSource(private val client: GeekClient) {
@@ -11,5 +12,5 @@ class MangaRemoteSource(private val client: GeekClient) {
 interface MangaRemoteApi {
 
     @GET("random/manga")
-    suspend fun getRandomContent(): Response<GetRandomMangaResponse>
+    suspend fun getRandomContent(): Response<BaseDataResponse<GetRandomMangaResponse>>
 }

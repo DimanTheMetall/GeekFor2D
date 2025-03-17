@@ -4,10 +4,11 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -16,6 +17,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import ru.pet.geek.entities.ContentTypeUi
@@ -23,6 +25,7 @@ import ru.pet.geek.ui.GeekTheme
 import ru.pet.geek.ui.R
 import ru.pet.geek.utils.PreviewBox
 import ru.pet.geek.utils.SpacerHeight
+import ru.pet.geek.utils.SpacerWidth
 import ru.pet.geek.utils.UiInterface
 
 interface MainInfoWidgetDataUi : UiInterface {
@@ -49,7 +52,7 @@ class MainInfoWidgetDataPreview : MainInfoWidgetDataUi {
     override val volumes: String? = "1"
     override val chapters: String? = "2"
     override val rating: GradientRatingUi = GradientRatingUiImpl(rating = 2.4f, ratesClick = 1232)
-    override val title: String = "Some title name for some manga title for long long long text"
+    override val title: String = "Some title name for some manga title for long long long text text xtext"
 }
 
 private val shape = RoundedCornerShape(10.dp)
@@ -85,14 +88,14 @@ fun MainInfoWidget(
             modifier
                 .background(brush = gradientBrush, shape = shape)
                 .padding(10.dp),
-        horizontalArrangement = Arrangement.Absolute.SpaceBetween,
+        horizontalArrangement = Arrangement.Absolute.Left,
     ) {
         Column(
-            modifier = Modifier.weight(fill = false, weight = 1f),
+            modifier = Modifier,
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
             ShimmerAsynhImage(
-                modifier = Modifier.size(width = 70.dp, height = 160.dp),
+                modifier = Modifier.height(220.dp).aspectRatio(0.65f),
                 model = imageUrl,
             )
             SpacerHeight(4.dp)
@@ -100,17 +103,19 @@ fun MainInfoWidget(
                 uiInfo = contentTypeUi,
             )
         }
+        SpacerWidth(10.dp)
         Column(
-            modifier = Modifier.weight(0.9f),
+            modifier = Modifier.fillMaxWidth().weight(weight = 1f, fill = true),
             horizontalAlignment = Alignment.Start,
             verticalArrangement = Arrangement.spacedBy(8.dp),
         ) {
             Text(
-                modifier = Modifier,
+                modifier = Modifier.height((20 * 2).dp).fillMaxWidth(),
                 text = title,
                 style = GeekTheme.typography.tttSmallBold,
                 color = GeekTheme.colors.textPrimary,
                 textAlign = TextAlign.Center,
+                overflow = TextOverflow.Ellipsis,
             )
             GradientRatingWidget(
                 modifier =
@@ -140,16 +145,16 @@ fun MainInfoWidget(
 @Composable
 private fun ContentTypeUi.toVolumesText(volumes: String?): String? =
     when (this) {
-        ContentTypeUi.Manga -> stringResource(R.string.ui_manga_volumes, volumes ?: "")
-        ContentTypeUi.Anime -> stringResource(R.string.ui_anime_volumes, volumes ?: "")
+        ContentTypeUi.Manga -> volumes?.let { stringResource(R.string.ui_manga_volumes, volumes) }
+        ContentTypeUi.Anime -> volumes?.let { stringResource(R.string.ui_anime_volumes, volumes) }
         ContentTypeUi.Characters -> null
     }
 
 @Composable
 private fun ContentTypeUi.toChaptersText(chapters: String?): String? =
     when (this) {
-        ContentTypeUi.Manga -> stringResource(R.string.ui_manga_chapters, chapters ?: "")
-        ContentTypeUi.Anime -> stringResource(R.string.ui_anime_chapters, chapters ?: "")
+        ContentTypeUi.Manga -> chapters?.let { stringResource(R.string.ui_manga_chapters, chapters) }
+        ContentTypeUi.Anime -> chapters?.let { stringResource(R.string.ui_anime_chapters, chapters) }
         ContentTypeUi.Characters -> null
     }
 
@@ -158,6 +163,7 @@ private fun MainInfoWidgetPreview() {
     GeekTheme {
         PreviewBox {
             MainInfoWidget(
+                modifier = Modifier.width(400.dp),
                 uiInfo = MainInfoWidgetDataPreview(),
             )
         }

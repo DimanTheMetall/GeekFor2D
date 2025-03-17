@@ -4,6 +4,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.layout.ContentScale
 import coil3.compose.AsyncImage
 import coil3.compose.AsyncImagePainter.State
 import ru.pet.geek.modifierExt.shimmerEffect
@@ -21,5 +22,6 @@ fun ShimmerAsynhImage(
         model = model,
         contentDescription = contentDescription,
         onState = onStateChanged,
+        contentScale = ContentScale.Crop,
     )
 }

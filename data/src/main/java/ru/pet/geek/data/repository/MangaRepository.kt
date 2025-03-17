@@ -14,7 +14,7 @@ class MangaRepository(
     suspend fun getRandomMangaContent(): LocalResponse<MangaRandomCardModel> =
         requestsController.prepareRequest {
             mangaRemoteSource.mangaApi.getRandomContent().toLocalResponse {
-                toAppModel()
+                data?.toAppModel()
             }
         }
 }

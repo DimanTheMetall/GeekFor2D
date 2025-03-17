@@ -12,12 +12,14 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
 import kotlinx.coroutines.withContext
+import ru.pet.geek.VisibilityItemImpl
 import ru.pet.geek.core.GeneralState
 import ru.pet.geek.core.LocalResponse
 import ru.pet.geek.core.mappers.toGeneralState
 import ru.pet.geek.utils.UiInterface
 import ru.pet.geek.widgets.CircleButtonInfo
 import ru.pet.geek.widgets.CircleStaticLoadingButton
+import ru.pet.geek.widgets.LeftRightButton
 
 abstract class BaseRandomCardViewModel<T> : ViewModel() {
     protected abstract suspend fun getRandomData(): LocalResponse<T>
@@ -31,13 +33,25 @@ abstract class BaseRandomCardViewModel<T> : ViewModel() {
 
     protected val mutableUiState = MutableStateFlow<RandomCardUiState>(RandomCardUiState.Loading)
     val uiState = mutableUiState.asStateFlow()
+
+    private val leftButtonState: LeftRightButton.LeftButton = LeftRightButton.LeftButton(onClick = ::onPreviousClick)
+    private val rightButtonState: LeftRightButton.RightButton = LeftRightButton.RightButton(onClick = ::onNextClick)
+    protected val buttonsState =
+        MutableStateFlow<LeftRightButtonsWidgetState>(
+            LeftRightButtonsWidgetStateImpl(
+                leftButton = VisibilityItemImpl(isVisible = false, item = leftButtonState),
+                rightButton = VisibilityItemImpl(isVisible = false, item = rightButtonState),
+            ),
+        )
+    val buttonsUiState = buttonsState.asStateFlow()
+
     private val mutex = Mutex()
 
     protected val isHasNext: Boolean
-        get() = currentIndex.value < responseList.value.lastIndex
+        get() = true
 
     protected val isHasPrevious: Boolean
-        get() = currentIndex.value <= 1
+        get() = currentIndex.value >= 1
 
     protected fun onInit() {
         viewModelScope.launch {
@@ -58,6 +72,30 @@ abstract class BaseRandomCardViewModel<T> : ViewModel() {
                 .map { dataState -> dataState.toUiState() }
                 .collect { uiState ->
                     mutableUiState.emit(uiState)
+                }
+        }
+
+        viewModelScope.launch {
+            currentDataState
+                .map { state ->
+                    val newButtonsState =
+                        when (state) {
+                            is GeneralState.Loading, is GeneralState.Error -> {
+                                LeftRightButtonsWidgetStateImpl(
+                                    leftButton = VisibilityItemImpl(isVisible = false, item = leftButtonState),
+                                    rightButton = VisibilityItemImpl(isVisible = false, item = rightButtonState),
+                                )
+                            }
+
+                            is GeneralState.Success<T> ->
+                                LeftRightButtonsWidgetStateImpl(
+                                    leftButton = VisibilityItemImpl(isVisible = isHasPrevious, item = leftButtonState),
+                                    rightButton = VisibilityItemImpl(isVisible = isHasNext, item = rightButtonState),
+                                )
+                        }
+                    newButtonsState
+                }.collect {
+                    buttonsState.emit(it)
                 }
         }
     }

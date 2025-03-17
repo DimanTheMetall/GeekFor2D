@@ -54,7 +54,7 @@ sealed interface LeftRightButton : CircleButtonInfo {
     ) : LeftRightButton {
         override val background: Color
             @Composable
-            get() = GeekTheme.colors.blueLight
+            get() = GeekTheme.colors.pinkLight
         override val iconRes: Int
             @DrawableRes
             get() = R.drawable.ui_ic_arrow_up
@@ -69,7 +69,7 @@ sealed interface LeftRightButton : CircleButtonInfo {
     ) : LeftRightButton {
         override val background: Color
             @Composable
-            get() = GeekTheme.colors.pinkLight
+            get() = GeekTheme.colors.blueLight
         override val iconRes: Int
             @DrawableRes
             get() = R.drawable.ui_ic_arrow_up

@@ -10,11 +10,14 @@ import androidx.compose.ui.unit.dp
 import ru.pet.geek.ui.GeekTheme
 
 @Composable
-fun PreviewBox(content: @Composable BoxScope.() -> Unit) {
+fun PreviewBox(
+    modifier: Modifier = Modifier,
+    content: @Composable BoxScope.() -> Unit,
+) {
     GeekTheme {
         Box(
             modifier =
-                Modifier
+                modifier
                     .background(GeekTheme.colors.backgroundPrimary)
                     .padding(10.dp),
             content = content,
