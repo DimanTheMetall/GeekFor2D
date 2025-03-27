@@ -8,11 +8,15 @@
     <string name="ui_users">пользователи</string>
     <string name="ui_random">Случайно</string>
 
-    <string name="ui_manga_chapters">Глав: %s</string>
-    <string name="ui_manga_volumes">Томов: %s</string>
+    <string name="ui_manga_chapters">Томов: %s</string>
+    <string name="ui_manga_volumes">Глав: %s</string>
 
-    <string name="ui_anime_chapters">Серий: %s</string>
-    <string name="ui_anime_volumes">Сезонов: %s</string>
+    <string name="ui_anime_chapters">Сезонов: %s</string>
+    <string name="ui_anime_volumes">Серий: %s</string>
+
+    <string name="ui_status_finished">Завершен</string>
+    <string name="ui_status_publishing">Выпускается</string>
+    <string name="ui_status_unknown">Неизвестно</string>
 
     <string name="ui_error_common_text">Упс...Что-то пошло не так, попробуйте еще раз.</string>
 </resources>

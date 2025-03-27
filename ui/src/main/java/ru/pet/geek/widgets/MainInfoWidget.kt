@@ -1,10 +1,13 @@
 package ru.pet.geek.widgets
 
+import androidx.annotation.DrawableRes
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.aspectRatio
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -23,7 +26,7 @@ import androidx.compose.ui.unit.dp
 import ru.pet.geek.entities.ContentTypeUi
 import ru.pet.geek.ui.GeekTheme
 import ru.pet.geek.ui.R
-import ru.pet.geek.utils.PreviewBox
+import ru.pet.geek.utils.PreviewColumn
 import ru.pet.geek.utils.SpacerHeight
 import ru.pet.geek.utils.SpacerWidth
 import ru.pet.geek.utils.UiInterface
@@ -31,31 +34,50 @@ import ru.pet.geek.utils.UiInterface
 interface MainInfoWidgetDataUi : UiInterface {
     val contentTypeUi: ContentTypeUi
     val imageUrl: String
-    val volumes: String?
-    val chapters: String?
+    val volumesChapterInfo: IconTwoLineInfo
+    val dateInfo: IconTwoLineInfo
     val rating: GradientRatingUi
     val title: String
+    val status: StatusWidgetInfo
 }
 
 data class MainInfoWidgetDataUiImpl(
     override val contentTypeUi: ContentTypeUi,
     override val imageUrl: String,
-    override val volumes: String?,
-    override val chapters: String?,
+    override val dateInfo: IconTwoLineInfo,
+    override val volumesChapterInfo: IconTwoLineInfo,
     override val rating: GradientRatingUi,
     override val title: String,
+    override val status: StatusWidgetInfo,
 ) : MainInfoWidgetDataUi
 
-class MainInfoWidgetDataPreview : MainInfoWidgetDataUi {
+class MainInfoWidgetDataPreview(
+    override val dateInfo: IconTwoLineInfo = IconTwoLineInfoPreview(),
+    override val volumesChapterInfo: IconTwoLineInfo = IconTwoLineInfoPreview(),
+) : MainInfoWidgetDataUi {
     override val contentTypeUi: ContentTypeUi = ContentTypeUi.Manga
     override val imageUrl: String = ""
-    override val volumes: String? = "1"
-    override val chapters: String? = "2"
+    override val status: StatusWidgetInfo = StatusWidgetInfo.Finished
+
     override val rating: GradientRatingUi = GradientRatingUiImpl(rating = 2.4f, ratesClick = 1232)
     override val title: String = "Some title name for some manga title for long long long text text xtext"
 }
 
 private val shape = RoundedCornerShape(10.dp)
+private val gradientBrush
+    @Composable
+    get() = Brush.horizontalGradient(listOf(GeekTheme.colors.transparent, GeekTheme.colors.blueLight))
+
+@Composable
+fun MainInfoWidgetLoading(modifier: Modifier = Modifier) {
+    Box(
+        modifier =
+            modifier
+                .fillMaxWidth()
+                .height(262.dp)
+                .background(shape = shape, brush = gradientBrush),
+    )
+}
 
 @Composable
 fun MainInfoWidget(
@@ -66,9 +88,13 @@ fun MainInfoWidget(
     imageUrl = uiInfo.imageUrl,
     contentTypeUi = uiInfo.contentTypeUi,
     title = uiInfo.title,
-    volumes = uiInfo.volumes,
-    chapters = uiInfo.chapters,
+    volumes = uiInfo.volumesChapterInfo.firstText,
+    chapters = uiInfo.volumesChapterInfo.secondText,
     ratingInfo = uiInfo.rating,
+    chaptersVolumesInfoIconRes = uiInfo.volumesChapterInfo.iconRes,
+    startDate = uiInfo.dateInfo.firstText,
+    endDate = uiInfo.dateInfo.secondText,
+    status = uiInfo.status,
 )
 
 @Composable
@@ -78,14 +104,18 @@ fun MainInfoWidget(
     contentTypeUi: ContentTypeUi,
     title: String,
     ratingInfo: GradientRatingUi,
+    @DrawableRes chaptersVolumesInfoIconRes: Int = R.drawable.ui_ic_chapters_volumes,
     volumes: String?,
     chapters: String?,
+    startDate: String?,
+    endDate: String?,
+    @DrawableRes dateIconRes: Int = R.drawable.ui_ic_calendar,
+    status: StatusWidgetInfo,
 ) {
-    val gradientBrush = Brush.horizontalGradient(listOf(GeekTheme.colors.transparent, GeekTheme.colors.blueLight))
-
     Row(
         modifier =
             modifier
+                .height(260.dp)
                 .background(brush = gradientBrush, shape = shape)
                 .padding(10.dp),
         horizontalArrangement = Arrangement.Absolute.Left,
@@ -104,40 +134,45 @@ fun MainInfoWidget(
             )
         }
         SpacerWidth(10.dp)
-        Column(
-            modifier = Modifier.fillMaxWidth().weight(weight = 1f, fill = true),
-            horizontalAlignment = Alignment.Start,
-            verticalArrangement = Arrangement.spacedBy(8.dp),
-        ) {
-            Text(
-                modifier = Modifier.height((20 * 2).dp).fillMaxWidth(),
-                text = title,
-                style = GeekTheme.typography.tttSmallBold,
-                color = GeekTheme.colors.textPrimary,
-                textAlign = TextAlign.Center,
-                overflow = TextOverflow.Ellipsis,
-            )
-            GradientRatingWidget(
-                modifier =
-                    Modifier
-                        .fillMaxWidth()
-                        .height(20.dp),
-                uiInfo = ratingInfo,
-            )
-            contentTypeUi.toVolumesText(volumes = volumes)?.let {
+        Box(modifier = Modifier.fillMaxSize()) {
+            Column(
+                modifier = Modifier.align(Alignment.TopCenter),
+                horizontalAlignment = Alignment.Start,
+                verticalArrangement = Arrangement.spacedBy(8.dp),
+            ) {
                 Text(
-                    text = it,
-                    style = GeekTheme.typography.tttSmallRegular,
+                    modifier = Modifier.height((20 * 2).dp).fillMaxWidth(),
+                    text = title,
+                    style = GeekTheme.typography.tttSmallBold,
                     color = GeekTheme.colors.textPrimary,
+                    textAlign = TextAlign.Center,
+                    overflow = TextOverflow.Ellipsis,
+                )
+                GradientRatingWidget(
+                    modifier =
+                        Modifier
+                            .fillMaxWidth()
+                            .height(20.dp),
+                    uiInfo = ratingInfo,
+                )
+
+                IconTwoLineInfoWidget(
+                    iconRes = chaptersVolumesInfoIconRes,
+                    firstLineInfo = contentTypeUi.toChaptersText(chapters),
+                    secondLineInfo = contentTypeUi.toVolumesText(volumes),
+                    hideIfEmpty = true,
+                )
+                IconTwoLineInfoWidget(
+                    firstLineInfo = startDate,
+                    secondLineInfo = endDate,
+                    iconRes = dateIconRes,
+                    hideIfEmpty = true,
                 )
             }
-            contentTypeUi.toChaptersText(chapters = chapters)?.let {
-                Text(
-                    text = it,
-                    style = GeekTheme.typography.tttSmallRegular,
-                    color = GeekTheme.colors.textPrimary,
-                )
-            }
+            StatusWidget(
+                modifier = Modifier.align(Alignment.BottomCenter),
+                uiInfo = status,
+            )
         }
     }
 }
@@ -160,12 +195,12 @@ private fun ContentTypeUi.toChaptersText(chapters: String?): String? =
 
 @[Composable Preview]
 private fun MainInfoWidgetPreview() {
-    GeekTheme {
-        PreviewBox {
-            MainInfoWidget(
-                modifier = Modifier.width(400.dp),
-                uiInfo = MainInfoWidgetDataPreview(),
-            )
-        }
+    PreviewColumn {
+        MainInfoWidget(
+            modifier = Modifier.width(400.dp),
+            uiInfo = MainInfoWidgetDataPreview(),
+        )
+        SpacerHeight(10.dp)
+        MainInfoWidgetLoading()
     }
 }

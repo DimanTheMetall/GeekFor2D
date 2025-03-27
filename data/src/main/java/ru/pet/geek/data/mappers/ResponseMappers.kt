@@ -4,12 +4,14 @@ import ru.pet.geek.data.remote.responses.GetRandomMangaResponse
 import ru.pet.geek.data.remote.responses.inner.ContentTypeNet
 import ru.pet.geek.data.remote.responses.inner.InnerImageResponse
 import ru.pet.geek.data.remote.responses.inner.InnerImagesResponse
+import ru.pet.geek.data.remote.responses.inner.InnerPublishedDateModel
 import ru.pet.geek.data.remote.responses.inner.InnerTitleModel
 import ru.pet.geek.data.remote.responses.inner.StatusNet
 import ru.pet.geek.data.remote.responses.inner.TitleTypeNet
 import ru.pet.geek.domain.entities.dto.ImageModel
 import ru.pet.geek.domain.entities.dto.ImagesModel
 import ru.pet.geek.domain.entities.dto.MangaRandomCardModel
+import ru.pet.geek.domain.entities.dto.PublishingDateModel
 import ru.pet.geek.domain.entities.dto.TitleModel
 import ru.pet.geek.domain.entities.dto.enums.ContentType
 import ru.pet.geek.domain.entities.dto.enums.Status
@@ -28,9 +30,18 @@ internal fun GetRandomMangaResponse.toAppModel(): MangaRandomCardModel? {
         type = type?.toApp() ?: ContentType.Manga,
         chapters = chapters,
         volumes = volumes,
-        status = status?.toAppModel() ?: Status.Unknown,
+        status = status?.toAppModel(),
         score = score,
         scoredBy = scoredBy,
+        publishedModel = published?.toAppModel(),
+    )
+}
+
+internal fun InnerPublishedDateModel.toAppModel(): PublishingDateModel? {
+    if (from == null && to == null) return null
+    return PublishingDateModel(
+        from = from,
+        to = to,
     )
 }
 
@@ -71,5 +82,5 @@ internal fun ContentTypeNet.toApp() =
 internal fun StatusNet.toAppModel() =
     when (this) {
         StatusNet.Finished -> Status.Finished
-        StatusNet.Unknown -> Status.Unknown
+        StatusNet.Publishing -> Status.Publishing
     }

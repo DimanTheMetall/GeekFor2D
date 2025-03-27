@@ -4,7 +4,6 @@ import androidx.compose.animation.AnimatedContent
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.animation.togetherWith
-import androidx.compose.foundation.layout.Box
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import ru.pet.geek.widgets.BaseErrorScreenWidget
@@ -27,7 +26,7 @@ fun StateSelector(
                     refreshButton = newsState.uiInfo,
                 )
 
-            is RandomCardUiState.Loading -> Box {  }
+            is RandomCardUiState.Loading -> LoadingCardState(modifier = modifier)
             is RandomCardUiState.Success ->
                 SuccessCardState(
                     modifier = modifier,

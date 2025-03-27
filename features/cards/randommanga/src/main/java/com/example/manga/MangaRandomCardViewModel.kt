@@ -7,11 +7,14 @@ import com.example.manga.api.RandomCardMangaNavApi
 import dagger.assisted.AssistedFactory
 import dagger.assisted.AssistedInject
 import ru.pet.geek.core.LocalResponse
+import ru.pet.geek.core.utils.UTCtoUiFormat
 import ru.pet.geek.domain.entities.dto.MangaRandomCardModel
 import ru.pet.geek.entities.ContentTypeUi
 import ru.pet.geek.mappers.toUi
+import ru.pet.geek.widgets.CalendarTwoLineInfo
 import ru.pet.geek.widgets.GradientRatingUiImpl
 import ru.pet.geek.widgets.MainInfoWidgetDataUiImpl
+import ru.pet.geek.widgets.VolumesChaptersTwoLineInfo
 
 class MangaRandomCardViewModel
     @AssistedInject
@@ -31,8 +34,17 @@ class MangaRandomCardViewModel
                     MainInfoWidgetDataUiImpl(
                         contentTypeUi = this.type.toUi(default = ContentTypeUi.Manga),
                         imageUrl = this.images.jpg.imageUrl,
-                        volumes = this.volumes?.toString(),
-                        chapters = this.chapters?.toString(),
+                        volumesChapterInfo =
+                            VolumesChaptersTwoLineInfo(
+                                chapterValue = chapters?.toString(),
+                                volumesValue = volumes?.toString(),
+                            ),
+                        dateInfo =
+                            CalendarTwoLineInfo(
+                                firstText = publishedModel?.from?.UTCtoUiFormat(),
+                                secondText = publishedModel?.to?.UTCtoUiFormat(),
+                            ),
+                        status = status.toUi(),
                         rating =
                             GradientRatingUiImpl(
                                 rating = this.score ?: 0f,

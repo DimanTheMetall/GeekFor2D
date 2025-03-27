@@ -4,6 +4,7 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import ru.pet.geek.data.remote.responses.inner.ContentTypeNet
 import ru.pet.geek.data.remote.responses.inner.InnerImagesResponse
+import ru.pet.geek.data.remote.responses.inner.InnerPublishedDateModel
 import ru.pet.geek.data.remote.responses.inner.InnerTitleModel
 import ru.pet.geek.data.remote.responses.inner.StatusNet
 
@@ -35,6 +36,8 @@ class GetRandomMangaResponse(
     val status: StatusNet? = null,
     @SerialName("publishing")
     val publishing: Boolean? = null,
+    @SerialName("published")
+    val published: InnerPublishedDateModel? = null,
     @SerialName("score")
     val score: Float? = null,
     @SerialName("scored_by")

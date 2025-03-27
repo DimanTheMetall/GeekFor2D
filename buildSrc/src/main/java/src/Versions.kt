@@ -20,4 +20,5 @@ object Versions {
     const val RETROFIT = "2.11.0"
     const val OKHTTP = "4.12.0"
     const val COIL = "3.1.0"
+    const val JODA_TIME = "2.13.1"
 }
