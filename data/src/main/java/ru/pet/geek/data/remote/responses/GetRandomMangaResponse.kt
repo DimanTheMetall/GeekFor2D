@@ -2,6 +2,7 @@ package ru.pet.geek.data.remote.responses
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
+import ru.pet.geek.data.remote.DEPRECATED_FROM_BACKEND
 import ru.pet.geek.data.remote.responses.inner.ContentTypeNet
 import ru.pet.geek.data.remote.responses.inner.InnerImagesResponse
 import ru.pet.geek.data.remote.responses.inner.InnerPublishedDateModel
@@ -21,10 +22,13 @@ class GetRandomMangaResponse(
     @SerialName("titles")
     val titles: List<InnerTitleModel> = emptyList(),
     @SerialName("title")
+    @Deprecated(DEPRECATED_FROM_BACKEND)
     val title: String? = null,
     @SerialName("title_english")
+    @Deprecated(DEPRECATED_FROM_BACKEND)
     val titleEnglish: String? = null,
     @SerialName("title_japanese")
+    @Deprecated(DEPRECATED_FROM_BACKEND)
     val titleJapanese: String? = null,
     @SerialName("type")
     val type: ContentTypeNet? = null,

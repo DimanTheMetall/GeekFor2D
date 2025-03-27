@@ -50,7 +50,7 @@ class MangaRandomCardViewModel
                                 rating = this.score ?: 0f,
                                 ratesClick = scoredBy ?: 0,
                             ),
-                        title = title,
+                        title = titles.toUi(),
                     ),
             )
 

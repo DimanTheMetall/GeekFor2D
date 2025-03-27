@@ -10,6 +10,9 @@ enum class StatusNet(
 ) : EnumStringValue {
     Finished("Finished"),
     Publishing("Publishing"),
+    OnHiatus("On Hiatus"),
+    Discontinued("Discontinued"),
+    NotYetPublished("Not yet published"),
 }
 
 object StatusTypeSerializer : ByStringNullableSerializer<StatusNet>(

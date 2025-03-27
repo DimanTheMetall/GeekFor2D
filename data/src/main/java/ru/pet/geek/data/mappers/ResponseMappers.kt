@@ -24,9 +24,6 @@ internal fun GetRandomMangaResponse.toAppModel(): MangaRandomCardModel? {
         images = images?.toAppModel() ?: ImagesModel(),
         approved = approved,
         titles = titles.mapNotNull { it.toAppModel() },
-        title = title ?: return null,
-        titleEnglish = titleEnglish,
-        titleJapanese = titleJapanese,
         type = type?.toApp() ?: ContentType.Manga,
         chapters = chapters,
         volumes = volumes,
@@ -83,4 +80,7 @@ internal fun StatusNet.toAppModel() =
     when (this) {
         StatusNet.Finished -> Status.Finished
         StatusNet.Publishing -> Status.Publishing
+        StatusNet.OnHiatus -> Status.OnHiatus
+        StatusNet.Discontinued -> Status.Discontinued
+        StatusNet.NotYetPublished -> Status.NotYetPublished
     }

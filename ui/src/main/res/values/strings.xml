@@ -16,6 +16,9 @@
 
     <string name="ui_status_finished">Завершен</string>
     <string name="ui_status_publishing">Выпускается</string>
+    <string name="ui_status_hiatus">Приостановлено</string>
+    <string name="ui_status_discontinued">Заброшено</string>
+    <string name="ui_status_not_yet_published">Еще не выпущено</string>
     <string name="ui_status_unknown">Неизвестно</string>
 
     <string name="ui_error_common_text">Упс...Что-то пошло не так, попробуйте еще раз.</string>

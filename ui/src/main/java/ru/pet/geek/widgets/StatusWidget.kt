@@ -26,6 +26,15 @@ enum class StatusWidgetInfo(
     Publishing(
         textRes = R.string.ui_status_publishing,
     ),
+    OnHiatus(
+        textRes = R.string.ui_status_hiatus,
+    ),
+    Discontinued(
+        textRes = R.string.ui_status_discontinued,
+    ),
+    NotYetPublished(
+        textRes = R.string.ui_status_not_yet_published,
+    ),
     Unknown(
         textRes = R.string.ui_status_unknown,
     ),
@@ -35,9 +44,10 @@ enum class StatusWidgetInfo(
         @Composable
         get() =
             when (this) {
-                Finished -> GeekTheme.colors.yellowMedium
+                Finished, OnHiatus -> GeekTheme.colors.yellowMedium
                 Publishing -> GeekTheme.colors.mediumGreen
-                Unknown -> GeekTheme.colors.orangeMedium
+                NotYetPublished -> GeekTheme.colors.blueLight
+                Unknown, Discontinued -> GeekTheme.colors.orangeMedium
             }
 }
 

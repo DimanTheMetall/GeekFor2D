@@ -15,5 +15,9 @@ fun Status?.toUi(): StatusWidgetInfo =
     when (this) {
         Status.Finished -> StatusWidgetInfo.Finished
         Status.Publishing -> StatusWidgetInfo.Publishing
+        Status.OnHiatus -> StatusWidgetInfo.OnHiatus
+        Status.Discontinued -> StatusWidgetInfo.Discontinued
+        Status.NotYetPublished -> StatusWidgetInfo.NotYetPublished
         null -> StatusWidgetInfo.Unknown
+
     }
