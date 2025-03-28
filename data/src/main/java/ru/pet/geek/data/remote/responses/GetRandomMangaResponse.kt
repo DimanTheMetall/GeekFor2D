@@ -3,7 +3,7 @@ package ru.pet.geek.data.remote.responses
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import ru.pet.geek.data.remote.DEPRECATED_FROM_BACKEND
-import ru.pet.geek.data.remote.responses.inner.ContentTypeNet
+import ru.pet.geek.data.remote.responses.inner.ContentTypeMangaNet
 import ru.pet.geek.data.remote.responses.inner.InnerImagesResponse
 import ru.pet.geek.data.remote.responses.inner.InnerPublishedDateModel
 import ru.pet.geek.data.remote.responses.inner.InnerTitleModel
@@ -31,7 +31,7 @@ class GetRandomMangaResponse(
     @Deprecated(DEPRECATED_FROM_BACKEND)
     val titleJapanese: String? = null,
     @SerialName("type")
-    val type: ContentTypeNet? = null,
+    val type: ContentTypeMangaNet? = null,
     @SerialName("chapters")
     val chapters: Int? = null,
     @SerialName("volumes")
@@ -53,4 +53,3 @@ class GetRandomMangaResponse(
     @SerialName("synopsis")
     val synopsis: String? = null,
 )
-

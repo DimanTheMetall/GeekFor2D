@@ -14,15 +14,14 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.drawscope.Stroke
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import ru.pet.geek.entities.ContentTypeUi
 import ru.pet.geek.ui.GeekTheme
-import ru.pet.geek.ui.R
 import ru.pet.geek.utils.PreviewBox
 import ru.pet.geek.utils.SpacerWidth
+import ru.pet.geek.utils.text
 
 private val shape = RoundedCornerShape(6.dp)
 
@@ -65,14 +64,6 @@ private fun ContentTypeUi.getBackground(): Color =
         ContentTypeUi.Manga -> GeekTheme.colors.blueMedium
         ContentTypeUi.Anime -> GeekTheme.colors.pinkMedium
         ContentTypeUi.Characters -> GeekTheme.colors.orangeMedium
-    }
-
-@Composable
-private fun ContentTypeUi.text(): String =
-    when (this) {
-        ContentTypeUi.Manga -> stringResource(R.string.ui_manga)
-        ContentTypeUi.Anime -> stringResource(R.string.ui_anime)
-        ContentTypeUi.Characters -> stringResource(R.string.ui_characher)
     }
 
 @[Composable Preview]

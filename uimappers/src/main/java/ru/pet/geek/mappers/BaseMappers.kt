@@ -1,14 +1,15 @@
 package ru.pet.geek.mappers
 
-import ru.pet.geek.domain.entities.dto.enums.ContentType
+import ru.pet.geek.domain.entities.dto.enums.CurrentContentType
 import ru.pet.geek.domain.entities.dto.enums.Status
 import ru.pet.geek.entities.ContentTypeUi
 import ru.pet.geek.widgets.StatusWidgetInfo
 
-fun ContentType.toUi(default: ContentTypeUi = ContentTypeUi.Manga): ContentTypeUi =
+fun CurrentContentType.toUi(): ContentTypeUi =
     when (this) {
-        ContentType.Manga -> ContentTypeUi.Manga
-        ContentType.Unknown -> default
+        CurrentContentType.Manga -> ContentTypeUi.Manga
+        CurrentContentType.Anime -> ContentTypeUi.Anime
+        CurrentContentType.Character -> ContentTypeUi.Characters
     }
 
 fun Status?.toUi(): StatusWidgetInfo =
@@ -19,5 +20,4 @@ fun Status?.toUi(): StatusWidgetInfo =
         Status.Discontinued -> StatusWidgetInfo.Discontinued
         Status.NotYetPublished -> StatusWidgetInfo.NotYetPublished
         null -> StatusWidgetInfo.Unknown
-
     }

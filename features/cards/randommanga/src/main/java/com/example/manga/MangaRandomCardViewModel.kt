@@ -9,7 +9,6 @@ import dagger.assisted.AssistedInject
 import ru.pet.geek.core.LocalResponse
 import ru.pet.geek.core.utils.UTCtoUiFormat
 import ru.pet.geek.domain.entities.dto.MangaRandomCardModel
-import ru.pet.geek.entities.ContentTypeUi
 import ru.pet.geek.mappers.toUi
 import ru.pet.geek.widgets.CalendarTwoLineInfo
 import ru.pet.geek.widgets.GradientRatingUiImpl
@@ -32,7 +31,7 @@ class MangaRandomCardViewModel
             SuccessUiState(
                 mainInfo =
                     MainInfoWidgetDataUiImpl(
-                        contentTypeUi = this.type.toUi(default = ContentTypeUi.Manga),
+                        contentTypeUi = this.type.toUi(),
                         imageUrl = this.images.jpg.imageUrl,
                         volumesChapterInfo =
                             VolumesChaptersTwoLineInfo(

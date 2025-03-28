@@ -62,7 +62,7 @@ sealed interface RandomItemUi : Clickable {
     data class Characters(
         override val onClick: () -> Unit = {},
     ) : RandomItemUi {
-        override val text: UiText = UiText.ResourcesText(ru.pet.geek.ui.R.string.ui_charachers)
+        override val text: UiText = UiText.ResourcesText(ru.pet.geek.ui.R.string.ui_characters)
 
         override val backgroundColor: Color
             @Composable get() = GeekTheme.colors.blueMedium

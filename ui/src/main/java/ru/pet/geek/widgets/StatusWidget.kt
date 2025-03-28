@@ -15,11 +15,11 @@ import ru.pet.geek.ui.GeekTheme
 import ru.pet.geek.ui.R
 import ru.pet.geek.utils.PreviewColumn
 import ru.pet.geek.utils.SpacerHeight
-import ru.pet.geek.utils.UiInterface
+import ru.pet.geek.utils.TextResHolder
 
 enum class StatusWidgetInfo(
-    @StringRes val textRes: Int,
-) : UiInterface {
+    @StringRes override val textRes: Int,
+) : TextResHolder {
     Finished(
         textRes = R.string.ui_status_finished,
     ),

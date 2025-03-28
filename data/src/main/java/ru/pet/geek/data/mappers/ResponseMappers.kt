@@ -1,7 +1,7 @@
 package ru.pet.geek.data.mappers
 
 import ru.pet.geek.data.remote.responses.GetRandomMangaResponse
-import ru.pet.geek.data.remote.responses.inner.ContentTypeNet
+import ru.pet.geek.data.remote.responses.inner.ContentTypeMangaNet
 import ru.pet.geek.data.remote.responses.inner.InnerImageResponse
 import ru.pet.geek.data.remote.responses.inner.InnerImagesResponse
 import ru.pet.geek.data.remote.responses.inner.InnerPublishedDateModel
@@ -13,24 +13,24 @@ import ru.pet.geek.domain.entities.dto.ImagesModel
 import ru.pet.geek.domain.entities.dto.MangaRandomCardModel
 import ru.pet.geek.domain.entities.dto.PublishingDateModel
 import ru.pet.geek.domain.entities.dto.TitleModel
-import ru.pet.geek.domain.entities.dto.enums.ContentType
+import ru.pet.geek.domain.entities.dto.enums.ContentTypeManga
 import ru.pet.geek.domain.entities.dto.enums.Status
 import ru.pet.geek.domain.entities.dto.enums.TitleType
 
 internal fun GetRandomMangaResponse.toAppModel(): MangaRandomCardModel? {
     return MangaRandomCardModel(
-        malId = malId ?: return null,
-        url = url,
-        images = images?.toAppModel() ?: ImagesModel(),
-        approved = approved,
-        titles = titles.mapNotNull { it.toAppModel() },
-        type = type?.toApp() ?: ContentType.Manga,
-        chapters = chapters,
-        volumes = volumes,
-        status = status?.toAppModel(),
-        score = score,
-        scoredBy = scoredBy,
-        publishedModel = published?.toAppModel(),
+            malId = malId ?: return null,
+            url = url,
+            images = images?.toAppModel() ?: ImagesModel(),
+            approved = approved,
+            titles = titles.mapNotNull { it.toAppModel() },
+            currentType = type?.toApp() ?: ContentTypeManga.Manga,
+            chapters = chapters,
+            volumes = volumes,
+            status = status?.toAppModel(),
+            score = score,
+            scoredBy = scoredBy,
+            publishedModel = published?.toAppModel(),
     )
 }
 
@@ -70,10 +70,17 @@ internal fun TitleTypeNet.toAppModel() =
         TitleTypeNet.Unknown -> TitleType.Unknown
     }
 
-internal fun ContentTypeNet.toApp() =
+internal fun ContentTypeMangaNet.toApp() =
     when (this) {
-        ContentTypeNet.Manga -> ContentType.Manga
-        ContentTypeNet.Unknown -> ContentType.Unknown
+        ContentTypeMangaNet.Manga -> ContentTypeManga.Manga
+        ContentTypeMangaNet.Unknown -> ContentTypeManga.Unknown
+        ContentTypeMangaNet.Manhua -> ContentTypeManga.Manhua
+        ContentTypeMangaNet.Manhwa -> ContentTypeManga.Manhwa
+        ContentTypeMangaNet.Novel -> ContentTypeManga.Novel
+        ContentTypeMangaNet.OneShot -> ContentTypeManga.OneShot
+        ContentTypeMangaNet.Doujinshi -> ContentTypeManga.Doujinshi
+        ContentTypeMangaNet.OEL -> ContentTypeManga.OEL
+        ContentTypeMangaNet.LightNovel -> ContentTypeManga.LightNovel
     }
 
 internal fun StatusNet.toAppModel() =
