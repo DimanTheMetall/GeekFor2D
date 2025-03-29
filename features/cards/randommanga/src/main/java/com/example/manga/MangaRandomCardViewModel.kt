@@ -25,7 +25,7 @@ class MangaRandomCardViewModel
             onInit()
         }
 
-        override suspend fun getRandomData(): LocalResponse<MangaRandomCardModel> = dataApi.getRandomCard()
+        override suspend fun getData(): LocalResponse<MangaRandomCardModel> = dataApi.getRandomCard()
 
         override fun MangaRandomCardModel.toUi(): SuccessUiState =
             SuccessUiState(
@@ -51,6 +51,7 @@ class MangaRandomCardViewModel
                             ),
                         title = titles.toUi(),
                     ),
+                synopsys = this.synopsis,
             )
 
         @AssistedFactory
