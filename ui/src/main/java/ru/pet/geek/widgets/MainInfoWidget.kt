@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.aspectRatio
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -58,7 +59,6 @@ class MainInfoWidgetDataPreview(
     override val contentTypeUi: ContentTypeUi = ContentTypeUi.Manga
     override val imageUrl: String = ""
     override val status: StatusWidgetInfo = StatusWidgetInfo.Finished
-
     override val rating: GradientRatingUi = GradientRatingUiImpl(rating = 2.4f, ratesClick = 1232)
     override val title: String = "Some title name for some manga title for long long long text text xtext"
 }
@@ -68,13 +68,15 @@ private val gradientBrush
     @Composable
     get() = Brush.horizontalGradient(listOf(GeekTheme.colors.transparent, GeekTheme.colors.blueLight))
 
+private val height = 274.dp
+
 @Composable
 fun MainInfoWidgetLoading(modifier: Modifier = Modifier) {
     Box(
         modifier =
             modifier
                 .fillMaxWidth()
-                .height(262.dp)
+                .height(height)
                 .background(shape = shape, brush = gradientBrush),
     )
 }
@@ -115,20 +117,20 @@ fun MainInfoWidget(
     Row(
         modifier =
             modifier
-                .height(260.dp)
+                .height(height)
                 .background(brush = gradientBrush, shape = shape)
                 .padding(10.dp),
         horizontalArrangement = Arrangement.Absolute.Left,
     ) {
         Column(
-            modifier = Modifier,
+            modifier = Modifier.fillMaxHeight(),
             horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.SpaceBetween,
         ) {
             ShimmerAsynhImage(
                 modifier = Modifier.height(220.dp).aspectRatio(0.65f),
                 model = imageUrl,
             )
-            SpacerHeight(4.dp)
             TypeBadgeWidget(
                 uiInfo = contentTypeUi,
             )

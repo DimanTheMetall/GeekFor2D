@@ -1,6 +1,5 @@
 package com.example.cards.basecards
 
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
@@ -18,21 +17,12 @@ import ru.pet.geek.core.LocalResponse
 import ru.pet.geek.core.mappers.toGeneralState
 import ru.pet.geek.utils.UiInterface
 import ru.pet.geek.widgets.CircleButtonInfo
-import ru.pet.geek.widgets.CircleStaticLoadingButton
 import ru.pet.geek.widgets.LeftRightButton
 
-abstract class BaseRandomCardViewModel<T> : ViewModel() {
-    protected abstract suspend fun getRandomData(): LocalResponse<T>
-
-    protected abstract fun T.toUi(): SuccessUiState
+abstract class BaseRandomCardViewModel<T> : BaseCardViewModel<T>() {
 
     protected val currentIndex = MutableStateFlow(0)
     protected val responseList = MutableStateFlow<List<LocalResponse<T>>>(mutableListOf())
-
-    protected val currentDataState = MutableStateFlow<GeneralState<T>>(GeneralState.Loading)
-
-    protected val mutableUiState = MutableStateFlow<RandomCardUiState>(RandomCardUiState.Loading)
-    val uiState = mutableUiState.asStateFlow()
 
     private val leftButtonState: LeftRightButton.LeftButton = LeftRightButton.LeftButton(onClick = ::onPreviousClick)
     private val rightButtonState: LeftRightButton.RightButton = LeftRightButton.RightButton(onClick = ::onNextClick)
@@ -53,7 +43,9 @@ abstract class BaseRandomCardViewModel<T> : ViewModel() {
     protected val isHasPrevious: Boolean
         get() = currentIndex.value >= 1
 
-    protected fun onInit() {
+    override fun onInit() {
+        super.onInit()
+
         viewModelScope.launch {
             combine(
                 currentIndex,
@@ -100,12 +92,6 @@ abstract class BaseRandomCardViewModel<T> : ViewModel() {
         }
     }
 
-    private fun refresh() {
-        loadData()
-    }
-
-    private fun onRefreshClick() = refresh()
-
     private fun replaceResponseOnIndex(
         response: LocalResponse<T>,
         indexToReplace: Int = currentIndex.value,
@@ -119,9 +105,9 @@ abstract class BaseRandomCardViewModel<T> : ViewModel() {
         }
     }
 
-    private fun loadData() {
+    override fun loadData() {
         val indexToResponse = currentIndex.value
-        val data = viewModelScope.async { getRandomData() }
+        val data = viewModelScope.async { getData() }
         viewModelScope.launch {
             withContext(Dispatchers.IO) {
                 val response = data.await()
@@ -152,18 +138,6 @@ abstract class BaseRandomCardViewModel<T> : ViewModel() {
             currentIndex.value -= 1
         }
     }
-
-    private fun GeneralState<T>.toUiState(): RandomCardUiState =
-        when (this) {
-            is GeneralState.Error ->
-                RandomCardUiState.Error(
-                    e = e,
-                    uiInfo = CircleStaticLoadingButton(onClick = ::onRefreshClick),
-                )
-
-            is GeneralState.Loading -> RandomCardUiState.Loading
-            is GeneralState.Success<T> -> RandomCardUiState.Success(data = data.toUi())
-        }
 }
 
 sealed interface RandomCardUiState : UiInterface {

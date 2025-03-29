@@ -37,7 +37,7 @@ fun TypeBadgeWidget(
                 .background(
                     color = uiInfo.getBackground(),
                     shape = shape,
-                ).padding(horizontal = 4.dp),
+                ).padding(vertical = 2.dp, horizontal = 6.dp),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.Absolute.Center,
     ) {

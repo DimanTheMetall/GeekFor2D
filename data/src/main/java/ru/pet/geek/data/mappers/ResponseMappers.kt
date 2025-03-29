@@ -19,18 +19,19 @@ import ru.pet.geek.domain.entities.dto.enums.TitleType
 
 internal fun GetRandomMangaResponse.toAppModel(): MangaRandomCardModel? {
     return MangaRandomCardModel(
-            malId = malId ?: return null,
-            url = url,
-            images = images?.toAppModel() ?: ImagesModel(),
-            approved = approved,
-            titles = titles.mapNotNull { it.toAppModel() },
-            currentType = type?.toApp() ?: ContentTypeManga.Manga,
-            chapters = chapters,
-            volumes = volumes,
-            status = status?.toAppModel(),
-            score = score,
-            scoredBy = scoredBy,
-            publishedModel = published?.toAppModel(),
+        malId = malId ?: return null,
+        url = url,
+        images = images?.toAppModel() ?: ImagesModel(),
+        approved = approved,
+        titles = titles.mapNotNull { it.toAppModel() },
+        currentType = type?.toApp() ?: ContentTypeManga.Manga,
+        chapters = chapters,
+        volumes = volumes,
+        status = status?.toAppModel(),
+        score = score,
+        scoredBy = scoredBy,
+        publishedModel = published?.toAppModel(),
+        synopsis = synopsis,
     )
 }
 
