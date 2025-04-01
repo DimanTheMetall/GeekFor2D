@@ -6,7 +6,6 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import ru.pet.geek.core.GeneralState
 import ru.pet.geek.core.LocalResponse
 import ru.pet.geek.core.mappers.toGeneralState
