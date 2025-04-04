@@ -5,7 +5,7 @@ import ru.pet.geek.domain.entities.dto.enums.CurrentContentType
 import ru.pet.geek.domain.entities.dto.enums.Status
 
 data class MangaRandomCardModel(
-    val malId: Int,
+    val malId: String,
     val url: String? = null,
     val images: ImagesModel,
     val approved: Boolean? = null,
@@ -21,6 +21,7 @@ data class MangaRandomCardModel(
     val popularity: Int? = null,
     val synopsis: String? = null,
     val publishedModel: PublishingDateModel? = null,
+    val genres: List<GenreModel> = emptyList(),
 ) {
     val type: CurrentContentType = CurrentContentType.Manga
 }

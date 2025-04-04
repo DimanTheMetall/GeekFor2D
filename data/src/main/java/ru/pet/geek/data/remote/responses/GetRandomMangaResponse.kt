@@ -4,9 +4,10 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import ru.pet.geek.data.remote.DEPRECATED_FROM_BACKEND
 import ru.pet.geek.data.remote.responses.inner.ContentTypeMangaNet
-import ru.pet.geek.data.remote.responses.inner.InnerImagesResponse
-import ru.pet.geek.data.remote.responses.inner.InnerPublishedDateModel
-import ru.pet.geek.data.remote.responses.inner.InnerTitleModel
+import ru.pet.geek.data.remote.responses.inner.InnerGenreModelNet
+import ru.pet.geek.data.remote.responses.inner.InnerImagesNet
+import ru.pet.geek.data.remote.responses.inner.InnerPublishedDateModelNet
+import ru.pet.geek.data.remote.responses.inner.InnerTitleModelNet
 import ru.pet.geek.data.remote.responses.inner.StatusNet
 
 @Serializable
@@ -16,11 +17,11 @@ class GetRandomMangaResponse(
     @SerialName("url")
     val url: String? = null,
     @SerialName("images")
-    val images: InnerImagesResponse? = null,
+    val images: InnerImagesNet? = null,
     @SerialName("approved")
     val approved: Boolean? = null,
     @SerialName("titles")
-    val titles: List<InnerTitleModel> = emptyList(),
+    val titles: List<InnerTitleModelNet> = emptyList(),
     @SerialName("title")
     @Deprecated(DEPRECATED_FROM_BACKEND)
     val title: String? = null,
@@ -41,7 +42,7 @@ class GetRandomMangaResponse(
     @SerialName("publishing")
     val publishing: Boolean? = null,
     @SerialName("published")
-    val published: InnerPublishedDateModel? = null,
+    val published: InnerPublishedDateModelNet? = null,
     @SerialName("score")
     val score: Float? = null,
     @SerialName("scored_by")
@@ -52,4 +53,6 @@ class GetRandomMangaResponse(
     val popularity: Int? = null,
     @SerialName("synopsis")
     val synopsis: String? = null,
+    @SerialName("genres")
+    val genres: List<InnerGenreModelNet> = emptyList()
 )

@@ -4,7 +4,7 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class InnerImageResponse(
+class InnerImageNet(
     @SerialName("image_url")
     val imageUrl: String? = null,
     @SerialName("small_image_url")

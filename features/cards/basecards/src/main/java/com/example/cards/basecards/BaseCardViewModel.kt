@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 import ru.pet.geek.core.GeneralState
@@ -12,7 +13,7 @@ import ru.pet.geek.core.mappers.toGeneralState
 import ru.pet.geek.widgets.CircleStaticLoadingButton
 
 abstract class BaseCardViewModel<T> : ViewModel() {
-    protected abstract fun T.toUi(): SuccessUiState
+    protected abstract fun T.toUi(isOpenGenresWidget: Boolean): SuccessUiState
 
     protected abstract suspend fun getData(): LocalResponse<T>
 
@@ -21,10 +22,17 @@ abstract class BaseCardViewModel<T> : ViewModel() {
     protected val mutableUiState = MutableStateFlow<RandomCardUiState>(RandomCardUiState.Loading)
     val uiState = mutableUiState.asStateFlow()
 
+    protected val isOpenGenresWidgetMutableState = MutableStateFlow(false)
+    val isOpenGenresWidgetState = isOpenGenresWidgetMutableState.asStateFlow()
+
     open fun onInit() {
         viewModelScope.launch {
-            currentDataState
-                .map { dataState -> dataState.toUiState() }
+            combine(
+                currentDataState,
+                isOpenGenresWidgetState,
+            ) { state, isGenresOpen ->
+                state to isGenresOpen
+            }.map { (dataState, isGenresOpen) -> dataState.toUiState(isOpenGenresWidget = isGenresOpen) }
                 .collect { uiState ->
                     mutableUiState.emit(uiState)
                 }
@@ -44,7 +52,7 @@ abstract class BaseCardViewModel<T> : ViewModel() {
         loadData()
     }
 
-    protected fun GeneralState<T>.toUiState(): RandomCardUiState =
+    protected fun GeneralState<T>.toUiState(isOpenGenresWidget: Boolean): RandomCardUiState =
         when (this) {
             is GeneralState.Error ->
                 RandomCardUiState.Error(
@@ -53,6 +61,14 @@ abstract class BaseCardViewModel<T> : ViewModel() {
                 )
 
             is GeneralState.Loading -> RandomCardUiState.Loading
-            is GeneralState.Success<T> -> RandomCardUiState.Success(data = data.toUi())
+            is GeneralState.Success<T> -> RandomCardUiState.Success(data = data.toUi(isOpenGenresWidget))
         }
+
+    protected fun closeGenresWidget() {
+        isOpenGenresWidgetMutableState.value = false
+    }
+
+    protected fun openGenresWidget() {
+        isOpenGenresWidgetMutableState.value = true
+    }
 }

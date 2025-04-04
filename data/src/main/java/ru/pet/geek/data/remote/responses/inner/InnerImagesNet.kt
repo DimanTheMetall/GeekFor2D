@@ -4,9 +4,9 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-class InnerImagesResponse {
+class InnerImagesNet {
     @SerialName("jpg")
-    val jpg: InnerImageResponse? = null
+    val jpg: InnerImageNet? = null
     @SerialName("webp")
-    val webp: InnerImageResponse? = null
+    val webp: InnerImageNet? = null
 }

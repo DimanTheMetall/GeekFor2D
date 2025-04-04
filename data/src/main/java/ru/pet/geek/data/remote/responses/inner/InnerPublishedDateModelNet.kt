@@ -4,9 +4,9 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-class InnerTitleModel(
-    @SerialName("type")
-    val type: TitleTypeNet? = null,
-    @SerialName("title")
-    val title: String? = null
+class InnerPublishedDateModelNet(
+    @SerialName("from")
+    val from: String? = null,
+    @SerialName("to")
+    val to: String? = null,
 )

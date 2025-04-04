@@ -48,8 +48,6 @@ class MangaRandomCardScreen : BaseScreen() {
         }
     }
 
-    override fun hashCode(): Int = super.hashCode()
-
     override fun equals(other: Any?): Boolean =
         when {
             other is MangaRandomCardScreen -> true

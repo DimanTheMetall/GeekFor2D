@@ -20,7 +20,6 @@ import ru.pet.geek.widgets.CircleButtonInfo
 import ru.pet.geek.widgets.LeftRightButton
 
 abstract class BaseRandomCardViewModel<T> : BaseCardViewModel<T>() {
-
     protected val currentIndex = MutableStateFlow(0)
     protected val responseList = MutableStateFlow<List<LocalResponse<T>>>(mutableListOf())
 
@@ -57,14 +56,6 @@ abstract class BaseRandomCardViewModel<T> : BaseCardViewModel<T>() {
                 val newState = state?.toGeneralState() ?: GeneralState.Loading
                 currentDataState.emit(newState)
             }
-        }
-
-        viewModelScope.launch {
-            currentDataState
-                .map { dataState -> dataState.toUiState() }
-                .collect { uiState ->
-                    mutableUiState.emit(uiState)
-                }
         }
 
         viewModelScope.launch {
@@ -131,12 +122,14 @@ abstract class BaseRandomCardViewModel<T> : BaseCardViewModel<T>() {
 
             is GeneralState.Loading -> Unit
         }
+        closeGenresWidget()
     }
 
     protected fun onPreviousClick() {
         if (currentIndex.value > 0) {
             currentIndex.value -= 1
         }
+        closeGenresWidget()
     }
 }
 

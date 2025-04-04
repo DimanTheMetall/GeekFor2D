@@ -32,8 +32,8 @@ fun Modifier.noRippleClickable(
 }
 
 fun Modifier.clickable(
-    enable: Boolean = true,
     clickable: Clickable,
+    enable: Boolean = true,
 ) = this.clickable(
     enabled = enable,
     onClick = clickable.onClick,

@@ -5,24 +5,21 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource
 import ru.pet.geek.utils.UiInterface
 
-
 interface UiText : UiInterface {
-
     @Composable
     fun toValue(): String
 
-    data class StringText(val value: String) : UiText {
+    data class StringText(
+        val value: String,
+    ) : UiText {
         @Composable
-        override fun toValue(): String {
-            return value
-        }
+        override fun toValue(): String = value
     }
 
-
-    data class ResourcesText(@StringRes val res: Int) : UiText {
+    data class ResourcesText(
+        @StringRes val res: Int,
+    ) : UiText {
         @Composable
-        override fun toValue(): String {
-            return stringResource(res)
-        }
+        override fun toValue(): String = stringResource(res)
     }
 }

@@ -9,6 +9,7 @@ import dagger.assisted.AssistedInject
 import ru.pet.geek.core.LocalResponse
 import ru.pet.geek.core.utils.UTCtoUiFormat
 import ru.pet.geek.domain.entities.dto.MangaRandomCardModel
+import ru.pet.geek.mappers.toListGenresWidgetUi
 import ru.pet.geek.mappers.toUi
 import ru.pet.geek.widgets.CalendarTwoLineInfo
 import ru.pet.geek.widgets.GradientRatingUiImpl
@@ -27,7 +28,7 @@ class MangaRandomCardViewModel
 
         override suspend fun getData(): LocalResponse<MangaRandomCardModel> = dataApi.getRandomCard()
 
-        override fun MangaRandomCardModel.toUi(): SuccessUiState =
+        override fun MangaRandomCardModel.toUi(isOpenGenresWidget: Boolean): SuccessUiState =
             SuccessUiState(
                 mainInfo =
                     MainInfoWidgetDataUiImpl(
@@ -52,6 +53,12 @@ class MangaRandomCardViewModel
                         title = titles.toUi(),
                     ),
                 synopsys = this.synopsis,
+                genres =
+                    genres.toListGenresWidgetUi(
+                        isOpen = isOpenGenresWidget,
+                        onCloseClick = ::closeGenresWidget,
+                        onOpenClick = ::openGenresWidget,
+                    ),
             )
 
         @AssistedFactory

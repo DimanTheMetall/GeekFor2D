@@ -18,7 +18,6 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
@@ -31,6 +30,7 @@ import ru.pet.geek.utils.PreviewColumn
 import ru.pet.geek.utils.SpacerHeight
 import ru.pet.geek.utils.SpacerWidth
 import ru.pet.geek.utils.UiInterface
+import ru.pet.geek.utils.mainBlueGradientBrush
 
 interface MainInfoWidgetDataUi : UiInterface {
     val contentTypeUi: ContentTypeUi
@@ -64,9 +64,6 @@ class MainInfoWidgetDataPreview(
 }
 
 private val shape = RoundedCornerShape(10.dp)
-private val gradientBrush
-    @Composable
-    get() = Brush.horizontalGradient(listOf(GeekTheme.colors.transparent, GeekTheme.colors.blueLight))
 
 private val height = 274.dp
 
@@ -77,7 +74,7 @@ fun MainInfoWidgetLoading(modifier: Modifier = Modifier) {
             modifier
                 .fillMaxWidth()
                 .height(height)
-                .background(shape = shape, brush = gradientBrush),
+                .background(shape = shape, brush = mainBlueGradientBrush),
     )
 }
 
@@ -118,7 +115,7 @@ fun MainInfoWidget(
         modifier =
             modifier
                 .height(height)
-                .background(brush = gradientBrush, shape = shape)
+                .background(brush = mainBlueGradientBrush, shape = shape)
                 .padding(10.dp),
         horizontalArrangement = Arrangement.Absolute.Left,
     ) {

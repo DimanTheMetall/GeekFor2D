@@ -19,23 +19,19 @@ import androidx.compose.runtime.mutableFloatStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.datasource.LoremIpsum
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import ru.pet.geek.ui.GeekTheme
 import ru.pet.geek.utils.PreviewBox
 import ru.pet.geek.utils.dpToPx
+import ru.pet.geek.utils.mainBlueGradientBrush
 import kotlin.math.roundToInt
 
 private val shape = RoundedCornerShape(10.dp)
-private val gradientBrush
-    @Composable
-    get() = Brush.horizontalGradient(listOf(GeekTheme.colors.transparent, GeekTheme.colors.blueLight))
 
 @Composable
-fun SliderContentWidgetPlacehodler(
+fun SliderContentWidgetLoading(
     modifier: Modifier = Modifier,
     height: Dp = 120.dp,
 ) {
@@ -44,7 +40,7 @@ fun SliderContentWidgetPlacehodler(
             modifier
                 .height(height)
                 .fillMaxWidth()
-                .background(brush = gradientBrush, shape = shape),
+                .background(brush = mainBlueGradientBrush, shape = shape),
     )
 }
 
@@ -81,7 +77,7 @@ fun SlideContentWidget(
     Row(
         modifier =
             modifier
-                .background(shape = shape, brush = gradientBrush)
+                .background(shape = shape, brush = mainBlueGradientBrush)
                 .padding(10.dp),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.Absolute.SpaceBetween,

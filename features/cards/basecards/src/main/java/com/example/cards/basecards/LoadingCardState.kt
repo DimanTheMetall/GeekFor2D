@@ -5,14 +5,17 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import ru.pet.geek.utils.SpacerHeight
+import ru.pet.geek.widgets.GenresListWidgetLoading
 import ru.pet.geek.widgets.MainInfoWidgetLoading
-import ru.pet.geek.widgets.SliderContentWidgetPlacehodler
+import ru.pet.geek.widgets.SliderContentWidgetLoading
 
 @Composable
 fun LoadingCardState(modifier: Modifier = Modifier) {
     Column(modifier = modifier) {
         MainInfoWidgetLoading()
         SpacerHeight(10.dp)
-        SliderContentWidgetPlacehodler(height = 100.dp)
+        SliderContentWidgetLoading(height = 100.dp)
+        SpacerHeight(10.dp)
+        GenresListWidgetLoading()
     }
 }
