@@ -4,6 +4,7 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import ru.pet.geek.data.remote.DEPRECATED_FROM_BACKEND
 import ru.pet.geek.data.remote.responses.inner.ContentTypeMangaNet
+import ru.pet.geek.data.remote.responses.inner.InnerAuthorModelNet
 import ru.pet.geek.data.remote.responses.inner.InnerGenreModelNet
 import ru.pet.geek.data.remote.responses.inner.InnerImagesNet
 import ru.pet.geek.data.remote.responses.inner.InnerPublishedDateModelNet
@@ -54,5 +55,7 @@ class GetRandomMangaResponse(
     @SerialName("synopsis")
     val synopsis: String? = null,
     @SerialName("genres")
-    val genres: List<InnerGenreModelNet> = emptyList()
+    val genres: List<InnerGenreModelNet> = emptyList(),
+    @SerialName("authors")
+    val authors: List<InnerAuthorModelNet> = emptyList(),
 )

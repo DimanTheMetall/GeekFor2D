@@ -1,8 +1,10 @@
 package ru.pet.geek.data.mappers
 
 import ru.pet.geek.data.remote.responses.GetRandomMangaResponse
+import ru.pet.geek.data.remote.responses.inner.AuthorTypeNet
 import ru.pet.geek.data.remote.responses.inner.ContentTypeMangaNet
 import ru.pet.geek.data.remote.responses.inner.GenreTypeNet
+import ru.pet.geek.data.remote.responses.inner.InnerAuthorModelNet
 import ru.pet.geek.data.remote.responses.inner.InnerGenreModelNet
 import ru.pet.geek.data.remote.responses.inner.InnerImageNet
 import ru.pet.geek.data.remote.responses.inner.InnerImagesNet
@@ -10,12 +12,14 @@ import ru.pet.geek.data.remote.responses.inner.InnerPublishedDateModelNet
 import ru.pet.geek.data.remote.responses.inner.InnerTitleModelNet
 import ru.pet.geek.data.remote.responses.inner.StatusNet
 import ru.pet.geek.data.remote.responses.inner.TitleTypeNet
+import ru.pet.geek.domain.entities.dto.AuthorModel
 import ru.pet.geek.domain.entities.dto.GenreModel
 import ru.pet.geek.domain.entities.dto.ImageModel
 import ru.pet.geek.domain.entities.dto.ImagesModel
 import ru.pet.geek.domain.entities.dto.MangaRandomCardModel
 import ru.pet.geek.domain.entities.dto.PublishingDateModel
 import ru.pet.geek.domain.entities.dto.TitleModel
+import ru.pet.geek.domain.entities.dto.enums.AuthorType
 import ru.pet.geek.domain.entities.dto.enums.ContentTypeManga
 import ru.pet.geek.domain.entities.dto.enums.GenreType
 import ru.pet.geek.domain.entities.dto.enums.Status
@@ -37,6 +41,7 @@ internal fun GetRandomMangaResponse.toAppModel(): MangaRandomCardModel? {
         publishedModel = published?.toAppModel(),
         synopsis = synopsis,
         genres = genres.mapNotNull { it.toAppModel(defaultType = GenreType.Manga) },
+        authors = authors.mapNotNull { it.toAppModel(defaultType = AuthorType.Manga) },
     )
 }
 
@@ -112,3 +117,17 @@ internal fun GenreTypeNet.toAppModel(): GenreType =
         GenreTypeNet.Manga -> GenreType.Manga
         GenreTypeNet.Anime -> GenreType.Anime
     }
+
+internal fun AuthorTypeNet.toAppModel(): AuthorType =
+    when (this) {
+        AuthorTypeNet.Manga -> AuthorType.Manga
+    }
+
+internal fun InnerAuthorModelNet.toAppModel(defaultType: AuthorType): AuthorModel? {
+    return AuthorModel(
+        malId = malId ?: return null,
+        name = name ?: "",
+        type = type?.toAppModel() ?: defaultType,
+        url = url,
+    )
+}

@@ -22,26 +22,26 @@ import ru.pet.geek.utils.PreviewColumn
 import ru.pet.geek.utils.SpacerHeight
 import ru.pet.geek.utils.mainBlueGradientBrush
 
-private const val CLOSED_ITEM_VISIBLE = 7
+private const val CLOSED_ITEM_VISIBLE = 4
 
-interface GenresListWidgetDataUi : Clickable {
+interface BadgeListWidgetDataUi : Clickable {
     val allGenres: List<BadgeWidgetDataUi>
     val currentGenresList: List<BadgeWidgetDataUi>
     val isOpen: Boolean
 }
 
-data class GenresListWidgetDataUiImpl(
+data class BadgeListWidgetDataUiImpl(
     override val allGenres: List<BadgeWidgetDataUi>,
     override val isOpen: Boolean,
     private val openWidgetClick: () -> Unit,
     private val closeWidgetClick: () -> Unit,
-) : GenresListWidgetDataUi {
+) : BadgeListWidgetDataUi {
     override val currentGenresList: List<BadgeWidgetDataUi> = getCurrentList()
 
     override val onClick: () -> Unit = if (isOpen) closeWidgetClick else openWidgetClick
 }
 
-private fun GenresListWidgetDataUi.getCurrentList(): List<BadgeWidgetDataUi> =
+private fun BadgeListWidgetDataUi.getCurrentList(): List<BadgeWidgetDataUi> =
     when {
         allGenres.size <= CLOSED_ITEM_VISIBLE -> allGenres
         isOpen ->
@@ -67,9 +67,9 @@ private fun GenresListWidgetDataUi.getCurrentList(): List<BadgeWidgetDataUi> =
             }
     }
 
-class GenresListWidgetPreviewData(
+class BadgeListWidgetPreviewData(
     override val isOpen: Boolean = true,
-) : GenresListWidgetDataUi {
+) : BadgeListWidgetDataUi {
     override val onClick: () -> Unit = {}
     override val allGenres: List<BadgeWidgetDataUi> =
         buildList {
@@ -86,9 +86,9 @@ private val shape = RoundedCornerShape(10.dp)
 
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
-fun GenresListWidget(
-    modifier: Modifier = Modifier,
-    uiInfo: GenresListWidgetDataUi,
+fun BadgeListWidget(
+        modifier: Modifier = Modifier,
+        uiInfo: BadgeListWidgetDataUi,
 ) {
     FlowRow(
         modifier =
@@ -109,7 +109,7 @@ fun GenresListWidget(
 }
 
 @Composable
-fun GenresListWidgetLoading(modifier: Modifier = Modifier) {
+fun BadgeListWidgetLoading(modifier: Modifier = Modifier) {
     Spacer(
         modifier =
             modifier
@@ -120,18 +120,18 @@ fun GenresListWidgetLoading(modifier: Modifier = Modifier) {
 }
 
 @[Composable Preview]
-private fun GenresListWidgetPreview() {
+private fun BadgeListWidgetPreview() {
     PreviewColumn(modifier = Modifier.width(400.dp)) {
-        GenresListWidget(
-            modifier = Modifier.fillMaxWidth(),
-            uiInfo = GenresListWidgetPreviewData(isOpen = true),
+        BadgeListWidget(
+                modifier = Modifier.fillMaxWidth(),
+                uiInfo = BadgeListWidgetPreviewData(isOpen = true),
         )
         SpacerHeight(10.dp)
-        GenresListWidget(
-            modifier = Modifier.fillMaxWidth(),
-            uiInfo = GenresListWidgetPreviewData(isOpen = false),
+        BadgeListWidget(
+                modifier = Modifier.fillMaxWidth(),
+                uiInfo = BadgeListWidgetPreviewData(isOpen = false),
         )
         SpacerHeight(10.dp)
-        GenresListWidgetLoading()
+        BadgeListWidgetLoading()
     }
 }

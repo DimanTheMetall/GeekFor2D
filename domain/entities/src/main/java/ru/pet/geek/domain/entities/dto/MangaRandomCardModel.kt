@@ -22,6 +22,7 @@ data class MangaRandomCardModel(
     val synopsis: String? = null,
     val publishedModel: PublishingDateModel? = null,
     val genres: List<GenreModel> = emptyList(),
+    val authors: List<AuthorModel> = emptyList(),
 ) {
     val type: CurrentContentType = CurrentContentType.Manga
 }

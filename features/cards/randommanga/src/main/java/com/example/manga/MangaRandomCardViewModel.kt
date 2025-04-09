@@ -9,7 +9,8 @@ import dagger.assisted.AssistedInject
 import ru.pet.geek.core.LocalResponse
 import ru.pet.geek.core.utils.UTCtoUiFormat
 import ru.pet.geek.domain.entities.dto.MangaRandomCardModel
-import ru.pet.geek.mappers.toListGenresWidgetUi
+import ru.pet.geek.mappers.authorsToListBadgesWidgetUi
+import ru.pet.geek.mappers.genresToListBadgesWidgetUi
 import ru.pet.geek.mappers.toUi
 import ru.pet.geek.widgets.CalendarTwoLineInfo
 import ru.pet.geek.widgets.GradientRatingUiImpl
@@ -54,10 +55,20 @@ class MangaRandomCardViewModel
                     ),
                 synopsys = this.synopsis,
                 genres =
-                    genres.toListGenresWidgetUi(
+                    genres.genresToListBadgesWidgetUi(
                         isOpen = isOpenGenresWidget,
                         onCloseClick = ::closeGenresWidget,
                         onOpenClick = ::openGenresWidget,
+                    ),
+                authors =
+                    authors.authorsToListBadgesWidgetUi(
+                        isOpen = true,
+                        onCloseClick = {
+                            // TODO
+                        },
+                        onOpenClick = {
+                            // TODO
+                        },
                     ),
             )
 

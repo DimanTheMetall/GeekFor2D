@@ -16,9 +16,9 @@ import ru.pet.geek.ui.GeekTheme
 import ru.pet.geek.utils.PreviewBox
 import ru.pet.geek.utils.SpacerHeight
 import ru.pet.geek.utils.UiInterface
-import ru.pet.geek.widgets.GenresListWidget
-import ru.pet.geek.widgets.GenresListWidgetDataUi
-import ru.pet.geek.widgets.GenresListWidgetPreviewData
+import ru.pet.geek.widgets.BadgeListWidget
+import ru.pet.geek.widgets.BadgeListWidgetDataUi
+import ru.pet.geek.widgets.BadgeListWidgetPreviewData
 import ru.pet.geek.widgets.MainInfoWidget
 import ru.pet.geek.widgets.MainInfoWidgetDataPreview
 import ru.pet.geek.widgets.MainInfoWidgetDataUi
@@ -27,19 +27,22 @@ import ru.pet.geek.widgets.SlideContentWidget
 interface CardSuccessUiState : UiInterface {
     val mainInfo: MainInfoWidgetDataUi
     val synopsys: String?
-    val genres: GenresListWidgetDataUi
+    val genres: BadgeListWidgetDataUi
+    val authors: BadgeListWidgetDataUi
 }
 
 data class SuccessUiState(
     override val mainInfo: MainInfoWidgetDataUi,
     override val synopsys: String?,
-    override val genres: GenresListWidgetDataUi,
+    override val genres: BadgeListWidgetDataUi,
+    override val authors: BadgeListWidgetDataUi,
 ) : CardSuccessUiState
 
 class CardSuccessStatePreview : CardSuccessUiState {
     override val mainInfo: MainInfoWidgetDataUi = MainInfoWidgetDataPreview()
     override val synopsys: String? = LoremIpsum().values.take(4).joinToString(separator = " ")
-    override val genres: GenresListWidgetDataUi = GenresListWidgetPreviewData()
+    override val genres: BadgeListWidgetDataUi = BadgeListWidgetPreviewData()
+    override val authors: BadgeListWidgetDataUi = BadgeListWidgetPreviewData()
 }
 
 @Composable
@@ -80,9 +83,16 @@ fun SuccessCardState(
             }
             if (uiInfo.genres.currentGenresList.isNotEmpty()) {
                 SpacerHeight(10.dp)
-                GenresListWidget(
+                BadgeListWidget(
                     modifier = Modifier.fillMaxWidth(),
                     uiInfo = uiInfo.genres,
+                )
+            }
+            if (uiInfo.authors.currentGenresList.isNotEmpty()) {
+                SpacerHeight(10.dp)
+                BadgeListWidget(
+                    modifier = Modifier.fillMaxWidth(),
+                    uiInfo = uiInfo.authors,
                 )
             }
         }
