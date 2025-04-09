@@ -8,7 +8,7 @@ import ru.pet.geek.data.remote.serialisers.EnumStringValue
 enum class AuthorTypeNet(
     override val id: String,
 ) : EnumStringValue {
-    Manga("manga"),
+    People("people"),
 }
 
 object AuthorTypeSerializer : ByStringNullableSerializer<AuthorTypeNet>(values = AuthorTypeNet.entries.toTypedArray())

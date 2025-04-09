@@ -33,18 +33,25 @@ class MangaRandomCardScreen : BaseScreen() {
             modifier =
                 Modifier
                     .fillMaxSize()
-                    .bottomNavMenuPadding()
                     .systemBarsPadding(),
         ) {
-            StateSelector(modifier = Modifier.fillMaxSize().align(Alignment.TopCenter), state = uiState)
-            LeftRightButtonsWidget(
-                modifier =
-                    Modifier
-                        .fillMaxWidth()
-                        .padding(horizontal = 10.dp)
-                        .align(Alignment.BottomCenter),
-                uiInfo = buttonsUiState,
-            )
+            Box(modifier = Modifier.fillMaxSize().bottomNavMenuPadding()) {
+                StateSelector(
+                    modifier =
+                        Modifier
+                            .fillMaxSize()
+                            .align(Alignment.TopCenter),
+                    state = uiState,
+                )
+                LeftRightButtonsWidget(
+                    modifier =
+                        Modifier
+                            .fillMaxWidth()
+                            .padding(horizontal = 10.dp, vertical = 10.dp)
+                            .align(Alignment.BottomCenter),
+                    uiInfo = buttonsUiState,
+                )
+            }
         }
     }
 

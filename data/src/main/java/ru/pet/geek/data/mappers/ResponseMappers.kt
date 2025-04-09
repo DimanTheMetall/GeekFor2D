@@ -27,21 +27,21 @@ import ru.pet.geek.domain.entities.dto.enums.TitleType
 
 internal fun GetRandomMangaResponse.toAppModel(): MangaRandomCardModel? {
     return MangaRandomCardModel(
-        malId = malId?.toString() ?: return null,
-        url = url,
-        images = images?.toAppModel() ?: ImagesModel(),
-        approved = approved,
-        titles = titles.mapNotNull { it.toAppModel() },
-        currentType = type?.toApp() ?: ContentTypeManga.Manga,
-        chapters = chapters,
-        volumes = volumes,
-        status = status?.toAppModel(),
-        score = score,
-        scoredBy = scoredBy,
-        publishedModel = published?.toAppModel(),
-        synopsis = synopsis,
-        genres = genres.mapNotNull { it.toAppModel(defaultType = GenreType.Manga) },
-        authors = authors.mapNotNull { it.toAppModel(defaultType = AuthorType.Manga) },
+            malId = malId?.toString() ?: return null,
+            url = url,
+            images = images?.toAppModel() ?: ImagesModel(),
+            approved = approved,
+            titles = titles.mapNotNull { it.toAppModel() },
+            currentType = type?.toApp() ?: ContentTypeManga.Manga,
+            chapters = chapters,
+            volumes = volumes,
+            status = status?.toAppModel(),
+            score = score,
+            scoredBy = scoredBy,
+            publishedModel = published?.toAppModel(),
+            synopsis = synopsis,
+            genres = genres.mapNotNull { it.toAppModel(defaultType = GenreType.Manga) },
+            authors = authors.mapNotNull { it.toAppModel(defaultType = AuthorType.People) },
     )
 }
 
@@ -120,7 +120,7 @@ internal fun GenreTypeNet.toAppModel(): GenreType =
 
 internal fun AuthorTypeNet.toAppModel(): AuthorType =
     when (this) {
-        AuthorTypeNet.Manga -> AuthorType.Manga
+        AuthorTypeNet.People -> AuthorType.People
     }
 
 internal fun InnerAuthorModelNet.toAppModel(defaultType: AuthorType): AuthorModel? {
