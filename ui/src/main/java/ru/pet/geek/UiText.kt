@@ -9,14 +9,16 @@ interface UiText : UiInterface {
     @Composable
     fun toValue(): String
 
-    data class StringText(
+    @JvmInline
+    value class StringText(
         val value: String,
     ) : UiText {
         @Composable
         override fun toValue(): String = value
     }
 
-    data class ResourcesText(
+    @JvmInline
+    value class ResourcesText(
         @StringRes val res: Int,
     ) : UiText {
         @Composable

@@ -20,6 +20,8 @@ fun ThemeHolder.geekPalette(): GeekColors =
         oxfordBlue = Color(0xFF011638) darkVariant Color(0xFF002D75),
         yellowMedium = Color(0xFFFFE852) darkVariant Color(0xFFE3CF4D),
         mediumGreen = Color(0xFF3DB366) darkVariant Color(0xFF25713F),
+        redMedium = Color(0xFFE50000) darkVariant Color(0xFFBB0000),
+        iconPrimary = Color(0xFF000000) darkVariant Color(0xFF000000),
         isDark = isDark,
     )
 
@@ -48,6 +50,9 @@ interface GeekColors {
     // text
     val textPrimary: Color
 
+    // icon
+    val iconPrimary: Color
+
     //
     val orangeMedium: Color
 
@@ -65,6 +70,9 @@ interface GeekColors {
 
     // yellow
     val yellowMedium: Color
+
+    // red
+    val redMedium: Color
 
     // transparent
     val transparent: Color
@@ -89,6 +97,8 @@ internal data class GeekColorsImpl(
     override val isDark: Boolean,
     override val yellowMedium: Color,
     override val mediumGreen: Color,
+    override val redMedium: Color,
+    override val iconPrimary: Color,
 ) : GeekColors {
     // No theme extends
     override val greyscale0: Color = Color(0xFFFFFFFF)

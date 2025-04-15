@@ -3,6 +3,7 @@ package ru.pet.geek.data.mappers
 import ru.pet.geek.data.remote.responses.GetRandomMangaResponse
 import ru.pet.geek.data.remote.responses.inner.AuthorTypeNet
 import ru.pet.geek.data.remote.responses.inner.ContentTypeMangaNet
+import ru.pet.geek.data.remote.responses.inner.EntryModelNet
 import ru.pet.geek.data.remote.responses.inner.GenreTypeNet
 import ru.pet.geek.data.remote.responses.inner.InnerAuthorModelNet
 import ru.pet.geek.data.remote.responses.inner.InnerGenreModelNet
@@ -13,6 +14,7 @@ import ru.pet.geek.data.remote.responses.inner.InnerTitleModelNet
 import ru.pet.geek.data.remote.responses.inner.StatusNet
 import ru.pet.geek.data.remote.responses.inner.TitleTypeNet
 import ru.pet.geek.domain.entities.dto.AuthorModel
+import ru.pet.geek.domain.entities.dto.EntryModel
 import ru.pet.geek.domain.entities.dto.GenreModel
 import ru.pet.geek.domain.entities.dto.ImageModel
 import ru.pet.geek.domain.entities.dto.ImagesModel
@@ -27,21 +29,21 @@ import ru.pet.geek.domain.entities.dto.enums.TitleType
 
 internal fun GetRandomMangaResponse.toAppModel(): MangaRandomCardModel? {
     return MangaRandomCardModel(
-            malId = malId?.toString() ?: return null,
-            url = url,
-            images = images?.toAppModel() ?: ImagesModel(),
-            approved = approved,
-            titles = titles.mapNotNull { it.toAppModel() },
-            currentType = type?.toApp() ?: ContentTypeManga.Manga,
-            chapters = chapters,
-            volumes = volumes,
-            status = status?.toAppModel(),
-            score = score,
-            scoredBy = scoredBy,
-            publishedModel = published?.toAppModel(),
-            synopsis = synopsis,
-            genres = genres.mapNotNull { it.toAppModel(defaultType = GenreType.Manga) },
-            authors = authors.mapNotNull { it.toAppModel(defaultType = AuthorType.People) },
+        malId = malId?.toString() ?: return null,
+        url = url,
+        images = images?.toAppModel() ?: ImagesModel(),
+        approved = approved,
+        titles = titles.mapNotNull { it.toAppModel() },
+        currentType = type?.toApp() ?: ContentTypeManga.Manga,
+        chapters = chapters,
+        volumes = volumes,
+        status = status?.toAppModel(),
+        score = score,
+        scoredBy = scoredBy,
+        publishedModel = published?.toAppModel(),
+        synopsis = synopsis,
+        genres = genres.mapNotNull { it.toAppModel(defaultType = GenreType.Manga) },
+        authors = authors.mapNotNull { it.toAppModel(defaultType = AuthorType.People) },
     )
 }
 
@@ -131,3 +133,12 @@ internal fun InnerAuthorModelNet.toAppModel(defaultType: AuthorType): AuthorMode
         url = url,
     )
 }
+
+internal fun EntryModelNet.toAppModel(): EntryModel? {
+    return EntryModel(
+        malId = malId ?: return null,
+        title = title ?: "",
+        imagesModel = images?.toAppModel() ?: ImagesModel(),
+    )
+}
+

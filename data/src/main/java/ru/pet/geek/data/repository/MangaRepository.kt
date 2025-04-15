@@ -5,6 +5,7 @@ import ru.pet.geek.data.mappers.toAppModel
 import ru.pet.geek.data.remote.MangaRemoteSource
 import ru.pet.geek.data.remote.RequestsController
 import ru.pet.geek.data.toLocalResponse
+import ru.pet.geek.domain.entities.dto.EntryModel
 import ru.pet.geek.domain.entities.dto.MangaRandomCardModel
 
 class MangaRepository(
@@ -15,6 +16,13 @@ class MangaRepository(
         requestsController.prepareRequest {
             mangaRemoteSource.mangaApi.getRandomContent().toLocalResponse {
                 data?.toAppModel()
+            }
+        }
+
+    suspend fun getRecommendationsMangaContent(id: Int): LocalResponse<List<EntryModel>> =
+        requestsController.prepareRequest {
+            mangaRemoteSource.mangaApi.getMangaRecommendations(id = id).toLocalResponse {
+                data?.mapNotNull { it.toAppModel() }
             }
         }
 }

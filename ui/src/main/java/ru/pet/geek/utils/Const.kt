@@ -7,3 +7,5 @@ import ru.pet.geek.ui.GeekTheme
 val mainBlueGradientBrush
     @Composable
     get() = Brush.horizontalGradient(listOf(GeekTheme.colors.transparent, GeekTheme.colors.blueLight))
+
+const val IMAGE_ASPECT_RATION = 0.65f

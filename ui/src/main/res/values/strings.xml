@@ -11,6 +11,9 @@
     <string name="ui_manga_chapters">Томов: %s</string>
     <string name="ui_manga_volumes">Глав: %s</string>
 
+    <string name="ui_genres">Жанры</string>
+    <string name="ui_authors">Авторы</string>
+
     <string name="ui_anime_chapters">Сезонов: %s</string>
     <string name="ui_anime_volumes">Серий: %s</string>
 

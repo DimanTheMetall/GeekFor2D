@@ -26,6 +26,7 @@ import androidx.compose.ui.unit.dp
 import ru.pet.geek.entities.ContentTypeUi
 import ru.pet.geek.ui.GeekTheme
 import ru.pet.geek.ui.R
+import ru.pet.geek.utils.IMAGE_ASPECT_RATION
 import ru.pet.geek.utils.PreviewColumn
 import ru.pet.geek.utils.SpacerHeight
 import ru.pet.geek.utils.SpacerWidth
@@ -125,7 +126,7 @@ fun MainInfoWidget(
             verticalArrangement = Arrangement.SpaceBetween,
         ) {
             ShimmerAsynhImage(
-                modifier = Modifier.height(220.dp).aspectRatio(0.65f),
+                modifier = Modifier.height(220.dp).aspectRatio(IMAGE_ASPECT_RATION),
                 model = imageUrl,
             )
             TypeBadgeWidget(
