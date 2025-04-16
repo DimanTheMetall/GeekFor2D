@@ -15,9 +15,9 @@ import ru.pet.geek.navigationcontroller.NavigationControllerApi
 class FeedModule {
     @Provides
     @AppScope
-    fun providerFeedDataApi(mangaRepository: MangaRepository): FeedDataApi =
+    fun providerFeedDataApi(mangaRepositoryImpl: MangaRepository): FeedDataApi =
         object : FeedDataApi {
-            override suspend fun getRandomContent(): LocalResponse<MangaRandomCardModel> = mangaRepository.getRandomMangaContent()
+            override suspend fun getRandomContent(): LocalResponse<MangaRandomCardModel> = mangaRepositoryImpl.getRandomMangaContent()
         }
 
     @Provides

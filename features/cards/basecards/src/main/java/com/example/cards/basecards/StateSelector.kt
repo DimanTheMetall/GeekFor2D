@@ -6,12 +6,15 @@ import androidx.compose.animation.fadeOut
 import androidx.compose.animation.togetherWith
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import ru.pet.geek.core.GeneralState
 import ru.pet.geek.widgets.BaseErrorScreenWidget
+import ru.pet.geek.widgets.TitledHorisontalCorouselUiInfo
 
 @Composable
 fun StateSelector(
     modifier: Modifier = Modifier,
     state: RandomCardUiState,
+    recommendations: GeneralState<TitledHorisontalCorouselUiInfo>,
 ) {
     AnimatedContent(
         modifier = modifier,
@@ -31,6 +34,7 @@ fun StateSelector(
                 SuccessCardState(
                     modifier = modifier,
                     uiInfo = newsState.data,
+                    recommendations = recommendations,
                 )
         }
     }

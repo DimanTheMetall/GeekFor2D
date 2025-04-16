@@ -2,10 +2,10 @@ package ru.pet.geek.widgets
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.content.MediaType.Companion.Text
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.aspectRatio
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
@@ -41,7 +41,8 @@ private val gradient
             tileMode = TileMode.Clamp,
         )
 
-private val IMAGE_WIDTH = 180.dp
+private val IMAGE_HEIGHT = 180.dp
+private val IMAGE_WIDTH = IMAGE_HEIGHT * IMAGE_ASPECT_RATION
 
 interface ContentHolderInfoUi : Clickable {
     val imageUrl: String
@@ -103,7 +104,7 @@ fun ContentHolder(
         ShimmerAsynhImage(
             modifier =
                 Modifier
-                    .width(IMAGE_WIDTH)
+                    .height(IMAGE_HEIGHT)
                     .aspectRatio(IMAGE_ASPECT_RATION)
                     .clickable(clickable = uiInfo),
             model = uiInfo.imageUrl,

@@ -3,9 +3,10 @@ package ru.pet.geek.domain.entities.dto
 import ru.pet.geek.domain.entities.dto.enums.ContentTypeManga
 import ru.pet.geek.domain.entities.dto.enums.CurrentContentType
 import ru.pet.geek.domain.entities.dto.enums.Status
+import ru.pet.geek.domain.entities.interfaces.IdHolder
 
 data class MangaRandomCardModel(
-    val malId: String,
+    override val malId: Int,
     val url: String? = null,
     val images: ImagesModel,
     val approved: Boolean? = null,
@@ -23,6 +24,6 @@ data class MangaRandomCardModel(
     val publishedModel: PublishingDateModel? = null,
     val genres: List<GenreModel> = emptyList(),
     val authors: List<AuthorModel> = emptyList(),
-) {
+) : IdHolder {
     val type: CurrentContentType = CurrentContentType.Manga
 }

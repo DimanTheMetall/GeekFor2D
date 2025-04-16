@@ -9,6 +9,7 @@ import ru.pet.geek.geekfor2d.di.modules.FeedModule
 import ru.pet.geek.geekfor2d.di.modules.MangaRandomCardModule
 import ru.pet.geek.geekfor2d.di.modules.RemoteSourceModule
 import ru.pet.geek.geekfor2d.di.modules.RepositoryModule
+import ru.pet.geek.geekfor2d.di.modules.UseCaseModule
 import javax.inject.Scope
 
 @AppScope
@@ -19,6 +20,7 @@ import javax.inject.Scope
         RemoteSourceModule::class,
         FeedModule::class,
         MangaRandomCardModule::class,
+        UseCaseModule::class,
     ],
 )
 interface AppComponent : AppDependency {

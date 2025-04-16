@@ -23,6 +23,10 @@ import ru.pet.geek.utils.ListUiDecorator
 import ru.pet.geek.utils.PreviewBox
 import ru.pet.geek.utils.SpacerHeight
 
+const val ITEMS_FOR_MORE_VISIBLE = 18
+
+fun List<*>.isMoreVisibleHorisontalCorousel(): Boolean = this.size > ITEMS_FOR_MORE_VISIBLE
+
 interface TitledHorisontalCorouselUiInfo : Clickable {
     val itemsList: ListUiDecorator<ContentHolderInfoUi>
     val title: UiText
@@ -92,7 +96,7 @@ private fun TitleInfo(
     ) {
         Text(
             text = title.toValue(),
-            style = GeekTheme.typography.tttSmallRegular,
+            style = GeekTheme.typography.tttMediumRegular,
             color = GeekTheme.colors.textPrimary,
         )
         if (isMoreVisible) {

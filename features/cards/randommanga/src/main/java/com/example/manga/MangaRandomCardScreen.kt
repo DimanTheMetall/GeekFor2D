@@ -28,6 +28,7 @@ class MangaRandomCardScreen : BaseScreen() {
         val vm = DaggerViewModel { component.getViewModelFactory().create() }
         val uiState by vm.uiState.collectAsState()
         val buttonsUiState by vm.buttonsUiState.collectAsState()
+        val recState by vm.recommendationsUIState.collectAsState()
 
         Box(
             modifier =
@@ -42,6 +43,7 @@ class MangaRandomCardScreen : BaseScreen() {
                             .fillMaxSize()
                             .align(Alignment.TopCenter),
                     state = uiState,
+                    recommendations = recState,
                 )
                 LeftRightButtonsWidget(
                     modifier =

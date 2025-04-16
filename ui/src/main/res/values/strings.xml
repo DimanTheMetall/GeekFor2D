@@ -24,6 +24,8 @@
     <string name="ui_status_not_yet_published">Еще не выпущено</string>
     <string name="ui_status_unknown">Неизвестно</string>
 
+    <string name="ui_horisontal_corousel_recommendation_title">Рекомендуем также</string>
+
     <string name="ui_visible_more">Еще</string>
     <string name="ui_hide">Скрыть</string>
 

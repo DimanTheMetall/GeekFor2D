@@ -29,7 +29,7 @@ import ru.pet.geek.domain.entities.dto.enums.TitleType
 
 internal fun GetRandomMangaResponse.toAppModel(): MangaRandomCardModel? {
     return MangaRandomCardModel(
-        malId = malId?.toString() ?: return null,
+        malId = malId ?: return null,
         url = url,
         images = images?.toAppModel() ?: ImagesModel(),
         approved = approved,

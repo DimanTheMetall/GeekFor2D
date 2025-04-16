@@ -6,6 +6,7 @@ import ru.pet.geek.data.remote.CounterRequestController
 import ru.pet.geek.data.remote.MangaRemoteSource
 import ru.pet.geek.data.remote.RequestsController
 import ru.pet.geek.data.repository.MangaRepository
+import ru.pet.geek.data.repository.MangaRepositoryImpl
 import ru.pet.geek.geekfor2d.di.AppScope
 
 @Module
@@ -17,5 +18,5 @@ class RepositoryModule {
     fun provideMangaRepository(
         mangaRemoteSource: MangaRemoteSource,
         requestsController: RequestsController,
-    ): MangaRepository = MangaRepository(mangaRemoteSource = mangaRemoteSource, requestsController = requestsController)
+    ): MangaRepository = MangaRepositoryImpl(mangaRemoteSource = mangaRemoteSource, requestsController = requestsController)
 }

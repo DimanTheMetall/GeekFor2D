@@ -7,3 +7,5 @@ fun dependencyProviderError(dependencyName: String = "Dependency"): Nothing {
 fun viewModelStoreProvidedError(): Nothing {
     error("No ViewModelStoreOwner was provided via LocalViewModelStoreOwner")
 }
+
+class ParentException : RuntimeException("Parent exception")
