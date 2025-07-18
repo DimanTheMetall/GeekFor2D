@@ -7,6 +7,7 @@ import androidx.compose.runtime.Stable
 interface Screen {
     @Composable
     fun Content()
+
 }
 
 interface RootScreen : Screen

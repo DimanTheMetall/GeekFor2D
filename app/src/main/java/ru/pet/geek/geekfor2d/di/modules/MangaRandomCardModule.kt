@@ -1,7 +1,7 @@
 package ru.pet.geek.geekfor2d.di.modules
 
-import com.example.manga.api.RandomCardMangaDataApi
-import com.example.manga.api.RandomCardMangaNavApi
+import ru.pet.geek.manga.api.RandomCardMangaDataApi
+import ru.pet.geek.manga.api.RandomCardMangaNavApi
 import dagger.Module
 import dagger.Provides
 import kotlinx.coroutines.flow.Flow

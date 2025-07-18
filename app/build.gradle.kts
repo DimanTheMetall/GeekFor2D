@@ -94,4 +94,5 @@ dependencies {
     implementation(project(Modules.getModulesDependency(Packages.FEATURES, Modules.FEED)))
     implementation(project(Modules.getModulesDependency(Packages.FEATURES, Modules.FAVORITE)))
     implementation(project(Modules.getModulesDependency(Packages.FEATURES, Modules.CARDS, Modules.RANDOM_MANGA)))
+    implementation(project(Modules.getModulesDependency(Packages.FEATURES, Modules.CARDS, Modules.IMAGE_CARD)))
 }

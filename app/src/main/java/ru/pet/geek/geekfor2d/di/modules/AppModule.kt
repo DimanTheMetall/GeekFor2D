@@ -9,17 +9,25 @@ import ru.pet.geek.data.remote.GeekClient
 import ru.pet.geek.data.remote.JikanClient
 import ru.pet.geek.geekfor2d.di.AppScope
 import ru.pet.geek.geekfor2d.di.Jikan
-import ru.pet.geek.navigationcontroller.NavigationController
+import ru.pet.geek.navigationcontroller.CoreNavigationController
+import ru.pet.geek.navigationcontroller.LoggerNavController
 import ru.pet.geek.navigationcontroller.NavigationControllerApi
+import javax.inject.Qualifier
 
 @Module
 class AppModule {
 
 
-    @[AppScope Provides]
-    fun provideNavigationControllerApi(): NavigationControllerApi {
-        return NavigationController()
+    @[AppScope Provides Core]
+    fun provideCoreNavigationControllerApi(): NavigationControllerApi {
+        return CoreNavigationController()
     }
+
+    @[AppScope Provides]
+    fun provideNavigationControllerApi(
+        @Core
+        navigationControllerApi: NavigationControllerApi
+    ): NavigationControllerApi = LoggerNavController(navigationControllerApi = navigationControllerApi)
 
     @[AppScope Provides]
     fun provideLoggerInterceptor(): HttpLoggingInterceptor {
@@ -46,3 +54,6 @@ class AppModule {
     ): GeekClient = JikanClient(okHttpClient)
 
 }
+
+@Qualifier
+annotation class Core

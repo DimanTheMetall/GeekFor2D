@@ -11,6 +11,7 @@ object Modules {
     const val RANDOM_MANGA = "randommanga"
     const val FEATURES = "features"
     const val UI_MAPPERS = "uimappers"
+    const val IMAGE_CARD = "imagecard"
 
     fun getModulesDependency(vararg strings: String) = strings.asList().joinToString(separator = "") { ":$it" }
 }

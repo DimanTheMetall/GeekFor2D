@@ -1,0 +1,12 @@
+*.iml
+*.bin
+*.so
+*.dex
+.gradle
+/local.properties
+/gradle.properties
+/.idea/*
+.DS_Store
+/build/*
+/lib/kotlin/result/build/*
+app/version.properties

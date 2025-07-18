@@ -4,7 +4,7 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.navigation
 import androidx.navigation.toRoute
-import com.example.manga.MangaRandomCardScreen
+import ru.pet.geek.manga.MangaRandomCardScreen
 import ru.pet.geek.favorite.FavoriteScreen
 import ru.pet.geek.features.feed.FeedScreen
 

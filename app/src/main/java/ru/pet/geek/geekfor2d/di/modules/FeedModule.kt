@@ -1,6 +1,6 @@
 package ru.pet.geek.geekfor2d.di.modules
 
-import com.example.manga.MangaRandomCardScreen
+import ru.pet.geek.manga.MangaRandomCardScreen
 import dagger.Module
 import dagger.Provides
 import ru.pet.geek.core.LocalResponse
