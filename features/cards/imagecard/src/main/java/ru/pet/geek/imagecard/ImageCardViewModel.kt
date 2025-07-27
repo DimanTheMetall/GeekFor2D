@@ -20,8 +20,8 @@ class ImageCardViewModel @AssistedInject constructor(
 
     private fun initialiseState(): ImageScreenState {
         return when (val configuration = imageCardScreenConfiguration) {
-            is ImageCardScreenConfiguration.ImageUrlScreenConfiguration -> ImageScreenState.ImageFromUrl(
-                imageUrl = configuration.imageUrl
+            is ImageCardScreenConfiguration.ImageUrlScreenConfiguration -> ImageScreenState.Success(
+                TODO()
             )
         }
     }

@@ -8,7 +8,7 @@ import ru.pet.geek.data.remote.responses.GetRandomMangaResponse
 import ru.pet.geek.data.remote.responses.inner.EntryModelWrapperNet
 
 class MangaRemoteSource(
-    private val client: GeekClient,
+    private val client: Client,
 ) {
     val mangaApi: MangaRemoteApi by lazy { client.retrofitClient.create(MangaRemoteApi::class.java) }
 }

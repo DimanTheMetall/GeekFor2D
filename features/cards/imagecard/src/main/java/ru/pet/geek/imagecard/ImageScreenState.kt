@@ -1,11 +1,13 @@
 package ru.pet.geek.imagecard
 
+import android.graphics.Bitmap
 import ru.pet.geek.utils.UiInterface
+import ru.pet.geek.widgets.CircleButtonInfo
 
-interface ImageScreenState : UiInterface {
+sealed interface ImageScreenState : UiInterface {
     data object Loading : ImageScreenState
 
-    data class ImageFromUrl(val imageUrl: String) : ImageScreenState
+    data class Success(val image: Bitmap) : ImageScreenState
 
-    data class Error(val e: Throwable) : ImageScreenState
+    data class Error(val e: Throwable, val refreshButton: CircleButtonInfo) : ImageScreenState
 }

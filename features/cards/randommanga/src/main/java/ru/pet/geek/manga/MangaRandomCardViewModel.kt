@@ -35,6 +35,7 @@ class MangaRandomCardViewModel
         private val navApi: RandomCardMangaNavApi,
         private val dataApi: RandomCardMangaDataApi,
     ) : BaseRandomCardViewModel<MangaRandomCardModel>() {
+
         init {
             onInit()
         }

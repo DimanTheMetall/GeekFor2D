@@ -30,6 +30,7 @@
             <option value="$PROJECT_DIR$/features" />
             <option value="$PROJECT_DIR$/features/cards" />
             <option value="$PROJECT_DIR$/features/cards/basecards" />
+            <option value="$PROJECT_DIR$/features/cards/imagecard" />
             <option value="$PROJECT_DIR$/features/cards/randommanga" />
             <option value="$PROJECT_DIR$/features/favorite" />
             <option value="$PROJECT_DIR$/features/feed" />

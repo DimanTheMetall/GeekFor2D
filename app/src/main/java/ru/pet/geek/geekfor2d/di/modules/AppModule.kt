@@ -5,7 +5,7 @@ import dagger.Provides
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import ru.pet.geek.data.BuildConfig
-import ru.pet.geek.data.remote.GeekClient
+import ru.pet.geek.data.remote.Client
 import ru.pet.geek.data.remote.JikanClient
 import ru.pet.geek.geekfor2d.di.AppScope
 import ru.pet.geek.geekfor2d.di.Jikan
@@ -51,7 +51,7 @@ class AppModule {
     @[AppScope Provides Jikan]
     fun provideJikanClient(
         okHttpClient: OkHttpClient
-    ): GeekClient = JikanClient(okHttpClient)
+    ): Client = JikanClient(okHttpClient)
 
 }
 

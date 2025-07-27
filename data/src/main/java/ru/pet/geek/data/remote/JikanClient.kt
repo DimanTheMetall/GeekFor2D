@@ -8,7 +8,7 @@ import retrofit2.converter.kotlinx.serialization.asConverterFactory
 
 class JikanClient(
     okHttpClient: OkHttpClient,
-) : GeekClient {
+) : Client {
     private val json =
         Json {
             ignoreUnknownKeys = true
