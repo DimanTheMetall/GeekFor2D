@@ -6,4 +6,5 @@ object Plugins {
     const val ANDROID_LIBRARY = "com.android.library"
     const val JVM = "org.jetbrains.kotlin.jvm"
     const val KOTLINX_SERIALIZATION = "plugin.serialization"
+    const val KOTLINX_PARCELABLE = "kotlin-parcelize"
 }

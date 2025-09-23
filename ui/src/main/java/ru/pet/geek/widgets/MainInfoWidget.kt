@@ -2,6 +2,7 @@ package ru.pet.geek.widgets
 
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -41,6 +42,7 @@ interface MainInfoWidgetDataUi : UiInterface {
     val rating: GradientRatingUi
     val title: String
     val status: StatusWidgetInfo
+    val onImageClick: () -> Unit
 }
 
 data class MainInfoWidgetDataUiImpl(
@@ -51,6 +53,7 @@ data class MainInfoWidgetDataUiImpl(
     override val rating: GradientRatingUi,
     override val title: String,
     override val status: StatusWidgetInfo,
+    override val onImageClick: () -> Unit,
 ) : MainInfoWidgetDataUi
 
 class MainInfoWidgetDataPreview(
@@ -62,6 +65,7 @@ class MainInfoWidgetDataPreview(
     override val status: StatusWidgetInfo = StatusWidgetInfo.Finished
     override val rating: GradientRatingUi = GradientRatingUiImpl(rating = 2.4f, ratesClick = 1232)
     override val title: String = "Some title name for some manga title for long long long text text xtext"
+    override val onImageClick: () -> Unit = {}
 }
 
 private val shape = RoundedCornerShape(10.dp)
@@ -95,6 +99,7 @@ fun MainInfoWidget(
     startDate = uiInfo.dateInfo.firstText,
     endDate = uiInfo.dateInfo.secondText,
     status = uiInfo.status,
+    onImageClick = uiInfo.onImageClick,
 )
 
 @Composable
@@ -111,6 +116,7 @@ fun MainInfoWidget(
     endDate: String?,
     @DrawableRes dateIconRes: Int = R.drawable.ui_ic_calendar,
     status: StatusWidgetInfo,
+    onImageClick: () -> Unit,
 ) {
     Row(
         modifier =
@@ -126,7 +132,10 @@ fun MainInfoWidget(
             verticalArrangement = Arrangement.SpaceBetween,
         ) {
             ShimmerAsynhImage(
-                modifier = Modifier.height(220.dp).aspectRatio(IMAGE_ASPECT_RATION),
+                modifier = Modifier
+                    .height(220.dp)
+                    .aspectRatio(IMAGE_ASPECT_RATION)
+                    .clickable(onClick = onImageClick),
                 model = imageUrl,
             )
             TypeBadgeWidget(

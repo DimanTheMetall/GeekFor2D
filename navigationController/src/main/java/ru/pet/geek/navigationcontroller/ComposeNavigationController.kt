@@ -5,8 +5,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import kotlinx.coroutines.flow.Flow
-import ru.pet.geek.core.navigation.RootScreen
-import ru.pet.geek.core.navigation.Screen
+import ru.pet.geek.core.navigation.GeekRoute
 
 interface NavigationEvents {
     val actions: Flow<NavigationAction>
@@ -21,23 +20,23 @@ fun ComposeNavigationController(
         api.actions.collect { action ->
             when (action) {
                 is NavigationAction.Back -> navHostController.back()
-                is NavigationAction.OpenNext -> navHostController.openNext(action.screen)
-                is NavigationAction.SelectStack -> navHostController.selectStack(action.root)
+                is NavigationAction.OpenNext -> navHostController.openNext(action.route)
+                is NavigationAction.SelectStack -> navHostController.selectStack(action.route)
             }
         }
     }
 }
 
-internal fun NavHostController.openNext(screen: Screen) {
-    this.navigate(screen)
+internal fun NavHostController.openNext(route: GeekRoute) {
+    this.navigate(route)
 }
 
 internal fun NavHostController.back() {
     this.navigateUp()
 }
 
-internal fun NavHostController.selectStack(screen: RootScreen) {
-    this.navigate(screen) {
+internal fun NavHostController.selectStack(route: GeekRoute.ContainerRoute) {
+    this.navigate(route) {
         launchSingleTop = true
         restoreState = true
         popUpTo(route = graph.startDestinationRoute!!) {

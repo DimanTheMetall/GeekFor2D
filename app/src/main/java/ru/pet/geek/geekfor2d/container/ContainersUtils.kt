@@ -7,30 +7,34 @@ import androidx.navigation.toRoute
 import ru.pet.geek.manga.MangaRandomCardScreen
 import ru.pet.geek.favorite.FavoriteScreen
 import ru.pet.geek.features.feed.FeedScreen
+import ru.pet.geek.core.navigation.GeekRoute
+import ru.pet.geek.imagecard.ImageCardScreen
 
 internal fun NavGraphBuilder.createGraph() {
-    navigation<FeedContainer>(startDestination = FeedScreen::class) {
+    navigation<GeekRoute.ContainerRoute.FeedContainer>(startDestination = GeekRoute.FeedRoute::class) {
         addSimplesScreens()
     }
 
-    navigation<FavoriteContainer>(startDestination = FavoriteScreen::class) {
+    navigation<GeekRoute.ContainerRoute.FavoriteContainer>(startDestination = GeekRoute.FavoriteRoute::class) {
         addSimplesScreens()
     }
 }
 
 private fun NavGraphBuilder.addSimplesScreens() {
-    composable<FeedScreen> {
-        val screen = it.toRoute<FeedScreen>()
-        screen.Content()
+    composable<GeekRoute.FeedRoute> {
+        FeedScreen().Content()
     }
 
-    composable<FavoriteScreen> {
-        val screen = it.toRoute<FavoriteScreen>()
-        screen.Content()
+    composable<GeekRoute.FavoriteRoute> {
+        FavoriteScreen().Content()
     }
 
-    composable<MangaRandomCardScreen> {
-        val screen = it.toRoute<MangaRandomCardScreen>()
-        screen.Content()
+    composable<GeekRoute.MangaRandomCardRoute> {
+        MangaRandomCardScreen().Content()
+    }
+
+    composable<GeekRoute.ImageRoute> {
+        val route = it.toRoute<GeekRoute.ImageRoute>()
+        ImageCardScreen(screenConfiguration = route)
     }
 }

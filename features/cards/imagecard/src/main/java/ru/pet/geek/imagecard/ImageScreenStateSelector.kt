@@ -18,8 +18,8 @@ internal fun ImageScreenStateSelector(
             )
         }
 
-        is ImageScreenState.Loading -> TODO()
-        is ImageScreenState.Success -> TODO()
+        is ImageScreenState.Loading -> Unit
+        is ImageScreenState.Success -> Unit
     }
 }
 

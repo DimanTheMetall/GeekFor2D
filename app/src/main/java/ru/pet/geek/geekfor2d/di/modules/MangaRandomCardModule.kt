@@ -6,6 +6,7 @@ import dagger.Module
 import dagger.Provides
 import kotlinx.coroutines.flow.Flow
 import ru.pet.geek.core.LocalResponse
+import ru.pet.geek.core.navigation.GeekRoute
 import ru.pet.geek.data.repository.MangaRepository
 import ru.pet.geek.data.usecase.FavoriteIdsListUseCase
 import ru.pet.geek.domain.entities.dto.EntryModel
@@ -35,5 +36,10 @@ class MangaRandomCardModule {
     fun providerMangaRandomCardNavApi(navController: NavigationControllerApi): RandomCardMangaNavApi =
         object : RandomCardMangaNavApi {
             override fun goBack() = navController.back()
+
+            override fun navigateToImageRemoteScreen(contentId: Int, imageUrl: String) {
+                val configuration = GeekRoute.ImageRoute(imageUrl = imageUrl, contentId = contentId)
+                navController.openNext(route = configuration)
+            }
         }
 }

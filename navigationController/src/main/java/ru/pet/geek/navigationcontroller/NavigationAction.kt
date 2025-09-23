@@ -1,10 +1,9 @@
 package ru.pet.geek.navigationcontroller
 
-import ru.pet.geek.core.navigation.RootScreen
-import ru.pet.geek.core.navigation.Screen
+import ru.pet.geek.core.navigation.GeekRoute
 
 sealed interface NavigationAction {
-    class OpenNext(val screen: Screen): NavigationAction
+    class OpenNext(val route: GeekRoute): NavigationAction
     data object Back: NavigationAction
-    class SelectStack(val root: RootScreen): NavigationAction
+    class SelectStack(val route: GeekRoute.ContainerRoute): NavigationAction
 }

@@ -8,9 +8,10 @@ import ru.pet.geek.geekfor2d.di.modules.AppModule
 import ru.pet.geek.geekfor2d.di.modules.FeedModule
 import ru.pet.geek.geekfor2d.di.modules.ImageCardModule
 import ru.pet.geek.geekfor2d.di.modules.MangaRandomCardModule
-import ru.pet.geek.geekfor2d.di.modules.RemoteSourceModule
+import ru.pet.geek.geekfor2d.di.modules.DataSourceModule
 import ru.pet.geek.geekfor2d.di.modules.RepositoryModule
 import ru.pet.geek.geekfor2d.di.modules.UseCaseModule
+import ru.pet.geek.geekfor2d.di.modules.UtilsModule
 import javax.inject.Scope
 
 @AppScope
@@ -18,11 +19,12 @@ import javax.inject.Scope
     modules = [
         AppModule::class,
         RepositoryModule::class,
-        RemoteSourceModule::class,
+        DataSourceModule::class,
         FeedModule::class,
         MangaRandomCardModule::class,
         UseCaseModule::class,
         ImageCardModule::class,
+        UtilsModule::class,
     ],
 )
 interface AppComponent : AppDependency {

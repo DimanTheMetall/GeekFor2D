@@ -16,6 +16,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
 import kotlinx.serialization.Serializable
 import ru.pet.geek.core.dagger.DaggerViewModel
+import ru.pet.geek.core.navigation.GeekRoute
 import ru.pet.geek.core.screens.BaseScreen
 import ru.pet.geek.geekfor2d.MainActivity
 import ru.pet.geek.geekfor2d.di.dependency.getAppDependency
@@ -62,7 +63,7 @@ class MainContainer : BaseScreen() {
         ) {
             NavHost(
                 navController = navController,
-                startDestination = FeedContainer::class,
+                startDestination = GeekRoute.ContainerRoute.FeedContainer::class,
             ) {
                 createGraph()
             }

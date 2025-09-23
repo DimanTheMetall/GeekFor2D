@@ -1,9 +1,9 @@
 package ru.pet.geek.geekfor2d.di.modules
 
-import ru.pet.geek.manga.MangaRandomCardScreen
 import dagger.Module
 import dagger.Provides
 import ru.pet.geek.core.LocalResponse
+import ru.pet.geek.core.navigation.GeekRoute
 import ru.pet.geek.data.repository.MangaRepository
 import ru.pet.geek.domain.entities.dto.MangaRandomCardModel
 import ru.pet.geek.features.feed.api.FeedDataApi
@@ -27,7 +27,7 @@ class FeedModule {
             override fun back() = navigationControllerApi.back()
 
             override fun goToRandomMangaCard() {
-                navigationControllerApi.openNext(MangaRandomCardScreen())
+                navigationControllerApi.openNext(GeekRoute.MangaRandomCardRoute)
             }
 
             override fun goToRandomAnimeCard() {

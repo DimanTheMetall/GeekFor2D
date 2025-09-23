@@ -9,7 +9,7 @@ import ru.pet.geek.data.remote.MangaRemoteSource
 import ru.pet.geek.geekfor2d.di.Jikan
 
 @Module
-class RemoteSourceModule {
+class DataSourceModule {
 
     @Provides
     fun provideMangaRemoteSource(@Jikan client: Client): MangaRemoteSource {

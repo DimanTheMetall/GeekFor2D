@@ -28,7 +28,7 @@ class LoggerNavController(private val navigationControllerApi: NavigationControl
                             Log.i(
                                 LogConstants.NAVIGATION_TAG,
                                 "Received ${navAction::class.simpleName} action to open " +
-                                        "screen ${navAction.screen::class.simpleName}"
+                                        "screen ${navAction.route::class.simpleName}"
                             )
                         }
 
@@ -36,7 +36,7 @@ class LoggerNavController(private val navigationControllerApi: NavigationControl
                             Log.i(
                                 LogConstants.NAVIGATION_TAG,
                                 "Received ${navAction::class.simpleName} action to open stack " +
-                                        "${navAction.root::class.simpleName}"
+                                        "${navAction.route::class.simpleName}"
                             )
                         }
                     }

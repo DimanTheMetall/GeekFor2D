@@ -2,6 +2,7 @@ package ru.pet.geek.geekfor2d.di.modules
 
 import dagger.Module
 import dagger.Provides
+import ru.pet.geek.core.utils.FileUtils
 import ru.pet.geek.data.local.FileLocalSource
 import ru.pet.geek.data.remote.CounterRequestController
 import ru.pet.geek.data.remote.FileRemoteSource
@@ -28,7 +29,8 @@ class RepositoryModule {
     fun provideFileRepository(
         fileRemoteSource: FileRemoteSource,
         fileLocalSource: FileLocalSource,
+        fileUtils: FileUtils
     ): FileRepository = FileRepositoryImpl(
-        fileRemoteSource = fileRemoteSource, fileLocalSource = fileLocalSource,
+        fileRemoteSource = fileRemoteSource, fileLocalSource = fileLocalSource, fileUtils = fileUtils,
     )
 }
