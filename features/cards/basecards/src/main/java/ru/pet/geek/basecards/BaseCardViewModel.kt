@@ -14,7 +14,7 @@ import ru.pet.geek.core.LocalResponse
 import ru.pet.geek.core.mappers.toGeneralState
 import ru.pet.geek.domain.entities.dto.EntryModel
 import ru.pet.geek.domain.entities.interfaces.IdHolder
-import ru.pet.geek.widgets.CircleStaticLoadingButton
+import ru.pet.geek.widgets.circle.CircleStaticLoadingButton
 import ru.pet.geek.widgets.TitledHorisontalCorouselUiInfo
 
 abstract class BaseCardViewModel<DATA : IdHolder> : ViewModel() {

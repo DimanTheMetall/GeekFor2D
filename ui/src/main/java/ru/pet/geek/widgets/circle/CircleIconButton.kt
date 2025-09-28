@@ -1,4 +1,4 @@
-package ru.pet.geek.widgets
+package ru.pet.geek.widgets.circle
 
 import androidx.annotation.DrawableRes
 import androidx.annotation.FloatRange
@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -33,10 +34,13 @@ interface CircleButtonInfo : Clickable {
 
     @get:FloatRange(-360.0, 360.0)
     val angle: Float
+
+    val inProgress: Boolean
 }
 
 data class CircleStaticLoadingButton(
     override val onClick: () -> Unit,
+    override val inProgress: Boolean = false,
 ) : CircleButtonInfo {
     override val background: Color
         @Composable
@@ -51,6 +55,7 @@ data class CircleStaticLoadingButton(
 sealed interface LeftRightButton : CircleButtonInfo {
     data class LeftButton(
         override val onClick: () -> Unit,
+        override val inProgress: Boolean = false,
     ) : LeftRightButton {
         override val background: Color
             @Composable
@@ -66,6 +71,7 @@ sealed interface LeftRightButton : CircleButtonInfo {
 
     data class RightButton(
         override val onClick: () -> Unit,
+        override val inProgress: Boolean = false,
     ) : LeftRightButton {
         override val background: Color
             @Composable
@@ -88,20 +94,27 @@ fun CircleIconButton(
     Box(
         modifier =
             modifier
-                .noRippleClickable(clickable = uiInfo)
+                .noRippleClickable(clickable = uiInfo, enable = uiInfo.inProgress.not())
                 .background(color = uiInfo.background, shape = CircleShape)
                 .padding(4.dp),
         contentAlignment = Alignment.Center,
     ) {
-        Icon(
-            modifier =
-                Modifier
-                    .graphicsLayer {
-                        this.rotationZ = uiInfo.angle
-                    },
-            painter = painterResource(uiInfo.iconRes),
-            contentDescription = null,
-        )
+        if (uiInfo.inProgress) {
+            CircularProgressIndicator(
+                strokeWidth = 2.dp,
+                color = GeekTheme.colors.iconPrimary,
+            )
+        } else {
+            Icon(
+                modifier =
+                    Modifier
+                        .graphicsLayer {
+                            this.rotationZ = uiInfo.angle
+                        },
+                painter = painterResource(uiInfo.iconRes),
+                contentDescription = null,
+            )
+        }
     }
 }
 
@@ -120,6 +133,10 @@ private fun CircleIconButtonPreview() {
             CircleIconButton(
                 modifier = Modifier.size(26.dp),
                 uiInfo = CircleStaticLoadingButton(onClick = {}),
+            )
+            CircleIconButton(
+                modifier = Modifier.size(26.dp),
+                uiInfo = LeftRightButton.LeftButton(onClick = {}, inProgress = true),
             )
         }
     }

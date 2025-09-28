@@ -18,9 +18,9 @@ import androidx.compose.ui.unit.dp
 import ru.pet.geek.VisibilityItem
 import ru.pet.geek.VisibilityItemImpl
 import ru.pet.geek.utils.PreviewBox
-import ru.pet.geek.widgets.CircleButtonInfo
-import ru.pet.geek.widgets.CircleIconButton
-import ru.pet.geek.widgets.LeftRightButton
+import ru.pet.geek.widgets.circle.CircleButtonInfo
+import ru.pet.geek.widgets.circle.CircleIconButton
+import ru.pet.geek.widgets.circle.LeftRightButton
 
 interface LeftRightButtonsWidgetState {
     val leftButton: VisibilityItem<CircleButtonInfo>

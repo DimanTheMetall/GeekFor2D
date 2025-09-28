@@ -20,8 +20,8 @@ import ru.pet.geek.core.utils.ParentException
 import ru.pet.geek.domain.entities.dto.EntryModel
 import ru.pet.geek.domain.entities.interfaces.IdHolder
 import ru.pet.geek.utils.UiInterface
-import ru.pet.geek.widgets.CircleButtonInfo
-import ru.pet.geek.widgets.LeftRightButton
+import ru.pet.geek.widgets.circle.CircleButtonInfo
+import ru.pet.geek.widgets.circle.LeftRightButton
 
 abstract class BaseRandomCardViewModel<DATA : IdHolder> : BaseCardViewModel<DATA>() {
     protected val currentIndex = MutableStateFlow(0)
@@ -30,13 +30,15 @@ abstract class BaseRandomCardViewModel<DATA : IdHolder> : BaseCardViewModel<DATA
     private val mutableRecommendationsListFlow: MutableStateFlow<Map<Int, GeneralState<List<EntryModel>>>> =
         MutableStateFlow(mutableMapOf())
 
-    private val leftButtonState: LeftRightButton.LeftButton = LeftRightButton.LeftButton(onClick = ::onPreviousClick)
-    private val rightButtonState: LeftRightButton.RightButton = LeftRightButton.RightButton(onClick = ::onNextClick)
+    private val initLeftButtonState: LeftRightButton.LeftButton =
+        LeftRightButton.LeftButton(onClick = ::onPreviousClick, inProgress = true)
+    private val initRightButtonState: LeftRightButton.RightButton =
+        LeftRightButton.RightButton(onClick = ::onNextClick, inProgress = true)
     protected val buttonsState =
         MutableStateFlow<LeftRightButtonsWidgetState>(
             LeftRightButtonsWidgetStateImpl(
-                leftButton = VisibilityItemImpl(isVisible = false, item = leftButtonState),
-                rightButton = VisibilityItemImpl(isVisible = false, item = rightButtonState),
+                leftButton = VisibilityItemImpl(isVisible = false, item = initLeftButtonState),
+                rightButton = VisibilityItemImpl(isVisible = false, item = initRightButtonState),
             ),
         )
     val buttonsUiState = buttonsState.asStateFlow()
@@ -129,17 +131,42 @@ abstract class BaseRandomCardViewModel<DATA : IdHolder> : BaseCardViewModel<DATA
                 .map { state ->
                     val newButtonsState =
                         when (state) {
-                            is GeneralState.Loading, is GeneralState.Error -> {
+                            is GeneralState.Error -> {
                                 LeftRightButtonsWidgetStateImpl(
-                                    leftButton = VisibilityItemImpl(isVisible = false, item = leftButtonState),
-                                    rightButton = VisibilityItemImpl(isVisible = false, item = rightButtonState),
+                                    leftButton = VisibilityItemImpl(
+                                        isVisible = false,
+                                        item = initLeftButtonState.copy(inProgress = false)
+                                    ),
+                                    rightButton = VisibilityItemImpl(
+                                        isVisible = false,
+                                        item = initRightButtonState.copy(inProgress = false)
+                                    ),
+                                )
+                            }
+
+                            is GeneralState.Loading -> {
+                                LeftRightButtonsWidgetStateImpl(
+                                    leftButton = VisibilityItemImpl(
+                                        isVisible = isHasPrevious,
+                                        item = initLeftButtonState.copy(inProgress = true)
+                                    ),
+                                    rightButton = VisibilityItemImpl(
+                                        isVisible = isHasNext,
+                                        item = initRightButtonState.copy(inProgress = true)
+                                    ),
                                 )
                             }
 
                             is GeneralState.Success<DATA> ->
                                 LeftRightButtonsWidgetStateImpl(
-                                    leftButton = VisibilityItemImpl(isVisible = isHasPrevious, item = leftButtonState),
-                                    rightButton = VisibilityItemImpl(isVisible = isHasNext, item = rightButtonState),
+                                    leftButton = VisibilityItemImpl(
+                                        isVisible = isHasPrevious,
+                                        item = initLeftButtonState.copy(inProgress = false)
+                                    ),
+                                    rightButton = VisibilityItemImpl(
+                                        isVisible = isHasNext,
+                                        item = initRightButtonState.copy(inProgress = false)
+                                    ),
                                 )
                         }
                     newButtonsState

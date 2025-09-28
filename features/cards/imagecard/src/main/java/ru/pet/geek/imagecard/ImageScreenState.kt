@@ -2,7 +2,7 @@ package ru.pet.geek.imagecard
 
 import android.graphics.Bitmap
 import ru.pet.geek.utils.UiInterface
-import ru.pet.geek.widgets.CircleButtonInfo
+import ru.pet.geek.widgets.circle.CircleButtonInfo
 
 sealed interface ImageScreenState : UiInterface {
     data object Loading : ImageScreenState
